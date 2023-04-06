@@ -6,7 +6,7 @@ const checkCaseAlreadyPlay=(tab,caseToCheck)=>{
     console.log(tab)
     console.log(tab.length)
     for (let elemenInTab = 0; elemenInTab < tab.length; elemenInTab++) {
-            if(tab[elemenInTab][0] === caseToCheck[0] && tab[elemenInTab][1] === caseToCheck[1]){
+            if(tab[elemenInTab][0][1] === caseToCheck[0][1]){
                 return true
             }
         }
