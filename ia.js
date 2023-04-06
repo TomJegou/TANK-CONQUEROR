@@ -5,15 +5,14 @@ const randomcase =()=>{return ["abcdefghij"[Math.floor(Math.random() * 10)],Math
 const checkCaseAlreadyPlay=(tab,caseToCheck)=>{
     console.log(tab)
     console.log(tab.length)
-    for (let t = 0; t < tab.length; t++) {
-        for(let i = 0; i < tab[t].length; i++){
-            if (tab[t][i]===caseToCheck) {
+    for (let elemenInTab = 0; elemenInTab < tab.length; elemenInTab++) {
+            if(tab[elemenInTab][0] === caseToCheck[0] && tab[elemenInTab][1] === caseToCheck[1]){
                 return true
             }
         }
         return false
     }
-}
+
 test1=[[1,'b'],[3,'o'],[5,'o'],[4,'a']]
 test2=[4,'a']
 console.log(checkCaseAlreadyPlay(test1,test2))
