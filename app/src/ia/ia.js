@@ -19,31 +19,54 @@ the first ia shoot on a random case
 ** if it hit shoot near by
 ** if it miss shoot on a random case
 */
+
+const findCaseAround=(caseToCheck)=>{
+    let caseAround = [];
+    let letter = caseToCheck[0];
+    let number = caseToCheck[1];
+    let letterIndex = "abcdefghij".indexOf(letter);
+    let numberIndex = number-1;
+    if (letterIndex+1 > 9) {
+        let letterIndexMax = 9
+    }
+    if (letterIndex-1 < 0) {
+        let letterIndexMin = 0
+    }
+    if (numberIndex+1 > 9) {
+        let numberIndexMax = 9
+    }
+    if (numberIndex-1 < 0) {
+        let numberIndexMin = 0
+    }
+    for (let i = letterIndexMin; i <= letterIndexMax; i++) {
+        for (let j = numberIndexMin; j <= numberIndexMax; j++) {
+            if (i !== letterIndex || j !== numberIndex) {
+                caseAround = ["abcdefghij"[i],j+1]
+            }
+        }
+    }
+    return (caseAround,)
+}
 function ia1(response,caseAlreadyPlay) {
+    let findCase = false
     let attackCase =randomcase()
-    console.log(attackCase)
-    console.log("case played : ")
-    console.log(caseAlreadyPlay)
     if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
         attackCase = randomcase()
-        console.log("new case :",attackCase)
         caseAlreadyPlay.push(attackCase)
-        console.log("New tab of case played : ")
-        console.log(caseAlreadyPlay)
     }else{
         caseAlreadyPlay.push(attackCase)
-        console.log("New tab of case played : ")
-        console.log(caseAlreadyPlay)
     }
+    if(response === 0 || 1){
+        while (!findCase) {
+            attackCase=caseAlreadyPlay[caseAlreadyPlay.length-1]
 
-
-    if(response===0 || 1){
-
+            if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
+                caseAlreadyPlay.push(attackCase)
+            }
+        }
+    return (attackCase,caseAlreadyPlay)
     }
-   
-    return (attackCase)
 }
-
 function ia2(){
 
 }
