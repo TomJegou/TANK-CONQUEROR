@@ -13,6 +13,39 @@ const checkCaseAlreadyPlay=(tab,caseToCheck)=>{
     }
 
 
+/**FindCaseAround is a function how check around a case we give to check (caseToCheck) and return all are case around */
+function findCaseAround (caseToCheck){
+    let allCaseAround = [];
+    let caseAround = [];
+    let letter = caseToCheck[0];
+    let number = caseToCheck[1];
+    let letterIndex = "abcdefghij".indexOf(letter);
+    let numberIndex = number-1;
+    let letterIndexMin = letterIndex-1;let letterIndexMax = letterIndex+1;let numberIndexMax = numberIndex+1;let numberIndexMin = numberIndex-1;
+    if (letterIndex > 9) {
+        letterIndexMax = 9
+    }
+    if (letterIndexMin < 0) {
+        letterIndexMin = 0
+    }
+    if (numberIndexMax > 9) {
+        numberIndexMax = 9
+    }
+    if (numberIndexMin < 0) {
+        numberIndexMin = 0
+    }
+    for (let i = letterIndexMin; i <= letterIndexMax; i++) {
+        for (let j = numberIndexMin; j <= numberIndexMax; j++) {
+            if (i !== letterIndex || j !== numberIndex) {
+                caseAround = ["abcdefghij"[i],j+1]
+                allCaseAround.push(caseAround)
+            }
+        }
+    }
+    return (allCaseAround)
+}
+  
+
 /** 
 the first ia shoot on a random case 
 ** check the response to know if the shoot hit or no
@@ -20,53 +53,38 @@ the first ia shoot on a random case
 ** if it miss shoot on a random case
 */
 
-const findCaseAround=(caseToCheck)=>{
-    let caseAround = [];
-    let letter = caseToCheck[0];
-    let number = caseToCheck[1];
-    let letterIndex = "abcdefghij".indexOf(letter);
-    let numberIndex = number-1;
-    if (letterIndex+1 > 9) {
-        let letterIndexMax = 9
-    }
-    if (letterIndex-1 < 0) {
-        let letterIndexMin = 0
-    }
-    if (numberIndex+1 > 9) {
-        let numberIndexMax = 9
-    }
-    if (numberIndex-1 < 0) {
-        let numberIndexMin = 0
-    }
-    for (let i = letterIndexMin; i <= letterIndexMax; i++) {
-        for (let j = numberIndexMin; j <= numberIndexMax; j++) {
-            if (i !== letterIndex || j !== numberIndex) {
-                caseAround = ["abcdefghij"[i],j+1]
-            }
-        }
-    }
-    return (caseAround,)
-}
+
+
 function ia1(response,caseAlreadyPlay) {
     let findCase = false
     let attackCase =randomcase()
-    if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
-        attackCase = randomcase()
-        caseAlreadyPlay.push(attackCase)
-    }else{
-        caseAlreadyPlay.push(attackCase)
+    while(!findCase){
+        if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
+            attackCase = randomcase()
+            caseAlreadyPlay.push(attackCase)
+            findCase=true
+        }else{
+            caseAlreadyPlay.push(attackCase)
+            findCase=true
+        }
     }
-    if(response === 0 || 1){
+    if(response == "toucher" || response == "detruit"){
         while (!findCase) {
             attackCase=caseAlreadyPlay[caseAlreadyPlay.length-1]
-
-            if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
-                caseAlreadyPlay.push(attackCase)
+            for(let i = 0 ;i<findCaseAround(attackCase).length;i++){
+                if (checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(attackCase)[i])) {
+                    attackCase = findCaseAround(attackCase)[i]
+                    caseAlreadyPlay.push(attackCase)
+                    findCase = true
+                    break
+                }
             }
         }
-    return (attackCase,caseAlreadyPlay)
+        ia1("",caseAlreadyPlay)
     }
+    return (caseAlreadyPlay)
 }
+
 function ia2(){
 
 }
@@ -74,4 +92,6 @@ function ia2(){
 function ia3(){
 
 }
-ia1(0,[['a',1],['b',3]])
+console.log(ia1("toucher",[['a',1],['b',3]]))
+
+console.log(findCaseAround(['b',3]))
