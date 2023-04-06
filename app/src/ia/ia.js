@@ -58,30 +58,52 @@ the first ia shoot on a random case
 function ia1(response,caseAlreadyPlay) {
     let findCase = false
     let attackCase =randomcase()
-    while(!findCase){
-        if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
-            attackCase = randomcase()
-            caseAlreadyPlay.push(attackCase)
-            findCase=true
-        }else{
-            caseAlreadyPlay.push(attackCase)
-            findCase=true
-        }
-    }
-    if(response == "toucher" || response == "detruit"){
-        while (!findCase) {
-            attackCase=caseAlreadyPlay[caseAlreadyPlay.length-1]
-            for(let i = 0 ;i<findCaseAround(attackCase).length;i++){
-                if (checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(attackCase)[i])) {
-                    attackCase = findCaseAround(attackCase)[i]
-                    caseAlreadyPlay.push(attackCase)
-                    findCase = true
-                    break
-                }
+    if(response == "toucher"){
+        attackCase=caseAlreadyPlay[caseAlreadyPlay.length-1]
+        for(let i = 0 ;i<findCaseAround(attackCase).length;i++){
+            let pendingCase = findCaseAround(attackCase)[i]
+            if (checkCaseAlreadyPlay(caseAlreadyPlay,pendingCase)) {
+                attackCase = pendingCase
+                caseAlreadyPlay.push(attackCase)
             }
         }
-        ia1("",caseAlreadyPlay)
+        while(!findCase){
+            if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
+                attackCase = randomcase()
+                caseAlreadyPlay.push(attackCase)
+                findCase=true
+            }else{
+                caseAlreadyPlay.push(attackCase)
+                findCase=true
+            }
+            break
+        }
     }
+    if(response == "detruit"){
+        while(!findCase){
+            if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
+                attackCase = randomcase()
+                caseAlreadyPlay.push(attackCase)
+                findCase=true
+            }else{
+                caseAlreadyPlay.push(attackCase)
+                findCase=true
+            }
+            break
+        }
+    }
+    while(!findCase){
+            if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
+                attackCase = randomcase()
+                caseAlreadyPlay.push(attackCase)
+                findCase=true
+            }else{
+                caseAlreadyPlay.push(attackCase)
+                findCase=true
+            }
+            break
+    }
+
     return (caseAlreadyPlay)
 }
 
@@ -93,5 +115,7 @@ function ia3(){
 
 }
 console.log(ia1("toucher",[['a',1],['b',3]]))
+// console.log(findCaseAround(['b',3]))
+// console.log(findCaseAround(['a',1]))
 
-console.log(findCaseAround(['b',3]))
+//[ 'a', 2 ],[ 'a', 3 ],[ 'a', 4 ],[ 'b', 2 ],[ 'b', 4 ],[ 'c', 2 ],[ 'c', 3 ],[ 'c', 4 ]
