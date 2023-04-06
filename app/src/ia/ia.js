@@ -19,10 +19,9 @@ the first ia shoot on a random case
 ** if it hit shoot near by
 ** if it miss shoot on a random case
 */
-function ia1(response,tab) {
+function ia1(response,caseAlreadyPlay) {
     let attackCase =randomcase()
     console.log(attackCase)
-    let caseAlreadyPlay=[['a',1]]
     console.log("case played : ")
     console.log(caseAlreadyPlay)
     if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
@@ -52,4 +51,4 @@ function ia2(){
 function ia3(){
 
 }
-ia1()
+ia1(0,[['a',1],['b',3]])
