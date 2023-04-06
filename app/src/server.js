@@ -8,7 +8,7 @@ const urlFilserver = `http://fileserver:5000/`;
 
 export default function StartServer (){
     app.get('/', (req, res) => {
-        req.pipe(request(`${urlFilserver}static/html/index.html`)).pipe(res);
+        req.pipe(request(`${urlFilserver}html/index.html`)).pipe(res);
     });
 
     app.get('/tuto', (req, res) => {
@@ -16,7 +16,7 @@ export default function StartServer (){
     });
 
     app.get('/solo', (req, res) => {
-        res.send(`Welcome to solo`)
+        req.pipe(request(`${urlFilserver}html/menuIA.html`)).pipe(res)
     });
 
     app.get('/multi', (req, res) => {
