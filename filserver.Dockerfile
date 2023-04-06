@@ -1,6 +1,6 @@
 FROM node:gallium-alpine3.17
 WORKDIR /app
-COPY ./front-end/package.json ./
+COPY ./fileserver/package.json ./
 RUN npm ci
-COPY ./front-end ./
+COPY ./filserver ./
 CMD [ "node main.js" ]
