@@ -24,6 +24,10 @@ export default function StartServer (){
     app.get('/multiMenu', (req, res) => {
         res.send(`Welcome to multi`);
     });
+    
+    app.get('/soloGame', (req, res) => {
+        req.pipe(request(`${urlFilserverHtml}/soloGame.html`)).pipe(res);
+    })
 
     app.listen(port, ()=>{
         console.log(`Server listening on http://${host}:${port}`);
