@@ -68,7 +68,7 @@ the first ia shoot on a random case
 ** if it miss shoot on a random case
 */
 
-function ia1(response,caseAlreadyPlay) {
+function ia1(response,caseAlreadyPlay){
     let findCase = false
     let attackCase =randomcase()
     if(response == "toucher"){
