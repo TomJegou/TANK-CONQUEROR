@@ -3,7 +3,7 @@ const app = express();
 const host = "localhost";
 const port = 5000;
 
-app.use(express.static('./public'));
+app.use(express.static('./html'));
 
 app.get('/', (req, res) => {
     res.send('Welcome to Filserver');
