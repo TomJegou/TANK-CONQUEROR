@@ -1,7 +1,7 @@
 FROM node:gallium-alpine3.17
 WORKDIR /app
-COPY ./app/package.json ./
-COPY ./app/package-lock.json ./
+COPY ./package.json .
+COPY ./package-lock.json .
 RUN npm install --production
-COPY ./app ./
+COPY . .
 CMD [ "node", "src/main.js" ]
