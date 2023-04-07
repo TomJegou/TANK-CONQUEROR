@@ -83,12 +83,11 @@ function ia1(response,caseAlreadyPlay) {
         if(!findCase){
             randomAttack(caseAlreadyPlay,attackCase)
         }
-        randomAttack(caseAlreadyPlay,attackCase)
-
-    }else if(response == "detruit"){
+    }else if(response == "detruit" || "louper"){
        randomAttack(caseAlreadyPlay,attackCase)
     }else{
         randomAttack(caseAlreadyPlay,attackCase)
+
     }
     return (caseAlreadyPlay)
 }
@@ -100,8 +99,6 @@ function ia2(){
 function ia3(){
 
 }
-console.log(ia1("toucher",[[ 1, 2 ], [ 2, 1 ], [ 2, 2 ],[1,1]]))
-console.log(ia1("detruit",[[ 1, 2 ], [ 2, 1 ], [ 2, 2 ],[1,1]]))
 
-// console.log(findCaseAround([2,2]))
-//[ [ 1, 2 ], [ 1, 4 ], [ 2, 2 ], [ 2, 3 ], [ 2, 4 ] ]
+
+
