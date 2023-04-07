@@ -1,5 +1,5 @@
 /**return a random case*/
-const randomcase =()=>{return ["abcdefghij"[Math.floor(Math.random() * 10)],Math.floor(Math.random()*10+1)]}
+const randomcase =()=>{return [Math.floor(Math.random()*10+1),Math.floor(Math.random()*10+1)]}
 
 /**return true if the case is already play (is in the tab)*/
 const checkCaseAlreadyPlay=(tab,caseToCheck)=>{
@@ -17,16 +17,16 @@ const checkCaseAlreadyPlay=(tab,caseToCheck)=>{
 function findCaseAround (caseToCheck){
     let allCaseAround = [];
     let caseAround = [];
-    let letter = caseToCheck[0];
+    let xnumber = caseToCheck[0];
     let number = caseToCheck[1];
-    let letterIndex = "abcdefghij".indexOf(letter);
+    let xIndex = xnumber-1;
     let numberIndex = number-1;
-    let letterIndexMin = letterIndex-1;let letterIndexMax = letterIndex+1;let numberIndexMax = numberIndex+1;let numberIndexMin = numberIndex-1;
-    if (letterIndex > 9) {
-        letterIndexMax = 9
+    let xIndexMin = xIndex-1;let xIndexMax = xIndex+1;let numberIndexMax = numberIndex+1;let numberIndexMin = numberIndex-1;
+    if ( xIndexMax > 9) {
+        xIndexMax = 9
     }
-    if (letterIndexMin < 0) {
-        letterIndexMin = 0
+    if (xIndexMin < 0) {
+        xIndexMin = 0
     }
     if (numberIndexMax > 9) {
         numberIndexMax = 9
@@ -34,10 +34,10 @@ function findCaseAround (caseToCheck){
     if (numberIndexMin < 0) {
         numberIndexMin = 0
     }
-    for (let i = letterIndexMin; i <= letterIndexMax; i++) {
+    for (let i = xIndexMin; i <= xIndexMax; i++) {
         for (let j = numberIndexMin; j <= numberIndexMax; j++) {
-            if (i !== letterIndex || j !== numberIndex) {
-                caseAround = ["abcdefghij"[i],j+1]
+            if (i !==  xIndex || j !== numberIndex) {
+                caseAround = [i+1,j+1]
                 allCaseAround.push(caseAround)
             }
         }
@@ -59,39 +59,13 @@ function ia1(response,caseAlreadyPlay) {
     let findCase = false
     let attackCase =randomcase()
     if(response == "toucher"){
-        attackCase=caseAlreadyPlay[caseAlreadyPlay.length-1]
-        for(let i = 0 ;i<findCaseAround(attackCase).length;i++){
-            let pendingCase = findCaseAround(attackCase)[i]
-            if (checkCaseAlreadyPlay(caseAlreadyPlay,pendingCase)) {
-                attackCase = pendingCase
+        for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
+            if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
+                attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i]
                 caseAlreadyPlay.push(attackCase)
+                break
             }
         }
-        while(!findCase){
-            if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
-                attackCase = randomcase()
-                caseAlreadyPlay.push(attackCase)
-                findCase=true
-            }else{
-                caseAlreadyPlay.push(attackCase)
-                findCase=true
-            }
-            break
-        }
-    }
-    if(response == "detruit"){
-        while(!findCase){
-            if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
-                attackCase = randomcase()
-                caseAlreadyPlay.push(attackCase)
-                findCase=true
-            }else{
-                caseAlreadyPlay.push(attackCase)
-                findCase=true
-            }
-            break
-        }
-    }
     while(!findCase){
             if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
                 attackCase = randomcase()
@@ -103,7 +77,7 @@ function ia1(response,caseAlreadyPlay) {
             }
             break
     }
-
+}
     return (caseAlreadyPlay)
 }
 
@@ -114,8 +88,6 @@ function ia2(){
 function ia3(){
 
 }
-console.log(ia1("toucher",[['a',1],['b',3]]))
-// console.log(findCaseAround(['b',3]))
-// console.log(findCaseAround(['a',1]))
-
-//[ 'a', 2 ],[ 'a', 3 ],[ 'a', 4 ],[ 'b', 2 ],[ 'b', 4 ],[ 'c', 2 ],[ 'c', 3 ],[ 'c', 4 ]
+console.log(ia1("toucher",[[ 1, 2 ], [ 2, 1 ], [ 2, 2 ]]))
+console.log(findCaseAround([2,2]))
+//[ [ 1, 2 ], [ 1, 4 ], [ 2, 2 ], [ 2, 3 ], [ 2, 4 ] ]
