@@ -69,17 +69,26 @@ the first ia shoot on a random case
 */
 
 function ia1(response,caseAlreadyPlay) {
+    let findCase = false
     let attackCase =randomcase()
     if(response == "toucher"){
         for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
             if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
                 attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i]
                 caseAlreadyPlay.push(attackCase)
+                findCase= true
                 break
             }
         }
+        if(!findCase){
+            randomAttack(caseAlreadyPlay,attackCase)
+        }
+        randomAttack(caseAlreadyPlay,attackCase)
+
     }else if(response == "detruit"){
        randomAttack(caseAlreadyPlay,attackCase)
+    }else{
+        randomAttack(caseAlreadyPlay,attackCase)
     }
     return (caseAlreadyPlay)
 }
