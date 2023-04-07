@@ -13,15 +13,15 @@ export default function StartServer (){
         req.pipe(request(`${urlFilserverHtml}/index.html`)).pipe(res);
     });
 
-    app.get('/tuto', (req, res) => {
+    app.get('/tutoMenu', (req, res) => {
         res.send(`Welcome to tuto`);
     });
 
-    app.get('/solo', (req, res) => {
+    app.get('/soloMenu', (req, res) => {
         req.pipe(request(`${urlFilserverHtml}/menuIA.html`)).pipe(res);
     });
 
-    app.get('/multi', (req, res) => {
+    app.get('/multiMenu', (req, res) => {
         res.send(`Welcome to multi`);
     });
 
