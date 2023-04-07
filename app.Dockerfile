@@ -3,5 +3,5 @@ WORKDIR /app
 COPY ./package.json .
 COPY ./package-lock.json .
 RUN npm install --production
-COPY . .
+COPY ./src ./src
 CMD [ "node", "src/main.js" ]

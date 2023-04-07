@@ -8,8 +8,8 @@ services:
       - "8000:8000"
     volumes:
       - type: bind
-        source: .
-        target: /app
+        source: ./public
+        target: /app/public
     networks:
       - backend
 networks:
