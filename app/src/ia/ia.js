@@ -44,7 +44,22 @@ function findCaseAround (caseToCheck){
     }
     return (allCaseAround)
 }
-  
+/** Random Attack is a function who will find a case to attack,who has not been a player before */
+
+function randomAttack(caseAlreadyPlay,attackCase){
+    let findCase = false
+    while(!findCase){
+        if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
+            attackCase = randomcase()
+            caseAlreadyPlay.push(attackCase)
+            findCase=true
+        }else{
+            caseAlreadyPlay.push(attackCase)
+            findCase=true
+        }
+        break
+}
+}
 
 /** 
 the first ia shoot on a random case 
@@ -53,10 +68,7 @@ the first ia shoot on a random case
 ** if it miss shoot on a random case
 */
 
-
-
 function ia1(response,caseAlreadyPlay) {
-    let findCase = false
     let attackCase =randomcase()
     if(response == "toucher"){
         for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
@@ -66,18 +78,9 @@ function ia1(response,caseAlreadyPlay) {
                 break
             }
         }
-    while(!findCase){
-            if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
-                attackCase = randomcase()
-                caseAlreadyPlay.push(attackCase)
-                findCase=true
-            }else{
-                caseAlreadyPlay.push(attackCase)
-                findCase=true
-            }
-            break
+    }else if(response == "detruit"){
+       randomAttack(caseAlreadyPlay,attackCase)
     }
-}
     return (caseAlreadyPlay)
 }
 
@@ -88,6 +91,8 @@ function ia2(){
 function ia3(){
 
 }
-console.log(ia1("toucher",[[ 1, 2 ], [ 2, 1 ], [ 2, 2 ]]))
-console.log(findCaseAround([2,2]))
+console.log(ia1("toucher",[[ 1, 2 ], [ 2, 1 ], [ 2, 2 ],[1,1]]))
+console.log(ia1("detruit",[[ 1, 2 ], [ 2, 1 ], [ 2, 2 ],[1,1]]))
+
+// console.log(findCaseAround([2,2]))
 //[ [ 1, 2 ], [ 1, 4 ], [ 2, 2 ], [ 2, 3 ], [ 2, 4 ] ]
