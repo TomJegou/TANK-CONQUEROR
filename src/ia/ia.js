@@ -71,25 +71,27 @@ the first ia shoot on a random case
 function ia1(response,caseAlreadyPlay){
     let findCase = false
     let attackCase =randomcase()
-    if(response == "toucher"){
-        for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
-            if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
-                attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i]
-                caseAlreadyPlay.push(attackCase)
-                findCase= true
-                break
+    while(response!=="fini"){
+        if(response == "toucher"){
+            for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
+                if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
+                    attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i]
+                    caseAlreadyPlay.push(attackCase)
+                    findCase= true
+                    break
+                }
             }
-        }
-        if(!findCase){
-            randomAttack(caseAlreadyPlay,attackCase)
-        }
-    }else if(response == "detruit" || "louper"){
-       randomAttack(caseAlreadyPlay,attackCase)
-    }else{
+            if(!findCase){
+                randomAttack(caseAlreadyPlay,attackCase)
+            }
+        }else if(response == "detruit" || "louper"){
         randomAttack(caseAlreadyPlay,attackCase)
+        }else{
+            randomAttack(caseAlreadyPlay,attackCase)
 
+        }
+        return (caseAlreadyPlay)
     }
-    return (caseAlreadyPlay)
 }
 
 function ia2(){
@@ -99,6 +101,18 @@ function ia2(){
 function ia3(){
 
 }
+let tab= [[1,1]]
+
+let fin = true
+while(fin){
+console.log(tab)
+ia1("toucher",tab)
+console.log(tab)
+ia1("louper",tab)
+console.log(tab)
+if(tab.length > 98){
+    fin = false
+}}
 
 
-
+console.log("Tableaux de fin",tab)
