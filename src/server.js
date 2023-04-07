@@ -7,6 +7,7 @@ const port = 8000;
 const urlFilserverHtml = `http://app:8000/html`;
 
 export default function StartServer (){
+    app.use(express.urlencoded({extended: true}));
     app.use(express.static('./public'));
 
     app.get('/', (req, res) => {
@@ -25,6 +26,11 @@ export default function StartServer (){
         res.send(`Welcome to multi`);
     });
     
+    app.post('/menuIA-submit', (req, res) => {
+        console.log(req.body)
+        res.redirect('/soloGame')
+    })
+
     app.get('/soloGame', (req, res) => {
         req.pipe(request(`${urlFilserverHtml}/soloGame.html`)).pipe(res);
     })
