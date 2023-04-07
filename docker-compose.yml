@@ -8,14 +8,6 @@ services:
       - "8000:8000"
     networks:
       - backend
-  fileserver:
-    build:
-      context: .
-      dockerfile: fileserver.Dockerfile
-    ports:
-      - "5000:5000"
-    networks:
-      - backend
 networks:
   backend:
     name: backend
