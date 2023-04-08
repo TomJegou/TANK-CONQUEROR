@@ -1,3 +1,3 @@
 const redirect = (route) => {
-    location.href = `/${route}`
+    location.href = `/${route}`;
 }

@@ -22,18 +22,18 @@ export default function StartServer (){
         req.pipe(request(`${urlFilserverHtml}/menuIA.html`)).pipe(res);
     });
 
+    app.post('/soloMenu', (req, res) => {
+        console.log(req.body);
+        res.redirect('/soloGame');
+    });
+
     app.get('/multiMenu', (req, res) => {
         res.send(`Welcome to multi`);
     });
     
-    app.post('/menuIA-submit', (req, res) => {
-        console.log(req.body)
-        res.redirect('/soloGame')
-    })
-
     app.get('/soloGame', (req, res) => {
         req.pipe(request(`${urlFilserverHtml}/soloGame.html`)).pipe(res);
-    })
+    });
 
     app.listen(port, ()=>{
         console.log(`Server listening on http://${host}:${port}`);
