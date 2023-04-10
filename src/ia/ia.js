@@ -62,17 +62,6 @@ function randomAttack(caseAlreadyPlay,attackCase){
 }
 
 
-function checkDirection(caseAlreadyPlay,caseToCheck){
-    let direction = []
-    let caseAround = findCaseAround(caseToCheck)
-    for (let i = 0; i < caseAround.length; i++) {
-        if (checkCaseAlreadyPlay(caseAlreadyPlay,caseAround[i])) {
-            direction.push(caseAround[i])
-        }
-    }
-    return direction
-}
-
 /** 
 the first ia shoot on a random case 
 ** check the response to know if the shoot hit or no
@@ -85,7 +74,7 @@ the first ia shoot on a random case
 function ia1(response,caseAlreadyPlay){
     let findCase = false
     let attackCase =randomcase()
-    while(response!=="fini"){
+    //si toucher boucle sur les allcasearound tant que qu'il y est une autre touche ou detruit ou tous les allcasearound sont jouer
         if(response == "toucher"){
             for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
                 if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
@@ -106,7 +95,6 @@ function ia1(response,caseAlreadyPlay){
         }
         return (caseAlreadyPlay)
     }
-}
 /** 
 the second ia shoot case in diagonal  
 ** check the response to know if the shoot hit or no
