@@ -73,13 +73,14 @@ function checkDirection(caseAlreadyPlay,caseToCheck){
     return direction
 }
 
-console.log(checkDirection([[3,7],[6,2],[1,4],[1,5],[2,3],[4,2]],[1,3]))
 /** 
 the first ia shoot on a random case 
 ** check the response to know if the shoot hit or no
 ** if it hit shoot near by
 ** if it miss shoot on a random case
 */
+
+
 
 function ia1(response,caseAlreadyPlay){
     let findCase = false
