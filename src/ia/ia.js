@@ -61,6 +61,19 @@ function randomAttack(caseAlreadyPlay,attackCase){
 }
 }
 
+
+function checkDirection(caseAlreadyPlay,caseToCheck){
+    let direction = []
+    let caseAround = findCaseAround(caseToCheck)
+    for (let i = 0; i < caseAround.length; i++) {
+        if (checkCaseAlreadyPlay(caseAlreadyPlay,caseAround[i])) {
+            direction.push(caseAround[i])
+        }
+    }
+    return direction
+}
+
+console.log(checkDirection([[3,7],[6,2],[1,4],[1,5],[2,3],[4,2]],[1,3]))
 /** 
 the first ia shoot on a random case 
 ** check the response to know if the shoot hit or no
@@ -93,26 +106,17 @@ function ia1(response,caseAlreadyPlay){
         return (caseAlreadyPlay)
     }
 }
-
+/** 
+the second ia shoot case in diagonal  
+** check the response to know if the shoot hit or no
+** if it hit shoot near by
+** if it miss shoot on a random case
+*/
 function ia2(){
 
 }
-
+/** 
+the third ia use the Nick berry algorithm
+*/
 function ia3(){
-
 }
-let tab= [[1,1]]
-
-let fin = true
-while(fin){
-console.log(tab)
-ia1("toucher",tab)
-console.log(tab)
-ia1("louper",tab)
-console.log(tab)
-if(tab.length > 98){
-    fin = false
-}}
-
-
-console.log("Tableaux de fin",tab)
