@@ -1,12 +1,27 @@
 const playerGrid = document.getElementById("playerGrid");
 const enemyGrid = document.getElementById("enemyGrid");
 
-let currentCase = {
+let CurrentCase = {
     x: undefined,
     y: undefined,
     isOccupied: false,
     isPlayer: false
 };
+
+const NumberAllTanks = {
+    "tank convoy": 1, //5*2 cases
+    "big tank": 1, //2*2 cases
+    "medium tank": 3, //2 cases
+    "small tank": 3, //1 case
+}
+
+class Tank {
+    constructor(name, listCases, size) {
+        this.name = name;
+        this.size = size;
+        this.listCases = listCases;
+    }
+}
 
 function createCase(x, y, t) {
     const div = document.createElement('div');
@@ -31,11 +46,11 @@ function createGrid() {
 const handleClickCase = (element) => {
     caseType = element.id.split(":")[0];
     caseCoordinates = element.id.split(":")[1];
-    caseType == "player" ? currentCase.isPlayer = true : currentCase.isPlayer = false;
+    caseType == "player" ? CurrentCase.isPlayer = true : CurrentCase.isPlayer = false;
     t = caseCoordinates.split(";")
-    currentCase.x = +t[0];
-    currentCase.y = +t[1];
-    console.log(currentCase);
+    CurrentCase.x = +t[0];
+    CurrentCase.y = +t[1];
+    console.log(CurrentCase);
 }
 
 createGrid();
