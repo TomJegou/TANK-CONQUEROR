@@ -1,7 +1,7 @@
 const playerGrid = document.getElementById("playerGrid");
 const enemyGrid = document.getElementById("enemyGrid");
 
-let CurrentCase = {
+let CurrentCaseClicked = {
     x: undefined,
     y: undefined,
     isOccupied: false,
@@ -46,11 +46,11 @@ function createGrid() {
 const handleClickCase = (element) => {
     caseType = element.id.split(":")[0];
     caseCoordinates = element.id.split(":")[1];
-    caseType == "player" ? CurrentCase.isPlayer = true : CurrentCase.isPlayer = false;
+    caseType == "player" ? CurrentCaseClicked.isPlayer = true : CurrentCaseClicked.isPlayer = false;
     t = caseCoordinates.split(";")
-    CurrentCase.x = +t[0];
-    CurrentCase.y = +t[1];
-    console.log(CurrentCase);
+    CurrentCaseClicked.x = +t[0];
+    CurrentCaseClicked.y = +t[1];
+    console.log(CurrentCaseClicked);
 }
 
 createGrid();
