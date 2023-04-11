@@ -5,7 +5,6 @@ let CurrentCaseClicked = {
     x: undefined,
     y: undefined,
     isOccupied: false,
-    isPlayer: false,
 };
 
 const NumberAllTanks = {
@@ -54,7 +53,6 @@ function generateTank() {
 function handleClickCase(element) {
     caseType = element.id.split(":")[0];
     caseCoordinates = element.id.split(":")[1];
-    caseType == "player" ? CurrentCaseClicked.isPlayer = true : CurrentCaseClicked.isPlayer = false;
     t = caseCoordinates.split(";")
     CurrentCaseClicked.x = +t[0];
     CurrentCaseClicked.y = +t[1];
