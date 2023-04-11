@@ -1,22 +1,23 @@
 body {
     align-items: center;
     justify-content: space-around;
+    height: 100vh;
 }
 
 #playerGrid{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 50vh;
-    height: 50vh;
+    width: 55vh;
+    height: 55vh;
 }
 
 #enemyGrid{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 50vh;
-    height: 50vh;
+    width: 55vh;
+    height: 55vh;
 }
 
 .case{
