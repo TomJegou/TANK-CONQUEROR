@@ -95,14 +95,15 @@ function ia1(response,caseAlreadyPlay){
                 break
             }
         }
-    }else{
-        randomAttack(caseAlreadyPlay,attackCase)
     }
+    // else{
+    //     randomAttack(caseAlreadyPlay,attackCase)
+    // }
     }
     if(response == "louper"){
         if(targeting == true){
             for(let j = 0;j<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
-                if(!caseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
+                if(!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
                     attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
                     caseAlreadyPlay.push(attackCase)
                     nb+=1
@@ -110,18 +111,14 @@ function ia1(response,caseAlreadyPlay){
                 }
             }
         }
-        else{
-            randomAttack(caseAlreadyPlay,attackCase)
-        }
+        // else{
+        //     randomAttack(caseAlreadyPlay,attackCase)
+        // }
     }
     if(response == "detruit"){
         nb=1
         targeting=false
         randomAttack(caseAlreadyPlay,attackCase)
-    }
-    else{
-        randomAttack(caseAlreadyPlay,attackCase)
-
     }
     return (caseAlreadyPlay)
 }
@@ -141,7 +138,32 @@ function ia3(){
 }
 
 
-
+console.log(findCaseAround([2,2]))
+// [1,2][2,2][3,2]
+// [ [ 1, 1 ], [ 1, 3 ], [ 2, 1 ], [ 2, 2 ], [ 2, 3 ] ]
 let tab = [[1,1],[1,2]]
 console.log(ia1("toucher",tab))
+console.log(targeting)
+tab = [[1,1],[1,2],[1,3]]
 console.log(ia1("louper",tab))
+tab = [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ] ]
+console.log(ia1("louper",tab))
+tab = [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 2 ] ]
+console.log(ia1("toucher",tab))
+tab = [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 2 ], [ 2, 3 ] ]
+console.log(ia1("louper",tab))
+tab = [
+    [ 1, 1 ], [ 1, 2 ],
+    [ 1, 3 ], [ 1, 4 ],
+    [ 2, 2 ], [ 2, 3 ],
+    [ 2, 4 ]
+  ]
+console.log(ia1("louper",tab))
+console.log(targeting)
+
+
+
+// tab = [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 2 ], [ 2, 3 ],[2,4] ]
+// console.log(ia1("toucher",tab))
+
+
