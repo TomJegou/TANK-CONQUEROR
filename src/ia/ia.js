@@ -79,7 +79,7 @@ function ia1(response,caseAlreadyPlay){
     if(response == "toucher"){
         if(targeting == true){
             for(let j = 0;j<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
-                if(!caseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
+                if(!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
                     attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
                     caseAlreadyPlay.push(attackCase)
                     nb+=1
@@ -140,5 +140,8 @@ the third ia use the Nick berry algorithm
 function ia3(){
 }
 
-console.log(ia1("toucher",[[1,1],[1,2]]))
-console.log(ia1("louper",[[1,1],[1,2],[2,1]]))
+
+
+let tab = [[1,1],[1,2]]
+console.log(ia1("toucher",tab))
+console.log(ia1("louper",tab))
