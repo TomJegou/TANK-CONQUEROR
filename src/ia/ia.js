@@ -68,33 +68,49 @@ the first ia shoot on a random case
 ** if it hit shoot near by
 ** if it miss shoot on a random case
 */
+let targeting=false
+let nb = 1
+
 
 
 
 function ia1(response,caseAlreadyPlay){
-    let findCase = false
     let attackCase =randomcase()
     //si toucher boucle sur les allcasearound tant que qu'il y est une autre touche ou detruit ou tous les allcasearound sont jouer
-        if(response == "toucher"){
-            for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
-                if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
-                    attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i]
+    if(response == "toucher"){
+        if(targeting == true){
+            for(let j = 0;j<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
+                if(!caseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
+                    attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
                     caseAlreadyPlay.push(attackCase)
-                    findCase= true
+                    nb+=1
                     break
                 }
             }
-            if(!findCase){
-                randomAttack(caseAlreadyPlay,attackCase)
-            }
-        }else if(response == "detruit" || "louper"){
-        randomAttack(caseAlreadyPlay,attackCase)
         }else{
-            randomAttack(caseAlreadyPlay,attackCase)
-
+        for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
+            if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
+                attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i]
+                caseAlreadyPlay.push(attackCase)
+                targeting = true
+                break
+            }
         }
-        return (caseAlreadyPlay)
     }
+        randomAttack(caseAlreadyPlay,attackCase)
+    
+    }
+    else if(response == "detruit"){
+        nb=1
+        targeting=false
+        randomAttack(caseAlreadyPlay,attackCase)
+    }
+    else{
+        randomAttack(caseAlreadyPlay,attackCase)
+
+    }
+    return (caseAlreadyPlay)
+}
 /** 
 the second ia shoot case in diagonal  
 ** check the response to know if the shoot hit or no
@@ -109,3 +125,6 @@ the third ia use the Nick berry algorithm
 */
 function ia3(){
 }
+
+console.log(ia1("toucher",[[1,1],[1,2]]))
+console.log(ia1("louper",[[1,1],[1,2],[2,1]]))
