@@ -76,7 +76,6 @@ let nb = 1
 
 function ia1(response,caseAlreadyPlay){
     let attackCase =randomcase()
-    //si toucher boucle sur les allcasearound tant que qu'il y est une autre touche ou detruit ou tous les allcasearound sont jouer
     if(response == "toucher"){
         if(targeting == true){
             for(let j = 0;j<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
@@ -87,7 +86,7 @@ function ia1(response,caseAlreadyPlay){
                     break
                 }
             }
-        }else{
+        }else if(targeting==false){
         for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
             if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
                 attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i]
@@ -96,11 +95,26 @@ function ia1(response,caseAlreadyPlay){
                 break
             }
         }
-    }
+    }else{
         randomAttack(caseAlreadyPlay,attackCase)
-    
     }
-    else if(response == "detruit"){
+    }
+    if(response == "louper"){
+        if(targeting == true){
+            for(let j = 0;j<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
+                if(!caseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
+                    attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
+                    caseAlreadyPlay.push(attackCase)
+                    nb+=1
+                    break
+                }
+            }
+        }
+        else{
+            randomAttack(caseAlreadyPlay,attackCase)
+        }
+    }
+    if(response == "detruit"){
         nb=1
         targeting=false
         randomAttack(caseAlreadyPlay,attackCase)
