@@ -4,33 +4,6 @@
 
 body {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 100vh;
-    width: 100vw;
-}
-
-#playerGrid{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 40vh;
-    height: 40vh;
-}
-
-#enemyGrid{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 40vh;
-    height: 40vh;
-}
-
-.case{
-    border: 1px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 4vh;
-    height: 4vh;
+    height: 100%;
+    width: 100%;
 }
