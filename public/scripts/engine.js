@@ -5,7 +5,7 @@ let CurrentCaseClicked = {
     x: undefined,
     y: undefined,
     isOccupied: false,
-    isPlayer: false
+    isPlayer: false,
 };
 
 const NumberAllTanks = {
@@ -14,6 +14,8 @@ const NumberAllTanks = {
     "medium tank": 3, //2 cases
     "small tank": 3, //1 case
 }
+
+const AllTanksPlayer1 = []
 
 class Tank {
     constructor(name, listCases, size) {
@@ -28,7 +30,9 @@ function createCase(x, y, t) {
     div.className = 'case';
     div.id = `${t}:${x};${y}`;
     div.style.border = "1px solid black";
-    div.setAttribute("onclick", `handleClickCase(this)`);
+    if(t === "player") {
+        div.setAttribute("onclick", `handleClickCase(this)`);
+    }
     return div;
 }
 
@@ -43,7 +47,11 @@ function createGrid() {
     }
 }
 
-const handleClickCase = (element) => {
+function generateTank() {
+
+}
+
+function handleClickCase(element) {
     caseType = element.id.split(":")[0];
     caseCoordinates = element.id.split(":")[1];
     caseType == "player" ? CurrentCaseClicked.isPlayer = true : CurrentCaseClicked.isPlayer = false;
