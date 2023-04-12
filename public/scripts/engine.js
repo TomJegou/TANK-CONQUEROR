@@ -70,7 +70,7 @@ function createGrid() {
 
 function placeTank(size) {
     let result = [];
-    let sens;
+    const directionPossible = [];
     let randomBox;
     function inBoxImpossibleToPlace(thisBox) {
         let result = false;
@@ -99,7 +99,9 @@ function placeTank(size) {
     }
 
     function getSens(rdmBox) {
-        
+        for (let i = rdmBox.x; i<= rdmBox+size; i++){
+
+        }
     }
 
     return result;
