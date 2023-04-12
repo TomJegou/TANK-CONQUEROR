@@ -3,7 +3,6 @@ const randomcase =()=>{return [Math.floor(Math.random()*10+1),Math.floor(Math.ra
 
 /**return true if the case is already play (is in the tab)*/
 const checkCaseAlreadyPlay=(tab,caseToCheck)=>{
-
     for (let elemenInTab = 0; elemenInTab < tab.length; elemenInTab++) {
             if(tab[elemenInTab][0] === caseToCheck[0] && tab[elemenInTab][1] === caseToCheck[1]){
                 return true
@@ -11,6 +10,7 @@ const checkCaseAlreadyPlay=(tab,caseToCheck)=>{
         }
         return false
     }
+
 function findLineDirection(hitCase){
     let line = []
 
@@ -88,9 +88,6 @@ the first ia shoot on a random case
 */
 let targeting=false
 let nb = 1
-
-
-
 let hitCase = []
 
 function ia1(response,caseAlreadyPlay){
@@ -98,14 +95,12 @@ function ia1(response,caseAlreadyPlay){
     if(response == "toucher"){
         hitCase.push(caseAlreadyPlay[caseAlreadyPlay.length-1])
         if(targeting == true){
-            if(hitCase.length >= 2){
-                if(findLineDirection(hitCase).length > 0){
-                    for(let k = 0;i<findLineDirection(hitCase).length;k++){
-                        if(!checkCaseAlreadyPlay(caseAlreadyPlay,findLineDirection(hitCase)[k])){
-                            attackCase = findLineDirection(hitCase)[k]
-                            caseAlreadyPlay.push(attackCase)
-                            break
-                        }
+            if(hitCase>=2){
+            for(let k = 0;i<findLineDirection(hitCase).length;k++){
+                    if(!checkCaseAlreadyPlay(caseAlreadyPlay,findLineDirection(hitCase)[k])){
+                        caseAlreadyPlay.push(attackCase)
+                        attackCase = findLineDirection(hitCase)[k]
+                        break
                     }
                 }
             }else{
@@ -142,7 +137,7 @@ function ia1(response,caseAlreadyPlay){
                 }
             }
         }
-        else if (!targeting){
+        else if (targeting==false){
             randomAttack(caseAlreadyPlay,attackCase)
         }
     }
@@ -169,4 +164,24 @@ the third ia use the Nick berry algorithm
 function ia3(){
 }
 
+hitCase=[[3,3]]
+targeting = true
+let tab = [ [ 1, 4 ], [ 9, 3 ], [ 1, 2 ], [ 1, 1 ] ,[ 3, 3 ], [ 2, 2 ]]
+tab = ia1("louper",tab)
+tab = ia1("louper",tab)
+tab = ia1("detruit",tab)
+tab = ia1("toucher",tab)
+tab = ia1("louper",tab)
+tab = ia1("louper",tab)
 
+
+
+
+
+
+console.log(targeting)
+console.log(hitCase)
+console.log(targeting)
+console.log(hitCase)
+console.log(tab)
+tab =[]
