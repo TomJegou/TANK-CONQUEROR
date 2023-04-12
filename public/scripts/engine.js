@@ -8,13 +8,14 @@ let CurrentCaseClicked = {
 };
 
 const NumberAllTanks = {
-    "tank convoy": 1, //5*2 cases
-    "big tank": 1, //2*2 cases
-    "medium tank": 3, //2 cases
-    "small tank": 3, //1 case
+    "tank convoy": {"number": 1, "size": 5*2}, //5*2 cases
+    "big tank": {"number": 1, "size": 2*2}, //2*2 cases
+    "medium tank": {"number": 3, "size": 2}, //2 cases
+    "small tank": {"number": 3, "size": 1}, //1 case
 }
 
 const AllTanksPlayer1 = []
+const AllTanksPlayer2 = []
 
 class Tank {
     constructor(name, listCases, size) {
@@ -24,12 +25,24 @@ class Tank {
     }
 }
 
+function isOccupied(x, y) {
+    t = AllTanksPlayer1.concat(AllTanksPlayer2);
+    t.map((tank) => {
+        tank.listCases.map((caseCurrent) => {
+            if(caseCurrent.x === x && caseCurrent.y === y) {
+                return true;
+            }
+        })
+    })
+    return false;
+}
+
 function createCase(x, y, t) {
     const div = document.createElement('div');
     div.className = 'case';
     div.id = `${t}:${x};${y}`;
     div.style.border = "1px solid black";
-    if(t === "player") {
+    if(t === "enemy") {
         div.setAttribute("onclick", `handleClickCase(this)`);
     }
     return div;
@@ -47,7 +60,13 @@ function createGrid() {
 }
 
 function generateTank() {
-
+    for (const name in NumberAllTanks) {
+        for (let i = 0; i < NumberAllTanks[name]["number"]; i++) {
+            const tank = new Tank(name, [], NumberAllTanks[name]["size"]);
+            AllTanksPlayer1.push(tank);
+            AllTanksPlayer2.push(tank);
+        }
+    }
 }
 
 function handleClickCase(element) {
@@ -56,7 +75,9 @@ function handleClickCase(element) {
     t = caseCoordinates.split(";")
     CurrentCaseClicked.x = +t[0];
     CurrentCaseClicked.y = +t[1];
+    CurrentCaseClicked.isOccupied = isOccupied(CurrentCaseClicked.x, CurrentCaseClicked.y);
     console.log(CurrentCaseClicked);
 }
 
 createGrid();
+generateTank();
