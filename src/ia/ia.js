@@ -11,7 +11,23 @@ const checkCaseAlreadyPlay=(tab,caseToCheck)=>{
         }
         return false
     }
+function findLineDirection(hitCase){
+    let line = []
 
+    let elem1 = hitCase[0]
+    let elem2 = hitCase[1]
+    if(elem1[0]==elem2[0]){
+        for(let y =1;y<=10;y++){
+            line.push([elem1[0],y])
+        }
+    }
+    if(elem1[1]==elem2[1]){
+        for(let x =1;x<=10;x++){
+            line.push([elem1[1],x])
+        }
+    }
+    return line
+}
 
 /**FindCaseAround is a function how check around a case we give to check (caseToCheck) and return all are case around */
 function findCaseAround (caseToCheck){
@@ -44,6 +60,8 @@ function findCaseAround (caseToCheck){
     }
     return (allCaseAround)
 }
+
+
 /** Random Attack is a function who will find a case to attack,who has not been a player before */
 
 function randomAttack(caseAlreadyPlay,attackCase){
@@ -73,11 +91,24 @@ let nb = 1
 
 
 
+let hitCase = []
 
 function ia1(response,caseAlreadyPlay){
     let attackCase =randomcase()
     if(response == "toucher"){
+        hitCase.push(caseAlreadyPlay[caseAlreadyPlay.length-1])
         if(targeting == true){
+            if(hitCase.length >= 2){
+                if(findLineDirection(hitCase).length > 0){
+                    for(let k = 0;i<findLineDirection(hitCase).length;k++){
+                        if(!checkCaseAlreadyPlay(caseAlreadyPlay,findLineDirection(hitCase)[k])){
+                            attackCase = findLineDirection(hitCase)[k]
+                            caseAlreadyPlay.push(attackCase)
+                            break
+                        }
+                    }
+                }
+            }else{
             for(let j = 0;j<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
                 if(!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
                     attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
@@ -86,6 +117,7 @@ function ia1(response,caseAlreadyPlay){
                     break
                 }
             }
+        }
         }else if(targeting==false){
         for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
             if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
@@ -96,9 +128,9 @@ function ia1(response,caseAlreadyPlay){
             }
         }
     }
-    // else{
-    //     randomAttack(caseAlreadyPlay,attackCase)
-    // }
+    else{
+        randomAttack(caseAlreadyPlay,attackCase)
+    }
     }
     if(response == "louper"){
         if(targeting == true){
@@ -115,6 +147,7 @@ function ia1(response,caseAlreadyPlay){
         }
     }
     if(response == "detruit"){
+        hitCase=[]
         nb=1
         targeting=false
         randomAttack(caseAlreadyPlay,attackCase)
