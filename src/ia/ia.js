@@ -106,14 +106,13 @@ function ia1(response,caseAlreadyPlay){
                 if(!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
                     attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
                     caseAlreadyPlay.push(attackCase)
-                    nb+=1
                     break
                 }
             }
         }
-        // else{
-        //     randomAttack(caseAlreadyPlay,attackCase)
-        // }
+        else if (!targeting){
+            randomAttack(caseAlreadyPlay,attackCase)
+        }
     }
     if(response == "detruit"){
         nb=1
@@ -136,34 +135,5 @@ the third ia use the Nick berry algorithm
 */
 function ia3(){
 }
-
-
-console.log(findCaseAround([2,2]))
-// [1,2][2,2][3,2]
-// [ [ 1, 1 ], [ 1, 3 ], [ 2, 1 ], [ 2, 2 ], [ 2, 3 ] ]
-let tab = [[1,1],[1,2]]
-console.log(ia1("toucher",tab))
-console.log(targeting)
-tab = [[1,1],[1,2],[1,3]]
-console.log(ia1("louper",tab))
-tab = [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ] ]
-console.log(ia1("louper",tab))
-tab = [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 2 ] ]
-console.log(ia1("toucher",tab))
-tab = [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 2 ], [ 2, 3 ] ]
-console.log(ia1("louper",tab))
-tab = [
-    [ 1, 1 ], [ 1, 2 ],
-    [ 1, 3 ], [ 1, 4 ],
-    [ 2, 2 ], [ 2, 3 ],
-    [ 2, 4 ]
-  ]
-console.log(ia1("louper",tab))
-console.log(targeting)
-
-
-
-// tab = [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 2 ], [ 2, 3 ],[2,4] ]
-// console.log(ia1("toucher",tab))
 
 
