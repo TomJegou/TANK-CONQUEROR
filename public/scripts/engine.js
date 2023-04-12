@@ -14,8 +14,8 @@ const NumberAllTanks = {
     "small tank": {"number": 3, "size": 1}, //1 case
 }
 
-const AllTanksPlayer1 = []
-const AllTanksPlayer2 = []
+const AllTanksPlayer = []
+const AllTanksEnemy = []
 
 class Tank {
     constructor(name, listCases, size) {
@@ -63,8 +63,8 @@ function generateTank() {
     for (const name in NumberAllTanks) {
         for (let i = 0; i < NumberAllTanks[name]["number"]; i++) {
             const tank = new Tank(name, [], NumberAllTanks[name]["size"]);
-            AllTanksPlayer1.push(tank);
-            AllTanksPlayer2.push(tank);
+            AllTanksPlayer.push(tank);
+            AllTanksEnemy.push(tank);
         }
     }
 }
