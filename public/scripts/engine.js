@@ -72,10 +72,10 @@ function placeTank(size) {
     let result = [];
     let sens;
     let randomCase;
-    function inCaseImpossibleToPlace() {
+    function inCaseImpossibleToPlace(thisCase) {
         let result = false;
         CaseImpossibleToPlace.map((currentCase) => {
-            if(currentCase.x === randomCase.x && currentCase.y === randomCase.y) {
+            if(currentCase.x === thisCase.x && currentCase.y === thisCase.y) {
                 result = true;
                 return;
             }
@@ -83,19 +83,39 @@ function placeTank(size) {
         return result;
     }
     function isPossible() {
-        if (inCaseImpossibleToPlace()) {
+        if (inCaseImpossibleToPlace(randomCase)) {
             return false;
         } else {
             if (sens == "horizontal") {
                 if (randomCase.x + size > 10 || randomCase.x - size < 1) {
                     return false;
                 } else {
+                    for (let i = randomCase.x; i<randomCase.x+size && i <= 10; i++) {
+                        if (inCaseImpossibleToPlace({x: i, y: randomCase.y})) {
+                            return false;
+                        }
+                    }
+                    for (let i = randomCase.x; i>randomCase.x-size && i >= 1; i--) {
+                        if (inCaseImpossibleToPlace({x: i, y: randomCase.y})) {
+                            return false;
+                        }
+                    }
                     return true;
                 }
             } else {
                 if (randomCase.y + size > 10 || randomCase.y - size < 1) {
                     return false;
                 } else {
+                    for (let i = randomCase.y; i<randomCase.y+size && i <= 10; i++) {
+                        if (inCaseImpossibleToPlace({x: randomCase.x, y: i})) {
+                            return false;
+                        }
+                    }
+                    for (let i = randomCase.y; i>randomCase.y-size && i >= 1; i--) {
+                        if (inCaseImpossibleToPlace({x: randomCase.x, y: i})) {
+                            return false;
+                        }
+                    }
                     return true;
                 }
             }
@@ -116,9 +136,11 @@ function placeTank(size) {
         }
     }
     do {
-        Math.random() > 0.5 ? sens = "horizontal" : sens = "vertical";
         randomCase = {x: getRandomInt(1, 11), y: getRandomInt(1, 11)};
-    } while (isPossible());
+        do {
+            Math.random() > 0.5 ? sens = "horizontal" : sens = "vertical";
+        } while (!isPossible())
+    } while (!isPossible());
     if (sens == "horizontal") {
         if (randomCase.x + size <= 10) {
             for (let i = 0; i < size; i++) {
