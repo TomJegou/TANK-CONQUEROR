@@ -1,7 +1,7 @@
 const playerGrid = document.getElementById("playerGrid");
 const enemyGrid = document.getElementById("enemyGrid");
 
-let CurrentCaseClicked = {
+let CurrentBoxClicked = {
     x: undefined,
     y: undefined,
     isOccupied: false,
@@ -16,13 +16,13 @@ const NumberAllTanks = {
 
 const AllTanksPlayer = []
 const AllTanksEnemy = []
-let CaseImpossibleToPlace = []
+let BoxImpossibleToPlace = []
 
 class Tank {
-    constructor(name, listCases, size) {
+    constructor(name, listBox, size) {
         this.name = name;
         this.size = size;
-        this.listCases = listCases;
+        this.listBox = listBox;
     }
 }
 
@@ -32,12 +32,12 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
-function isOccupied(x, y) {
+function isOccupied(thisBox) {
     let result = false;
     const t = AllTanksPlayer.concat(AllTanksEnemy);
     t.map((tank) => {
-        tank.listCases.map((caseCurrent) => {
-            if(caseCurrent.x === x && caseCurrent.y === y) {
+        tank.listBox.map((boxCurrent) => {
+            if(boxCurrent.x === thisBox.x && boxCurrent.y === thisBox.y) {
                 result = true;
                 return;
             }
@@ -46,13 +46,13 @@ function isOccupied(x, y) {
     return result;
 }
 
-function createCase(x, y, t) {
+function createBox(x, y, t) {
     const div = document.createElement('div');
-    div.className = 'case';
+    div.className = 'box';
     div.id = `${t}:${x};${y}`;
     div.style.border = "1px solid black";
     if(t === "enemy") {
-        div.setAttribute("onclick", `handleClickCase(this)`);
+        div.setAttribute("onclick", `handleClickBox(this)`);
     }
     return div;
 }
@@ -60,8 +60,8 @@ function createCase(x, y, t) {
 function createGrid() {
     for (let y = 1; y <= 10; y++) {
         for(let x = 1; x <= 10; x++) {
-            const playerDiv = createCase(x, y, "player");
-            const enemyDiv = createCase(x, y, "enemy");
+            const playerDiv = createBox(x, y, "player");
+            const enemyDiv = createBox(x, y, "enemy");
             playerGrid.appendChild(playerDiv);
             enemyGrid.appendChild(enemyDiv);
         }
@@ -71,105 +71,37 @@ function createGrid() {
 function placeTank(size) {
     let result = [];
     let sens;
-    let randomCase;
-    function inCaseImpossibleToPlace(thisCase) {
+    let randomBox;
+    function inBoxImpossibleToPlace(thisBox) {
         let result = false;
-        CaseImpossibleToPlace.map((currentCase) => {
-            if(currentCase.x === thisCase.x && currentCase.y === thisCase.y) {
+        BoxImpossibleToPlace.map((currentBox) => {
+            if(currentBox.x === thisBox.x && currentBox.y === thisBox.y) {
                 result = true;
                 return;
             }
         })
         return result;
     }
-    function isPossible() {
-        if (inCaseImpossibleToPlace(randomCase)) {
-            return false;
-        } else {
-            if (sens == "horizontal") {
-                if (randomCase.x + size > 10 || randomCase.x - size < 1) {
-                    return false;
-                } else {
-                    for (let i = randomCase.x; i<randomCase.x+size && i <= 10; i++) {
-                        if (inCaseImpossibleToPlace({x: i, y: randomCase.y})) {
-                            return false;
-                        }
-                    }
-                    for (let i = randomCase.x; i>randomCase.x-size && i >= 1; i--) {
-                        if (inCaseImpossibleToPlace({x: i, y: randomCase.y})) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            } else {
-                if (randomCase.y + size > 10 || randomCase.y - size < 1) {
-                    return false;
-                } else {
-                    for (let i = randomCase.y; i<randomCase.y+size && i <= 10; i++) {
-                        if (inCaseImpossibleToPlace({x: randomCase.x, y: i})) {
-                            return false;
-                        }
-                    }
-                    for (let i = randomCase.y; i>randomCase.y-size && i >= 1; i--) {
-                        if (inCaseImpossibleToPlace({x: randomCase.x, y: i})) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            }
+    
+    function addBorderBoxImpossibleToPlace(currentBox) {
+        if (!isOccupied({x: currentBox.x+1, y: currentBox.y})) {
+            BoxImpossibleToPlace.push({x: currentBox.x+1, y: currentBox.y});
+        }
+        if (!isOccupied({x: currentBox.x-1, y: currentBox.y})) {
+            BoxImpossibleToPlace.push({x: currentBox.x-1, y: currentBox.y});
+        }
+        if (!isOccupied({x: currentBox.x, y: currentBox.y+1})) {
+            BoxImpossibleToPlace.push({x: currentBox.x, y: currentBox.y+1});
+        }
+        if (!isOccupied({x: currentBox.x, y: currentBox.y-1})) {
+            BoxImpossibleToPlace.push({x: currentBox.x+1, y: currentBox.y-1});
         }
     }
-    function addBorderCaseImpossibleToPlace(currentCase) {
-        if (!isOccupied(currentCase.x+1, currentCase.y)) {
-            CaseImpossibleToPlace.push({x: currentCase.x+1, y: currentCase.y});
-        }
-        if (!isOccupied(currentCase.x-1, currentCase.y)) {
-            CaseImpossibleToPlace.push({x: currentCase.x-1, y: currentCase.y});
-        }
-        if (!isOccupied(currentCase.x, currentCase.y+1)) {
-            CaseImpossibleToPlace.push({x: currentCase.x, y: currentCase.y+1});
-        }
-        if (!isOccupied(currentCase.x, currentCase.y-1)) {
-            CaseImpossibleToPlace.push({x: currentCase.x+1, y: currentCase.y-1});
-        }
+
+    function getSens(rdmBox) {
+        
     }
-    do {
-        randomCase = {x: getRandomInt(1, 11), y: getRandomInt(1, 11)};
-        do {
-            Math.random() > 0.5 ? sens = "horizontal" : sens = "vertical";
-        } while (!isPossible())
-    } while (!isPossible());
-    if (sens == "horizontal") {
-        if (randomCase.x + size <= 10) {
-            for (let i = 0; i < size; i++) {
-                result.push({x: randomCase.x + i, y: randomCase.y});
-                CaseImpossibleToPlace.push({x: randomCase.x + i, y: randomCase.y});
-                addBorderCaseImpossibleToPlace({x: randomCase.x + i, y: randomCase.y})
-            }
-        } else {
-            for (let i = 0; i < size; i++) {
-                result.push({x: randomCase.x - i, y: randomCase.y});
-                CaseImpossibleToPlace.push({x: randomCase.x - i, y: randomCase.y});
-                addBorderCaseImpossibleToPlace({x: randomCase.x - i, y: randomCase.y})
-            }
-        }
-    } else {
-        if (randomCase.y + size <= 10) {
-            for (let i = 0; i < size; i++) {
-                result.push({x: randomCase.x, y: randomCase.y + i});
-                CaseImpossibleToPlace.push({x: randomCase.x, y: randomCase.y + i});
-                addBorderCaseImpossibleToPlace({x: randomCase.x, y: randomCase.y + i})
-            }
-        } else {
-            for (let i = 0; i < size; i++) {
-                result.push({x: randomCase.x, y: randomCase.y - i});
-                CaseImpossibleToPlace.push({x: randomCase.x, y: randomCase.y - i});
-                addBorderCaseImpossibleToPlace({x: randomCase.x, y: randomCase.y - i})
-            }
-        }
-    }
+
     return result;
 }
 
@@ -180,7 +112,7 @@ function generateTank() {
             AllTanksPlayer.push(tankPlayer);
         }
     }
-    CaseImpossibleToPlace = [];
+    BoxImpossibleToPlace = [];
     for (const name in NumberAllTanks) {
         for (let i = 0; i < NumberAllTanks[name]["number"]; i++) {
             const tankEnemy = new Tank(name, placeTank(NumberAllTanks[name]["size"]), NumberAllTanks[name]["size"]);
@@ -191,28 +123,28 @@ function generateTank() {
 
 function displayTankPlayer() {
     AllTanksPlayer.map((tank) => {
-        tank.listCases.map((caseCurrent) => {
-            const div = document.getElementById(`player:${caseCurrent.x};${caseCurrent.y}`);
+        tank.listBox.map((boxCurrent) => {
+            const div = document.getElementById(`player:${boxCurrent.x};${boxCurrent.y}`);
             div.style.backgroundColor = "red";
         })
     })
     // debug mod
     AllTanksEnemy.map((tank) => {
-        tank.listCases.map((caseCurrent) => {
-            const div = document.getElementById(`enemy:${caseCurrent.x};${caseCurrent.y}`);
+        tank.listBox.map((boxCurrent) => {
+            const div = document.getElementById(`enemy:${boxCurrent.x};${boxCurrent.y}`);
             div.style.backgroundColor = "blue";
         })
     })
 }
 
-function handleClickCase(element) {
+function handleClickBox(element) {
     caseType = element.id.split(":")[0];
     caseCoordinates = element.id.split(":")[1];
     t = caseCoordinates.split(";")
-    CurrentCaseClicked.x = +t[0];
-    CurrentCaseClicked.y = +t[1];
-    CurrentCaseClicked.isOccupied = isOccupied(CurrentCaseClicked.x, CurrentCaseClicked.y);
-    console.log(CurrentCaseClicked)
+    CurrentBoxClicked.x = +t[0];
+    CurrentBoxClicked.y = +t[1];
+    CurrentBoxClicked.isOccupied = isOccupied(CurrentBoxClicked);
+    console.log(CurrentBoxClicked);
 }
 
 createGrid();
