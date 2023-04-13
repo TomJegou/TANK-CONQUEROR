@@ -10,7 +10,7 @@ const checkCaseAlreadyPlay=(tab,caseToCheck)=>{
         }
         return false
     }
-
+/**This Function is use to find the Line direction of a ship */
 function findLineDirection(hitCase){
     let line = []
 
@@ -150,34 +150,23 @@ function ia1(response,caseAlreadyPlay){
     }
     return (caseAlreadyPlay)
 }
-function oddeven(number){
-    if(number % 2==0){
-        return true
-    }
-     else {
-        false
-     }
-}
+
+
+
+
 function allDiagonalCase(){
+    const oddeven=(number)=>{if(number % 2==0){return true}else {false}}
     let caseDiagonal = []
     let x = 1;let y = 1;let xNb = 1;let yNb = 1
-        while(x<=10){
-            while(y<=5){
-                caseDiagonal.push([xNb,yNb]);
-                yNb+=2;
-                y+=1;
-            }if(oddeven(x)){
-                yNb =1 ; 
-            }else{
-                yNb =2 ; 
-            }
-            y = 1 ; x += 1 ; xNb += 1
-        }
-        return caseDiagonal
+    while(x<=10){
+        while(y<=5){
+            caseDiagonal.push([xNb,yNb]);yNb+=2;y+=1;
+        }if(oddeven(x)){yNb =1 ; }else{yNb =2 ; }
+        y = 1 ; x += 1 ; xNb += 1
+    }
+    return caseDiagonal
 }
 
-
-console.log(allDiagonalCase())
 
 function diagonalAttack(caseAlreadyPlay,attackCase){
     let findCase = false
