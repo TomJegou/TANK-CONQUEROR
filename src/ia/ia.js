@@ -150,14 +150,58 @@ function ia1(response,caseAlreadyPlay){
     }
     return (caseAlreadyPlay)
 }
+function oddeven(number){
+    if(number % 2==0){
+        return true
+    }
+     else {
+        false
+     }
+}
+function allDiagonalCase(){
+    let caseDiagonal = []
+    let x = 1;let y = 1;let xNb = 1;let yNb = 1
+        while(x<=10){
+            while(y<=5){
+                caseDiagonal.push([xNb,yNb]);
+                yNb+=2;
+                y+=1;
+            }if(oddeven(x)){
+                yNb =1 ; 
+            }else{
+                yNb =2 ; 
+            }
+            y = 1 ; x += 1 ; xNb += 1
+        }
+        return caseDiagonal
+}
+
+
+console.log(allDiagonalCase())
+
+function diagonalAttack(caseAlreadyPlay,attackCase){
+    let findCase = false
+    while(!findCase){
+        if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
+            attackCase = di()
+            caseAlreadyPlay.push(attackCase)
+            findCase=true
+        }else{
+            caseAlreadyPlay.push(attackCase)
+            findCase=true
+        }
+        break
+    
+}
+}
 /** 
 the second ia shoot case in diagonal  
 ** check the response to know if the shoot hit or no
 ** if it hit shoot near by
 ** if it miss shoot on a random case
 */
-function ia2(){
-
+function ia2(response,caseAlreadyPlay){
+    
 }
 /** 
 the third ia use the Nick berry algorithm
