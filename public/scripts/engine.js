@@ -7,11 +7,15 @@ let CurrentBoxClicked = {
     isOccupied: false,
 };
 
+// const NumberAllTanks = {
+//     "tank convoy": {"number": 1, "size": 5}, //5 cases
+//     "big tank": {"number": 1, "size": 4}, //4 cases
+//     "medium tank": {"number": 3, "size": 2}, //2 cases
+//     "small tank": {"number": 3, "size": 1}, //1 case
+// }
+
 const NumberAllTanks = {
     "tank convoy": {"number": 1, "size": 1}, //5 cases
-    "big tank": {"number": 1, "size": 1}, //2*2 cases
-    "medium tank": {"number": 3, "size": 1}, //2 cases
-    "small tank": {"number": 3, "size": 1}, //1 case
 }
 
 const AllTanksPlayer = []
@@ -84,16 +88,16 @@ function placeTank(size, grid) {
     }
     
     function addBorderBoxImpossibleToPlace(currentBox) {
-        if (!isOccupied({x: currentBox.x+1, y: currentBox.y}, grid)) {
+        if (!isOccupied({x: currentBox.x+1, y: currentBox.y}, grid) && currentBox.x+1 <= 10) {
             BoxImpossibleToPlace.push({x: currentBox.x+1, y: currentBox.y});
         }
-        if (!isOccupied({x: currentBox.x-1, y: currentBox.y}, grid)) {
-            BoxImpossibleToPlace.push({x: currentBox.x-1, y: currentBox.y});
+        if (!isOccupied({x: currentBox.x-1, y: currentBox.y}, grid) && currentBox.x-1 >= 1) {
+            BoxImpossibleToPlace.push({x: currentBox.x-1, y: currentBox.y}, );
         }
-        if (!isOccupied({x: currentBox.x, y: currentBox.y+1}, grid)) {
+        if (!isOccupied({x: currentBox.x, y: currentBox.y+1}, grid) && currentBox.y+1 <= 10) {
             BoxImpossibleToPlace.push({x: currentBox.x, y: currentBox.y+1});
         }
-        if (!isOccupied({x: currentBox.x, y: currentBox.y-1}, grid)) {
+        if (!isOccupied({x: currentBox.x, y: currentBox.y-1}, grid) && currentBox.y-1 >= 1) {
             BoxImpossibleToPlace.push({x: currentBox.x+1, y: currentBox.y-1});
         }
     }
@@ -125,7 +129,7 @@ function placeTank(size, grid) {
         }
         if (box.y - size >= 1) {
             let isOk = true;
-            for (let i = box.y; i >= box.y - size; i--) {
+            for (let i = box.y; i > box.y - size; i--) {
                 if (isOccupied({x: box.x, y: i}, grid) || inBoxImpossibleToPlace({x: box.x, y: i})) {
                     isOk = false;
                     break;
@@ -137,7 +141,7 @@ function placeTank(size, grid) {
         }
         if (box.y + size <= 10) {
             let isOk = true;
-            for (let i = box.y; i <= box.y + size; i++) {
+            for (let i = box.y; i < box.y + size; i++) {
                 if (isOccupied({x: box.x, y: i}, grid) || inBoxImpossibleToPlace({x: box.x, y: i})) {
                     isOk = false;
                     break;
@@ -151,25 +155,25 @@ function placeTank(size, grid) {
 
     function placeBox(box, direction) {
         if (direction === "left") {
-            for (let i = box.x; i >= box.x - size; i--) {
+            for (let i = box.x; i > box.x - size; i--) {
                 result.push({x: i, y: box.y});
                 addBorderBoxImpossibleToPlace({x: i, y: box.y});
             }
         }
         if (direction === "right") {
-            for (let i = box.x; i <= box.x + size; i++) {
+            for (let i = box.x; i < box.x + size; i++) {
                 result.push({x: i, y: box.y});
                 addBorderBoxImpossibleToPlace({x: i, y: box.y});
             }
         }
         if (direction === "top") {
-            for (let i = box.y; i >= box.y - size; i--) {
+            for (let i = box.y; i > box.y - size; i--) {
                 result.push({x: box.x, y: i});
                 addBorderBoxImpossibleToPlace({x: i, y: box.y});
             }
         }
         if (direction === "bottom") {
-            for (let i = box.y; i <= box.y + size; i++) {
+            for (let i = box.y; i < box.y + size; i++) {
                 result.push({x: box.x, y: i});
                 addBorderBoxImpossibleToPlace({x: i, y: box.y});
             }
@@ -183,6 +187,16 @@ function placeTank(size, grid) {
     randomDirection = directionPossible[getRandomInt(0, directionPossible.length)];
     placeBox(randomBox, randomDirection);
     return result;
+}
+
+// Debug mode
+
+function displayBoxImpossibleToPlace(grid) {
+    BoxImpossibleToPlace.map((boxCurrent) => {
+        const div = document.getElementById(`${grid}:${boxCurrent.x};${boxCurrent.y}`);
+        let content = document.createTextNode("X");
+        div.appendChild(content);
+    })
 }
 
 function generateTank() {
@@ -201,18 +215,20 @@ function generateTank() {
     }
 }
 
-function displayTankPlayer() {
-    AllTanksPlayer.map((tank) => {
+function displayTankGrid(grid) {
+    let t;
+    let color;
+    if (grid === "player") { 
+        t = AllTanksPlayer;
+        color = "blue"
+    } else {
+        t = AllTanksEnemy;
+        color = "red"
+    }
+    t.map((tank) => {
         tank.listBox.map((boxCurrent) => {
-            const div = document.getElementById(`player:${boxCurrent.x};${boxCurrent.y}`);
-            div.style.backgroundColor = "red";
-        })
-    })
-    // debug mod
-    AllTanksEnemy.map((tank) => {
-        tank.listBox.map((boxCurrent) => {
-            const div = document.getElementById(`enemy:${boxCurrent.x};${boxCurrent.y}`);
-            div.style.backgroundColor = "blue";
+            const div = document.getElementById(`${grid}:${boxCurrent.x};${boxCurrent.y}`);
+            div.style.backgroundColor = color;
         })
     })
 }
@@ -229,4 +245,6 @@ function handleClickBox(element) {
 
 createGrid();
 generateTank();
-displayTankPlayer();
+displayTankGrid("player");
+displayTankGrid("enemy"); // debug mode
+displayBoxImpossibleToPlace("enemy");
