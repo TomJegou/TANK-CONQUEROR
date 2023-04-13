@@ -161,12 +161,28 @@ function allDiagonalCase(){
     while(x<=10){
         while(y<=5){
             caseDiagonal.push([xNb,yNb]);yNb+=2;y+=1;
-        }if(oddeven(x)){yNb =1 ; }else{yNb =2 ; }
+        }if(oddeven(x)){yNb =1;}else{yNb =2;}
         y = 1 ; x += 1 ; xNb += 1
     }
     return caseDiagonal
 }
 
+function diagonalLine(){
+    let caseDiagonalLine = []
+    let i =0
+    while(caseDiagonalLine.length<=10){
+        for(let j =0;j<50;j++){
+            for(let k = 0;k<=5;k++){
+                caseDiagonalLine.push([allDiagonalCase()[i]])
+                i+=1
+            }
+        return caseDiagonalLine
+        }}
+}
+
+
+console.log(allDiagonalCase()[0])
+console.log(diagonalLine())
 
 function diagonalAttack(caseAlreadyPlay,attackCase){
     let findCase = false
