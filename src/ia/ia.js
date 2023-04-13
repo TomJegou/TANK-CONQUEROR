@@ -164,29 +164,3 @@ the third ia use the Nick berry algorithm
 */
 function ia3(){
 }
-
-hitCase=[[3,3]]
-targeting = true
-let tab = [[ 3, 3 ], [ 2, 3 ]]
-tab = ia1("toucher",tab)
-tab = ia1("detruit",tab)
-tab = ia1("louper",tab)
-tab = ia1("toucher",tab)
-tab = ia1("louper",tab)
-
-
-
-
-
-
-
-
-
-
-
-console.log(targeting)
-console.log(hitCase)
-console.log(targeting)
-console.log(hitCase)
-console.log(tab)
-tab =[]
