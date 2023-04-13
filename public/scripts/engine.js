@@ -7,15 +7,16 @@ let CurrentBoxClicked = {
     isOccupied: false,
 };
 
-// const NumberAllTanks = {
-//     "tank convoy": {"number": 1, "size": 5}, //5 cases
-//     "big tank": {"number": 1, "size": 4}, //4 cases
-//     "medium tank": {"number": 3, "size": 2}, //2 cases
-//     "small tank": {"number": 3, "size": 1}, //1 case
-// }
+let NumberAllTanks = {
+    "tank convoy": {"number": 1, "size": 5}, //5 cases
+    "big tank": {"number": 1, "size": 4}, //4 cases
+    "medium tank": {"number": 3, "size": 2}, //2 cases
+    "small tank": {"number": 3, "size": 1}, //1 case
+}
 
-const NumberAllTanks = {
-    "tank convoy": {"number": 1, "size": 1}, //5 cases
+// Debug mode
+NumberAllTanks = {
+    "tank convoy": {"number": 1, "size": 2}
 }
 
 const AllTanksPlayer = []
@@ -76,6 +77,18 @@ function placeTank(size, grid) {
     const directionPossible = [];
     let randomBox;
     let randomDirection;
+
+    function inResult(thisBox) {
+        let r = false;
+        result.map((currentBox) => {
+            if(currentBox.x === thisBox.x && currentBox.y === thisBox.y) {
+                r = true;
+                return;
+            }
+        })
+        return r;
+    }
+
     function inBoxImpossibleToPlace(thisBox) {
         let result = false;
         BoxImpossibleToPlace.map((currentBox) => {
@@ -87,19 +100,18 @@ function placeTank(size, grid) {
         return result;
     }
     
-    function addBorderBoxImpossibleToPlace(currentBox) {
-        if (!isOccupied({x: currentBox.x+1, y: currentBox.y}, grid) && currentBox.x+1 <= 10) {
-            BoxImpossibleToPlace.push({x: currentBox.x+1, y: currentBox.y});
+    function addBorderBoxImpossibleToPlace(currentBox, x = currentBox.x, y = currentBox.y) {
+        if (x >= 1 && x <= 10 && y >= 1 && y <= 10 && !inBoxImpossibleToPlace({x: x, y: y}) && !inResult({x: x, y: y})) {
+            BoxImpossibleToPlace.push({x: x, y: y});
         }
-        if (!isOccupied({x: currentBox.x-1, y: currentBox.y}, grid) && currentBox.x-1 >= 1) {
-            BoxImpossibleToPlace.push({x: currentBox.x-1, y: currentBox.y}, );
-        }
-        if (!isOccupied({x: currentBox.x, y: currentBox.y+1}, grid) && currentBox.y+1 <= 10) {
-            BoxImpossibleToPlace.push({x: currentBox.x, y: currentBox.y+1});
-        }
-        if (!isOccupied({x: currentBox.x, y: currentBox.y-1}, grid) && currentBox.y-1 >= 1) {
-            BoxImpossibleToPlace.push({x: currentBox.x, y: currentBox.y-1});
-        }
+        addBorderBoxImpossibleToPlace(currentBox, currentBox.x - 1, currentBox.y);
+        addBorderBoxImpossibleToPlace(currentBox, currentBox.x + 1, currentBox.y);
+        addBorderBoxImpossibleToPlace(currentBox, currentBox.x, currentBox.y - 1);
+        addBorderBoxImpossibleToPlace(currentBox, currentBox.x, currentBox.y + 1);
+        addBorderBoxImpossibleToPlace(currentBox, currentBox.x - 1, currentBox.y - 1);
+        addBorderBoxImpossibleToPlace(currentBox, currentBox.x - 1, currentBox.y + 1);
+        addBorderBoxImpossibleToPlace(currentBox, currentBox.x + 1, currentBox.y - 1);
+        addBorderBoxImpossibleToPlace(currentBox, currentBox.x + 1, currentBox.y + 1);
     }
 
     function getSens(box) {
@@ -169,13 +181,13 @@ function placeTank(size, grid) {
         if (direction === "top") {
             for (let i = box.y; i > box.y - size; i--) {
                 result.push({x: box.x, y: i});
-                addBorderBoxImpossibleToPlace({x: i, y: box.y});
+                addBorderBoxImpossibleToPlace({x: box.x, y: i});
             }
         }
         if (direction === "bottom") {
             for (let i = box.y; i < box.y + size; i++) {
                 result.push({x: box.x, y: i});
-                addBorderBoxImpossibleToPlace({x: i, y: box.y});
+                addBorderBoxImpossibleToPlace({x: box.x, y: i});
             }
         }
     }
