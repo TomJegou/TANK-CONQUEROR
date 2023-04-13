@@ -20,7 +20,7 @@ body {
     height: 55vh;
 }
 
-.case{
+.box{
     border: 1px;
     display: flex;
     flex-direction: row;
