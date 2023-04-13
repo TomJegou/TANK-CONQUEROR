@@ -98,7 +98,7 @@ function placeTank(size, grid) {
             BoxImpossibleToPlace.push({x: currentBox.x, y: currentBox.y+1});
         }
         if (!isOccupied({x: currentBox.x, y: currentBox.y-1}, grid) && currentBox.y-1 >= 1) {
-            BoxImpossibleToPlace.push({x: currentBox.x+1, y: currentBox.y-1});
+            BoxImpossibleToPlace.push({x: currentBox.x, y: currentBox.y-1});
         }
     }
 
