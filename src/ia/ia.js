@@ -95,11 +95,12 @@ function ia1(response,caseAlreadyPlay){
     if(response == "toucher"){
         hitCase.push(caseAlreadyPlay[caseAlreadyPlay.length-1])
         if(targeting == true){
-            if(hitCase>=2){
+            if(hitCase>2){
             for(let k = 0;i<findLineDirection(hitCase).length;k++){
                     if(!checkCaseAlreadyPlay(caseAlreadyPlay,findLineDirection(hitCase)[k])){
                         caseAlreadyPlay.push(attackCase)
                         attackCase = findLineDirection(hitCase)[k]
+                        nb+=1
                         break
                     }
                 }
@@ -166,13 +167,17 @@ function ia3(){
 
 hitCase=[[3,3]]
 targeting = true
-let tab = [ [ 1, 4 ], [ 9, 3 ], [ 1, 2 ], [ 1, 1 ] ,[ 3, 3 ], [ 2, 2 ]]
-tab = ia1("louper",tab)
-tab = ia1("louper",tab)
+let tab = [[ 3, 3 ], [ 2, 3 ]]
+tab = ia1("toucher",tab)
 tab = ia1("detruit",tab)
+tab = ia1("louper",tab)
 tab = ia1("toucher",tab)
 tab = ia1("louper",tab)
-tab = ia1("louper",tab)
+
+
+
+
+
 
 
 
