@@ -167,33 +167,14 @@ function allDiagonalCase(){
     return caseDiagonal
 }
 
-function diagonalLine(){
-    let caseDiagonalLine = []
-    let k = 0;
-    for(let i = 0; i <allDiagonalCase().length; i++){
-        if(i<10){
-            if (i % 5 == 0) {
-                caseDiagonalLine.push([allDiagonalCase()[i]]);
-            }
-        }else if(i % 5 == 0 && i>=10 && i < 20){
-            k=1;
-            caseDiagonalLine.push([allDiagonalCase()[i+k]])
-        }
-        else if(i % 5 == 0 && i>=20 && i<30){
-            k=2;
-            caseDiagonalLine.push([allDiagonalCase()[i+k]])
-        }
-        else if(i % 5 == 0 && i>=30 && i<40){
-            k=3;
-            caseDiagonalLine.push([allDiagonalCase()[i+k]])
-        }
-        else if(i % 5 == 0 && i>=30){
-            k=4;
-            caseDiagonalLine.push([allDiagonalCase()[i+k]])
-        }
+
+function diagonalLine() {
+    const caseDiagonalLine = [];
+    for (let i = 0; i < 10; i++) {
+      caseDiagonalLine.push([i + 1, i + 1]);
     }
-    return caseDiagonalLine
-}
+    return caseDiagonalLine;
+  }
 console.log(diagonalLine())
 
 function diagonalAttack(caseAlreadyPlay,attackCase){
