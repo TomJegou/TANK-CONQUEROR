@@ -169,20 +169,16 @@ function allDiagonalCase(){
 
 function diagonalLine(){
     let caseDiagonalLine = []
-    let i =0
-    while(caseDiagonalLine.length<10){
-        let a =0
-        caseDiagonalLine.push([allDiagonalCase()[a+i]])
-        for(let o = 0;o<10;o++){
-            for(let k = 0;k<5;k++){
-                i+=1
-            }
-        }
+    let compteur = 1;
+    for (let i = 0; i < allDiagonalCase; i++) {
+        caseDiagonalLine.push(i)
+      if (i % 5 === 0) {
+        caseDiagonalLine.push(i+compteur);
+        compteur++;
+      }
     }
     return caseDiagonalLine
 }
-
-
 console.log(diagonalLine())
 
 function diagonalAttack(caseAlreadyPlay,attackCase){
