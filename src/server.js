@@ -24,7 +24,6 @@ export default function StartServer (){
     });
 
     app.post('/soloMenu', (req, res) => {
-        console.log(req.body);
         let json = JSON.stringify(req.body);
         fs.writeFile('./public/scripts/difficultyIA.json', json, 'utf8', (err) => {
             if (err) {
