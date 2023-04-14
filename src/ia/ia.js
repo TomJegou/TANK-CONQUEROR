@@ -176,11 +176,19 @@ function diagonalLine(){
                 caseDiagonalLine.push([allDiagonalCase()[i]]);
             }
         }else if(i % 5 == 0 && i>=10 && i < 20){
-            k=1
+            k=1;
             caseDiagonalLine.push([allDiagonalCase()[i+k]])
         }
-        else if(i % 5 == 0 && i>=20){
-            k=2
+        else if(i % 5 == 0 && i>=20 && i<30){
+            k=2;
+            caseDiagonalLine.push([allDiagonalCase()[i+k]])
+        }
+        else if(i % 5 == 0 && i>=30 && i<40){
+            k=3;
+            caseDiagonalLine.push([allDiagonalCase()[i+k]])
+        }
+        else if(i % 5 == 0 && i>=30){
+            k=4;
             caseDiagonalLine.push([allDiagonalCase()[i+k]])
         }
     }
