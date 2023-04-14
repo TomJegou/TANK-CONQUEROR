@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 const playerGrid = document.getElementById("playerGrid");
 const enemyGrid = document.getElementById("enemyGrid");
 
@@ -263,6 +265,16 @@ function engine() {
         displayBoxImpossibleToPlace("enemy");
     }
     displayTankGrid("player");
+    let difficultyIA;
+    fs.readFile("difficultyIA.json", "utf8", (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        difficultyIA = data;
+        return;
+    });
+    console.log(difficultyIA);
     let whoPlay;
     Math.random() > 0.5 ? whoPlay = "player" : whoPlay = "enemy";
     let winner;
