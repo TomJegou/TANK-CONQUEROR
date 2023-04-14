@@ -203,16 +203,6 @@ function placeTank(size, grid) {
     return result;
 }
 
-// Debug mode
-
-function displayBoxImpossibleToPlace(grid) {
-    BoxImpossibleToPlace.map((boxCurrent) => {
-        const div = document.getElementById(`${grid}:${boxCurrent.x};${boxCurrent.y}`);
-        let content = document.createTextNode("X");
-        div.appendChild(content);
-    })
-}
-
 function generateTank() {
     for (const name in NumberAllTanks) {
         for (let i = 0; i < NumberAllTanks[name]["number"]; i++) {
@@ -257,8 +247,18 @@ function handleClickBox(element) {
     console.log(CurrentBoxClicked);
 }
 
+const debugMode = true;
 createGrid();
 generateTank();
+if (debugMode){
+    function displayBoxImpossibleToPlace(grid) {
+        BoxImpossibleToPlace.map((boxCurrent) => {
+            const div = document.getElementById(`${grid}:${boxCurrent.x};${boxCurrent.y}`);
+            let content = document.createTextNode("X");
+            div.appendChild(content);
+        })
+    }
+    displayTankGrid("enemy"); // debug mode
+    displayBoxImpossibleToPlace("enemy");
+}
 displayTankGrid("player");
-displayTankGrid("enemy"); // debug mode
-displayBoxImpossibleToPlace("enemy");
