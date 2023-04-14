@@ -169,23 +169,22 @@ function allDiagonalCase(){
 
 function diagonalLine(){
     let caseDiagonalLine = []
-    let k = 1;
+    let k = 0;
     for(let i = 0; i <allDiagonalCase().length; i++){
-        if (i % 5 == 0) {
-    
-        if(i>=10){
-                caseDiagonalLine.push([allDiagonalCase()[i+k]]);
+        if(i<10){
+            if (i % 5 == 0) {
+                caseDiagonalLine.push([allDiagonalCase()[i]]);
             }
-        else if(i>=20){
+        }else if(i % 5 == 0 && i>=10 && i < 20){
             k=1
-            caseDiagonalLine.push([allDiagonalCase()[i+k]]);
+            caseDiagonalLine.push([allDiagonalCase()[i+k]])
         }
-        else if (i % 5 == 0){
-        caseDiagonalLine.push([allDiagonalCase()[i]])
-    }
+        else if(i % 5 == 0 && i>=20){
+            k=2
+            caseDiagonalLine.push([allDiagonalCase()[i+k]])
+        }
     }
     return caseDiagonalLine
-}
 }
 console.log(diagonalLine())
 
