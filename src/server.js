@@ -1,5 +1,6 @@
 import express from 'express';
 import request from 'request';
+import fs from 'fs';
 
 const host = "localhost";
 const app = express();
@@ -24,7 +25,13 @@ export default function StartServer (){
 
     app.post('/soloMenu', (req, res) => {
         console.log(req.body);
-        res.redirect('/soloGame');
+        let json = JSON.stringify(req.body);
+        fs.writeFile('./public/scripts/difficultyIA.json', json, 'utf8', (err) => {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/soloGame');
+        });
     });
 
     app.get('/multiMenu', (req, res) => {

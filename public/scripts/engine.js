@@ -247,18 +247,28 @@ function handleClickBox(element) {
     console.log(CurrentBoxClicked);
 }
 
-const debugMode = true;
-createGrid();
-generateTank();
-if (debugMode){
-    function displayBoxImpossibleToPlace(grid) {
-        BoxImpossibleToPlace.map((boxCurrent) => {
-            const div = document.getElementById(`${grid}:${boxCurrent.x};${boxCurrent.y}`);
-            let content = document.createTextNode("X");
-            div.appendChild(content);
-        })
+function engine() {
+    const debugMode = true;
+    createGrid();
+    generateTank();
+    if (debugMode){
+        function displayBoxImpossibleToPlace(grid) {
+            BoxImpossibleToPlace.map((boxCurrent) => {
+                const div = document.getElementById(`${grid}:${boxCurrent.x};${boxCurrent.y}`);
+                let content = document.createTextNode("X");
+                div.appendChild(content);
+            })
+        }
+        displayTankGrid("enemy"); // debug mode
+        displayBoxImpossibleToPlace("enemy");
     }
-    displayTankGrid("enemy"); // debug mode
-    displayBoxImpossibleToPlace("enemy");
+    displayTankGrid("player");
+    let whoPlay;
+    Math.random() > 0.5 ? whoPlay = "player" : whoPlay = "enemy";
+    let winner;
+    // while (true) {
+
+    // }
 }
-displayTankGrid("player");
+
+engine();
