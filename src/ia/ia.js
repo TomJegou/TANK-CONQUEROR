@@ -153,7 +153,7 @@ function ia1(response,caseAlreadyPlay){
 
 
 
-
+/** This function return a tab whit all the box 1 / 2  */
 function allDiagonalCase(){
     const oddeven=(number)=>{if(number % 2==0){return true}else {false}}
     let caseDiagonal = []
@@ -169,15 +169,23 @@ function allDiagonalCase(){
 
 function diagonalLine(){
     let caseDiagonalLine = []
-    let compteur = 1;
-    for (let i = 0; i < allDiagonalCase; i++) {
-        caseDiagonalLine.push(i)
-      if (i % 5 === 0) {
-        caseDiagonalLine.push(i+compteur);
-        compteur++;
-      }
+    let k = 1;
+    for(let i = 0; i <allDiagonalCase().length; i++){
+        if (i % 5 == 0) {
+    
+        if(i>=10){
+                caseDiagonalLine.push([allDiagonalCase()[i+k]]);
+            }
+        else if(i>=20){
+            k=1
+            caseDiagonalLine.push([allDiagonalCase()[i+k]]);
+        }
+        else if (i % 5 == 0){
+        caseDiagonalLine.push([allDiagonalCase()[i]])
+    }
     }
     return caseDiagonalLine
+}
 }
 console.log(diagonalLine())
 
