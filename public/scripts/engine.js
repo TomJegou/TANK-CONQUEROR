@@ -14,11 +14,6 @@ let NumberAllTanks = {
     "small tank": {"number": 3, "size": 1}, //1 case
 }
 
-// Debug mode
-NumberAllTanks = {
-    "tank convoy": {"number": 1, "size": 2}
-}
-
 const AllTanksPlayer = []
 const AllTanksEnemy = []
 let BoxImpossibleToPlace = []
@@ -100,18 +95,27 @@ function placeTank(size, grid) {
         return result;
     }
     
-    function addBorderBoxImpossibleToPlace(currentBox, x = currentBox.x, y = currentBox.y) {
-        if (x >= 1 && x <= 10 && y >= 1 && y <= 10 && !inBoxImpossibleToPlace({x: x, y: y}) && !inResult({x: x, y: y})) {
-            BoxImpossibleToPlace.push({x: x, y: y});
+    function addBorderBoxImpossibleToPlace() {
+        function addBorderBox(currentBox, x, y) {
+            if (x < 1 || x > 10 || y < 1 || y > 10 || inBoxImpossibleToPlace({x: x, y: y}) || inResult({x: x, y: y})) {
+                return;
+            } else {
+                if (x != undefined && y != undefined) {
+                    BoxImpossibleToPlace.push({x: x, y: y});
+                }
+                addBorderBox(currentBox, currentBox.x - 1, currentBox.y);
+                addBorderBox(currentBox, currentBox.x + 1, currentBox.y);
+                addBorderBox(currentBox, currentBox.x, currentBox.y - 1);
+                addBorderBox(currentBox, currentBox.x, currentBox.y + 1);
+                addBorderBox(currentBox, currentBox.x - 1, currentBox.y - 1);
+                addBorderBox(currentBox, currentBox.x - 1, currentBox.y + 1);
+                addBorderBox(currentBox, currentBox.x + 1, currentBox.y - 1);
+                addBorderBox(currentBox, currentBox.x + 1, currentBox.y + 1);
+            }
         }
-        addBorderBoxImpossibleToPlace(currentBox, currentBox.x - 1, currentBox.y);
-        addBorderBoxImpossibleToPlace(currentBox, currentBox.x + 1, currentBox.y);
-        addBorderBoxImpossibleToPlace(currentBox, currentBox.x, currentBox.y - 1);
-        addBorderBoxImpossibleToPlace(currentBox, currentBox.x, currentBox.y + 1);
-        addBorderBoxImpossibleToPlace(currentBox, currentBox.x - 1, currentBox.y - 1);
-        addBorderBoxImpossibleToPlace(currentBox, currentBox.x - 1, currentBox.y + 1);
-        addBorderBoxImpossibleToPlace(currentBox, currentBox.x + 1, currentBox.y - 1);
-        addBorderBoxImpossibleToPlace(currentBox, currentBox.x + 1, currentBox.y + 1);
+        result.map((currentBox) => {
+            addBorderBox(currentBox);
+        })
     }
 
     function getSens(box) {
@@ -169,25 +173,21 @@ function placeTank(size, grid) {
         if (direction === "left") {
             for (let i = box.x; i > box.x - size; i--) {
                 result.push({x: i, y: box.y});
-                addBorderBoxImpossibleToPlace({x: i, y: box.y});
             }
         }
         if (direction === "right") {
             for (let i = box.x; i < box.x + size; i++) {
                 result.push({x: i, y: box.y});
-                addBorderBoxImpossibleToPlace({x: i, y: box.y});
             }
         }
         if (direction === "top") {
             for (let i = box.y; i > box.y - size; i--) {
                 result.push({x: box.x, y: i});
-                addBorderBoxImpossibleToPlace({x: box.x, y: i});
             }
         }
         if (direction === "bottom") {
             for (let i = box.y; i < box.y + size; i++) {
                 result.push({x: box.x, y: i});
-                addBorderBoxImpossibleToPlace({x: box.x, y: i});
             }
         }
     }
@@ -198,6 +198,8 @@ function placeTank(size, grid) {
     } while (isOccupied(randomBox, grid) || inBoxImpossibleToPlace(randomBox) || directionPossible.length === 0);
     randomDirection = directionPossible[getRandomInt(0, directionPossible.length)];
     placeBox(randomBox, randomDirection);
+    addBorderBoxImpossibleToPlace();
+    console.log(BoxImpossibleToPlace);
     return result;
 }
 
