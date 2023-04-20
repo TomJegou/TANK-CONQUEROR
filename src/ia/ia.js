@@ -208,10 +208,11 @@ the second ia shoot case in diagonal
 */
 function ia2(response,caseAlreadyPlay){
     //need to change
-    let attackCase = [1,1]
+    let attackCase = []
     for(let i =0;i<diagonalLine.length;i++){
-        if (checkCaseAlreadyPlay(caseAlreadyPlay,diagonalLine[i])) {
+        if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
             attackCase =diagonalLine()[i]
+            console.log(attackCase)
         }else{
             attackCase = allDiagonalCase[Math.floor(Math.random()*50+1)]//random case in diagonal case
         }
