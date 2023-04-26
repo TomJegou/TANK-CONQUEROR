@@ -6,6 +6,7 @@ export default function SoloGame() {
         <Layout className="flex flex-row flex-wrap justify-center">
             <h1 className="flex flex-row flex-wrap justify-center w-full">SOLO GAME</h1>
             <GameSet />
+            {console.log("Hey")}
         </Layout>
     )
 }
