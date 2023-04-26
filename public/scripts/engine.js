@@ -246,15 +246,19 @@ function handleClickBox(element) {
     console.log(CurrentBoxClicked);
 }
 
+function hit(box) {
+    const div = document.getElementById(box);
+    let content = document.createTextNode("X");
+    div.appendChild(content);
+}
+
 function engine() {
     const debugMode = false;
     generateTank();
     if (debugMode){
         function displayBoxImpossibleToPlace(grid) {
             BoxImpossibleToPlace.map((boxCurrent) => {
-                const div = document.getElementById(`${grid}:${boxCurrent.x};${boxCurrent.y}`);
-                let content = document.createTextNode("X");
-                div.appendChild(content);
+                hit(`${grid}:${boxCurrent.x};${boxCurrent.y}`)
             })
         }
         displayTankGrid("enemy"); // debug mode
