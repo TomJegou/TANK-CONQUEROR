@@ -20,17 +20,11 @@ export default function StartServer (){
     });
 
     app.get('/soloMenu', (req, res) => {
-        req.pipe(request(`${urlFilserverHtml}/menuIA.html`)).pipe(res);
+        req.pipe(request(`${urlFilserverHtml}/soloMenu.html`)).pipe(res);
     });
 
-    app.post('/soloMenu', (req, res) => {
-        let json = JSON.stringify(req.body);
-        fs.writeFile('./public/scripts/difficultyIA.json', json, 'utf8', (err) => {
-            if (err) {
-                console.log(err);
-            }
-            res.redirect('/soloGame');
-        });
+    app.get('/menuIA', (req, res) => {
+        req.pipe(request(`${urlFilserverHtml}/menuIA.html`)).pipe(res);
     });
 
     app.get('/multiMenu', (req, res) => {
