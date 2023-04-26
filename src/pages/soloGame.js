@@ -5,8 +5,10 @@ export default function SoloGame() {
     return (
         <Layout className="flex flex-row flex-wrap justify-center">
             <h1 className="flex flex-row flex-wrap justify-center w-full">SOLO GAME</h1>
-            <Grid />
-            <Grid />
+            <div className="flex flex-row flex-wrap justify-between items-center w-full h-[70vh]">
+                <Grid />
+                <Grid />
+            </div>
         </Layout>
     )
 }
