@@ -1,15 +1,12 @@
-import Layout from "@/components/layout"
+import Layout from "@/components/Layout"
+import Grid from "@/components/Grid"
 
 export default function SoloGame() {
     return (
-        <Layout>
-            <h1>SOLO GAME</h1>
-            <div>
-                
-            </div>
-            <div>
-
-            </div>
+        <Layout className="flex flex-row flex-wrap justify-center">
+            <h1 className="flex flex-row flex-wrap justify-center w-full">SOLO GAME</h1>
+            <Grid />
+            <Grid />
         </Layout>
     )
 }
