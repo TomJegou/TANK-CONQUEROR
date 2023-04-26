@@ -261,8 +261,7 @@ function engine() {
         displayBoxImpossibleToPlace("enemy");
     }
     displayTankGrid("player");
-    let difficultyIA;
-    console.log(document.cookie);
+    let difficultyIA = document.cookie.split('; ').find(cookie => cookie.startsWith('difficultyIA')).split('=')[1];
     let whoPlay;
     Math.random() > 0.5 ? whoPlay = "player" : whoPlay = "enemy";
     let winner;
