@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/global.css">
+    <script type="module" src="scripts/menuIA.js" ></script>
     <title>Menu Difficulty</title>
 </head>
 <body>
     <form action="/soloMenu" method="POST">
-        <input type="submit" name="buttonIA" value="easy"></input>
-        <input type="submit" name="buttonIA" value="medium"></input>
-        <input type="submit" name="buttonIA" value="hard"></input>
+        <input type="submit" name="buttonIA" value="easy" onclick="setCookieDifficultyIA('easy')"></input>
+        <input type="submit" name="buttonIA" value="medium" onclick="setCookieDifficultyIA('medium')"></input>
+        <input type="submit" name="buttonIA" value="hard" onclick="setCookieDifficultyIA('hard')"></input>
     </form>
 </body>
 </html>

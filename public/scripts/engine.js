@@ -1,5 +1,3 @@
-import fs from 'fs';
-
 const playerGrid = document.getElementById("playerGrid");
 const enemyGrid = document.getElementById("enemyGrid");
 
@@ -53,7 +51,7 @@ function createBox(x, y, t) {
     div.id = `${t}:${x};${y}`;
     div.style.border = "1px solid black";
     if(t === "enemy") {
-        div.setAttribute("onclick", `handleClickBox(this)`);
+        div.setAttribute("onclick", "handleClickBox(this)");
     }
     return div;
 }
@@ -201,7 +199,6 @@ function placeTank(size, grid) {
     randomDirection = directionPossible[getRandomInt(0, directionPossible.length)];
     placeBox(randomBox, randomDirection);
     addBorderBoxImpossibleToPlace();
-    console.log(BoxImpossibleToPlace);
     return result;
 }
 
@@ -250,8 +247,7 @@ function handleClickBox(element) {
 }
 
 function engine() {
-    const debugMode = true;
-    createGrid();
+    const debugMode = false;
     generateTank();
     if (debugMode){
         function displayBoxImpossibleToPlace(grid) {
@@ -266,15 +262,7 @@ function engine() {
     }
     displayTankGrid("player");
     let difficultyIA;
-    fs.readFile("difficultyIA.json", "utf8", (err, data) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-        difficultyIA = data;
-        return;
-    });
-    console.log(difficultyIA);
+    console.log(document.cookie);
     let whoPlay;
     Math.random() > 0.5 ? whoPlay = "player" : whoPlay = "enemy";
     let winner;
@@ -283,4 +271,5 @@ function engine() {
     // }
 }
 
+createGrid();
 engine();
