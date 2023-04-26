@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/global.css">
     <script src="/scripts/menuIA.js" ></script>
+    <script src="/scripts/redirect.js" ></script>
     <title>Menu Difficulty</title>
 </head>
 <body>
-    <input type="submit" name="buttonIA" value="easy" onclick="setCookieDifficultyIA('easy')"></input>
-    <input type="submit" name="buttonIA" value="medium" onclick="setCookieDifficultyIA('medium')"></input>
-    <input type="submit" name="buttonIA" value="hard" onclick="setCookieDifficultyIA('hard')"></input>
+    <input type="submit" name="buttonIA" value="easy" onclick="setCookieDifficultyIA('easy');redirect('soloGame')"></input>
+    <input type="submit" name="buttonIA" value="medium" onclick="setCookieDifficultyIA('medium');redirect('soloGame')"></input>
+    <input type="submit" name="buttonIA" value="hard" onclick="setCookieDifficultyIA('hard');redirect('soloGame')"></input>
 </body>
 </html>
