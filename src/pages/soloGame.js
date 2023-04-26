@@ -4,6 +4,12 @@ export default function SoloGame() {
     return (
         <Layout>
             <h1>SOLO GAME</h1>
+            <div>
+                
+            </div>
+            <div>
+
+            </div>
         </Layout>
     )
 }
