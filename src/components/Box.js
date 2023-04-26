@@ -1,6 +1,5 @@
-export default function Box ({ className, text }) {
-    let length = 5
+export default function Box ({ className, text, id, x, y, side }) {
     return (
-        <div className={`bg-red-600 flex h-[${length}vh] w-[${length}vh] border ` + className}>{text}</div>
+        <div className={"flex h-[5vh] w-[5vh] border " + className} id={id} x={x} y={y} side={side}>{text}</div>
     )
 }

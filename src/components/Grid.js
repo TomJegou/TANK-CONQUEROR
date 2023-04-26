@@ -1,7 +1,6 @@
 import Box from "./Box"
 
-export default function Grid({ className }) {
-    let length = 60
+export default function Grid({ side }) {
     const t = [] 
     function generateGrid() {
         for (let y = 1; y <= 10; y++) {
@@ -12,8 +11,10 @@ export default function Grid({ className }) {
     }
     generateGrid()
     return (
-        <div className={ `flex flex-row flex-wrap w-[${length}vh] h-[${length}vh] bg-red-600 ` + className}>
-            
+        <div className={"flex flex-row flex-wrap w-[50vh] h-[50vh]"} side={side}>
+            {t.map(box => {
+                return <Box x={box.x} y={box.y} side={side} />
+            })}
         </div>
     )
 }
