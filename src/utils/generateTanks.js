@@ -1,3 +1,5 @@
+import { IsOccupied } from "./tools"
+
 let NumberAllTanks = {
     "tank convoy": {"number": 1, "size": 5}, //5 cases
     "big tank": {"number": 2, "size": 4}, //4 cases
@@ -21,19 +23,6 @@ function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
-}
-
-function IsOccupied(thisBox, grid) {
-    let result = false;
-    grid.map((tank) => {
-        tank.listBox.map((boxCurrent) => {
-            if(boxCurrent.x === thisBox.x && boxCurrent.y === thisBox.y) {
-                result = true;
-                return;
-            }
-        })
-    })
-    return result;
 }
 
 function placeTank(size, grid) {
