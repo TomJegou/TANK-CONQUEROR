@@ -4,7 +4,7 @@ import FieldBox from "./FieldBox"
 import TankBox from "./TankBox"
 import { useState } from "react"
 
-export default function Box ({ x, y, side }) {
+export default function Box ({ x, y, side, sendResponseToGrid }) {
     const debugMode = true
     const grid = side == "enemy" ? AllTanksEnemy : AllTanksPlayer
     const isOc = IsOccupied({x: x, y: y}, grid)
@@ -14,8 +14,7 @@ export default function Box ({ x, y, side }) {
     const [text, setText] = useState("")
 
     function handleClick(){
-        console.log(isOc)
-        setText("x")
+        sendResponseToGrid(isOc)
     }
 
     const otherAttribute = side == "enemy" ? {onClick: handleClick}: {}
