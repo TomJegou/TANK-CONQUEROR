@@ -137,7 +137,7 @@ export function huntCase(caseAlreadyPlay){
     return undefined
 }
 /** Attack function is a function to attack whit the use of Nick Berry algorithm inspiration*/
-export function attack(caseAlreadyPlay,attackCase){
+export function ia3attack(caseAlreadyPlay,attackCase){
     let findCase = false
     while(!findCase){
         if(huntCase != undefined){
