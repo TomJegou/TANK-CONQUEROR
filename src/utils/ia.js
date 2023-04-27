@@ -207,7 +207,6 @@ the second ia shoot case in diagonal
 ** if it miss shoot on a random case
 */
 function ia2(response,caseAlreadyPlay){
-    //need to change
     let attackCase = []
     for(let i =0;i<diagonalLine.length;i++){
         if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
@@ -308,6 +307,9 @@ function attack(caseAlreadyPlay,attackCase){
         if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)){
             caseAlreadyPlay.push(attackCase)
             findCase=true
+        }else{
+            caseAlreadyPlay.push(attackCase)
+            findCase=true
         }
     }
 }
@@ -317,6 +319,9 @@ the third ia was inspired of the Nick berry algorithm
 */
 function ia3(response,caseAlreadyPlay){
     let attackCase = huntCase()
+    if(huntCase == undefined){
+        attackCase = randomcase()
+    }
     if(response == "toucher"){
         hitCase.push(caseAlreadyPlay[caseAlreadyPlay.length-1])
         if(targeting == true){
@@ -377,8 +382,7 @@ function ia3(response,caseAlreadyPlay){
 }
 
 
-let tab = [[4,4],[5,5]]
-test1 = huntCase(tab)
-console.log(test1)
-
-console.log(attack(tab,test1))
+let tab = [[4,4],[5,5],[6,6],[7,7],[8,8],[8,3],[3,3],[3,8],[5,10],[10,6],[5,1],[1,5],[2,10],[9,10],[9,1],[2,1],[1,2],[1,9],[10,9],[10,2],[7,2],[4,2],[2,4],[2,7],[4,9],[7,9],[9,7],[9,4]]
+test1 = randomcase()
+attack(tab,test1)
+console.log(tab)
