@@ -7,10 +7,10 @@ let NumberAllTanks = {
     "small tank": {"number": 3, "size": 1}, //1 case
 }
 
-//debugMode
-// NumberAllTanks = {
-//     "small tank": {"number": 1, "size": 1}, //1 case
-// }
+// debugMode
+NumberAllTanks = {
+    "small tank": {"number": 1, "size": 1}, //1 case
+}
 
 let AllTanksEnemy = []
 let AllTanksPlayer = []
