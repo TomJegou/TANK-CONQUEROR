@@ -5,19 +5,22 @@ import TankBox from "./TankBox"
 import { useState } from "react"
 
 export default function Box ({ x, y, side, sendResponseToGrid }) {
-    const debugMode = true
+    const debugMode = false
     const grid = side == "enemy" ? AllTanksEnemy : AllTanksPlayer
-    const isOc = IsOccupied({x: x, y: y}, grid)
-    const color = debugMode ? side == "player" ? isOc ? "blue": "" : isOc? "red" : "" : side == "player" ? isOc ? "blue" : "" :  ""
+    const [isOc] = useState(IsOccupied({x: x, y: y}, grid))
+    const [color, setColor] = useState(debugMode ? side == "player" ? isOc ? "blue": "" : isOc? "gray" : "" : side == "player" ? isOc ? "blue" : "" :  "")
     const ContentBox = isOc ? TankBox : FieldBox
-
     const [text, setText] = useState("")
+    const otherAttribute = side == "enemy" ? {onClick: handleClick} : {}
 
     function handleClick(){
         sendResponseToGrid({x: x, y: y})
+        if(isOc){
+            setColor("red")
+        } else {
+            setText("X")
+        }
     }
-
-    const otherAttribute = side == "enemy" ? {onClick: handleClick}: {}
 
     return (
         <div className="flex h-[5vh] w-[5vh] border"

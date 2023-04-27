@@ -13,6 +13,7 @@ export default function SoloGame() {
     const [acclamation, setAcclamation] = useState("")
     const [winnerName, setWinnerName] = useState("")
     const [gameOver, setGameOver] = useState(false)
+    const [boxTouched, setBoxTouched] = useState({x: null, y: null})
     let numBoxTobeTouchedByPlayer = getNumBoxToBeTouched(AllTanksEnemy)
     let numBoxTobeTouchedByEnemy = getNumBoxToBeTouched(AllTanksPlayer)
     const handleDataFromGameSet = (boxClicked) => {
@@ -23,6 +24,7 @@ export default function SoloGame() {
                 setWinner("player")
                 setIsGameOver(true)
                 setGameOver(true)
+                setBoxTouched(boxClicked)
             }
         }
     }
@@ -38,7 +40,7 @@ export default function SoloGame() {
         <Layout className="flex flex-row flex-wrap justify-center">
             <h1 className="flex flex-row flex-wrap justify-center w-full text-4xl">SOLO GAME</h1>
             <GameSet sendResponseToSoloGame={handleDataFromGameSet} />
-            <EndGame acclamation={acclamation} winner={winnerName} isGameOver={gameOver}/>
+            <EndGame acclamation={acclamation} winner={winnerName} isGameOver={gameOver} />
         </Layout>
     )
 }

@@ -1,7 +1,7 @@
 import Grid from "@/components/Grid"
 import { GenerateTank } from "@/utils/generateTanks"
 
-export default function GameSet({ sendResponseToSoloGame }) {
+export default function GameSet({ sendResponseToSoloGame, boxTouched }) {
     return (
         <div className="fixed flex flex-row flex-wrap justify-around items-center w-full h-[90vh] bottom-0 bg-black overflow-y-scroll">
 
