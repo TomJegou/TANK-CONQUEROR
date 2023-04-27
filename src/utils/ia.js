@@ -287,13 +287,30 @@ function huntCase(caseAlreadyPlay){
             return tankCaseProb[i]
         }
     }
+    return undefined
 }
 /** Attack function is a function to attack whit the use of Nick Berry algorithm inspiration*/
 function attack(caseAlreadyPlay,attackCase){
     let findCase = false
     while(!findCase){
-        for(let i = 0)
+        if(huntCase != undefined){
+            if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)){
+                attackCase = huntCase()
+                caseAlreadyPlay.push(attackCase)
+                findCase=true
+            }
+            else{
+                caseAlreadyPlay.push(attackCase)
+                findCase=true
+            }
+        }else{
+        attackCase = randomcase()
+        if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)){
+            caseAlreadyPlay.push(attackCase)
+            findCase=true
+        }
     }
+}
 }
 /** 
 the third ia was inspired of the Nick berry algorithm
@@ -360,7 +377,7 @@ function ia3(response,caseAlreadyPlay){
 }
 
 
-let tab = [[4,4],[5,5],[6,6],[7,7],[8,8]]
+let tab = [[4,4],[5,5]]
 test1 = huntCase(tab)
 console.log(test1)
 
