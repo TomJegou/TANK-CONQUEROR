@@ -320,7 +320,7 @@ the third ia was inspired of the Nick berry algorithm
 function ia3(response,caseAlreadyPlay){
     let attackCase = huntCase()
     if(huntCase == undefined){
-        attackCase = randomcase()
+        attackCase = randomAttack()
     }
     if(response == "toucher"){
         hitCase.push(caseAlreadyPlay[caseAlreadyPlay.length-1])
