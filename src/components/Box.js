@@ -26,8 +26,9 @@ export default function Box ({ id, x, y, side }) {
     }
 
     return (
-        <motion.div className="flex h-[5vh] w-[5vh] border" 
-        
+        <motion.div className="flex h-[5vh] w-[5vh] border"
+        animate = {{ backgroundColor: ["", color], opacity: [0, 100]}}
+        transition={{duration: 1}}
         id={id} 
         x={x} 
         y={y} 
