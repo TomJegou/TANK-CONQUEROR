@@ -1,14 +1,3 @@
-// import { ia1, ia2, ia3 } from "./ia/ia.js";
-
-const playerGrid = document.getElementById("playerGrid");
-const enemyGrid = document.getElementById("enemyGrid");
-
-let CurrentBoxClicked = {
-    x: undefined,
-    y: undefined,
-    isOccupied: false,
-};
-
 let NumberAllTanks = {
     "tank convoy": {"number": 1, "size": 5}, //5 cases
     "big tank": {"number": 2, "size": 4}, //4 cases
@@ -45,28 +34,6 @@ function isOccupied(thisBox, grid) {
         })
     })
     return result;
-}
-
-function createBox(x, y, t) {
-    const div = document.createElement('div');
-    div.className = 'box';
-    div.id = `${t}:${x};${y}`;
-    div.style.border = "1px solid black";
-    if(t === "enemy") {
-        div.setAttribute("onclick", "handleClickBox(this)");
-    }
-    return div;
-}
-
-function createGrid() {
-    for (let y = 1; y <= 10; y++) {
-        for(let x = 1; x <= 10; x++) {
-            const playerDiv = createBox(x, y, "player");
-            const enemyDiv = createBox(x, y, "enemy");
-            playerGrid.appendChild(playerDiv);
-            enemyGrid.appendChild(enemyDiv);
-        }
-    }
 }
 
 function placeTank(size, grid) {
@@ -204,7 +171,7 @@ function placeTank(size, grid) {
     return result;
 }
 
-function generateTank() {
+function GenerateTank() {
     for (const name in NumberAllTanks) {
         for (let i = 0; i < NumberAllTanks[name]["number"]; i++) {
             const tankPlayer = new Tank(name, placeTank(NumberAllTanks[name]["size"], AllTanksPlayer), NumberAllTanks[name]["size"]);
@@ -220,61 +187,7 @@ function generateTank() {
     }
 }
 
-function displayTankGrid(grid) {
-    let t;
-    let color;
-    if (grid === "player") { 
-        t = AllTanksPlayer;
-        color = "blue"
-    } else {
-        t = AllTanksEnemy;
-        color = "red"
-    }
-    t.map((tank) => {
-        tank.listBox.map((boxCurrent) => {
-            const div = document.getElementById(`${grid}:${boxCurrent.x};${boxCurrent.y}`);
-            div.style.backgroundColor = color;
-        })
-    })
+function test(){
 }
 
-function handleClickBox(element) {
-    caseType = element.id.split(":")[0];
-    caseCoordinates = element.id.split(":")[1];
-    t = caseCoordinates.split(";")
-    CurrentBoxClicked.x = +t[0];
-    CurrentBoxClicked.y = +t[1];
-    CurrentBoxClicked.isOccupied = isOccupied(CurrentBoxClicked, AllTanksPlayer.concat(AllTanksEnemy));
-    console.log(CurrentBoxClicked);
-}
-
-function hit(box) {
-    const div = document.getElementById(box);
-    let content = document.createTextNode("X");
-    div.appendChild(content);
-}
-
-function engine() {
-    generateTank();
-    // debug mode
-    const debugMode = true;
-    if (debugMode){
-        function displayBoxImpossibleToPlace(grid) {
-            BoxImpossibleToPlace.map((boxCurrent) => {
-                hit(`${grid}:${boxCurrent.x};${boxCurrent.y}`)
-            })
-        }
-        displayTankGrid("enemy"); 
-        displayBoxImpossibleToPlace("enemy");
-    }
-    displayTankGrid("player");
-    let difficultyIA = document.cookie.split('; ').find(cookie => cookie.startsWith('difficultyIA')).split('=')[1];
-    let whoPlay;
-    Math.random() > 0.5 ? whoPlay = "player" : whoPlay = "enemy";
-    let winner;
-    // while (true) {
-
-    // }
-}
-
-export { engine, createGrid, handleClickBox };
+export { GenerateTank, test };
