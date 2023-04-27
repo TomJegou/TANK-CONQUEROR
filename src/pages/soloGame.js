@@ -1,10 +1,12 @@
 import Layout from "@/components/Layout"
 import GameSet from "@/components/gameSet"
+import { GenerateTank, AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTanks"
 
 
 export default function SoloGame() {
-    const handleDataFromGameSet = (data) => {
-        console.log(data)
+    GenerateTank()
+    const handleDataFromGameSet = (boxClicked) => {
+        console.log(boxClicked)
     }
     return (
         <Layout className="flex flex-row flex-wrap justify-center">
