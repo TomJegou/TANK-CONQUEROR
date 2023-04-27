@@ -7,7 +7,6 @@ import { useState } from "react"
 
 export default function SoloGame() {
     GenerateTank()
-    const [winner, setWinner] = useState("") 
     const [isGameOver, setIsGameOver] = useState(false)
     const [acclamation, setAcclamation] = useState("")
     const [winnerName, setWinnerName] = useState("")
@@ -18,9 +17,8 @@ export default function SoloGame() {
         if (responseEngine != "missed") {
             numBoxTobeTouchedByPlayer--
             if (numBoxTobeTouchedByPlayer <= 0) {
-                setWinner("player")
-                setAcclamation(winner == "player" ? "Congratulation !" : "Too bad...")
-                setWinnerName(winner == "player" ? "You" : "The Opponent")
+                setAcclamation("Congratulation !")
+                setWinnerName("player")
                 setIsGameOver(true)
             }
         }
