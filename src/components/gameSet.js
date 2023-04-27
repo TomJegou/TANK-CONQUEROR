@@ -1,6 +1,8 @@
 import Grid from "@/components/Grid"
+import { GenerateTank } from "@/utils/generateTanks"
 
 export default function GameSet() {
+    GenerateTank()
     return (
         <div className="absolute flex flex-row flex-wrap justify-around items-center w-full h-[90vh] bottom-0 bg-black">
 

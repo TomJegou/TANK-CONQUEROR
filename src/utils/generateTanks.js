@@ -5,8 +5,8 @@ let NumberAllTanks = {
     "small tank": {"number": 3, "size": 1}, //1 case
 }
 
-const AllTanksPlayer = []
-const AllTanksEnemy = []
+let AllTanksEnemy = []
+let AllTanksPlayer = []
 let BoxImpossibleToPlace = []
 
 class Tank {
@@ -23,7 +23,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
-function isOccupied(thisBox, grid) {
+function IsOccupied(thisBox, grid) {
     let result = false;
     grid.map((tank) => {
         tank.listBox.map((boxCurrent) => {
@@ -91,7 +91,7 @@ function placeTank(size, grid) {
         if (box.x - size >= 1) {
             let isOk = true;
             for (let i = box.x; i >= box.x - size; i--) {
-                if (isOccupied({x: i, y: box.y}, grid) || inBoxImpossibleToPlace({x: i, y: box.y})) {
+                if (IsOccupied({x: i, y: box.y}, grid) || inBoxImpossibleToPlace({x: i, y: box.y})) {
                     isOk = false;
                     break;
                 }
@@ -103,7 +103,7 @@ function placeTank(size, grid) {
         if (box.x + size <= 10) {
             let isOk = true;
             for (let i = box.x; i <= box.x + size; i++) {
-                if (isOccupied({x: i, y: box.y}, grid) || inBoxImpossibleToPlace({x: i, y: box.y})) {
+                if (IsOccupied({x: i, y: box.y}, grid) || inBoxImpossibleToPlace({x: i, y: box.y})) {
                     isOk = false;
                     break;
                 }
@@ -115,7 +115,7 @@ function placeTank(size, grid) {
         if (box.y - size >= 1) {
             let isOk = true;
             for (let i = box.y; i > box.y - size; i--) {
-                if (isOccupied({x: box.x, y: i}, grid) || inBoxImpossibleToPlace({x: box.x, y: i})) {
+                if (IsOccupied({x: box.x, y: i}, grid) || inBoxImpossibleToPlace({x: box.x, y: i})) {
                     isOk = false;
                     break;
                 }
@@ -127,7 +127,7 @@ function placeTank(size, grid) {
         if (box.y + size <= 10) {
             let isOk = true;
             for (let i = box.y; i < box.y + size; i++) {
-                if (isOccupied({x: box.x, y: i}, grid) || inBoxImpossibleToPlace({x: box.x, y: i})) {
+                if (IsOccupied({x: box.x, y: i}, grid) || inBoxImpossibleToPlace({x: box.x, y: i})) {
                     isOk = false;
                     break;
                 }
@@ -164,7 +164,7 @@ function placeTank(size, grid) {
     do {
         randomBox = {x: getRandomInt(1, 11), y: getRandomInt(1, 11)};
         getSens(randomBox);
-    } while (isOccupied(randomBox, grid) || inBoxImpossibleToPlace(randomBox) || directionPossible.length === 0);
+    } while (IsOccupied(randomBox, grid) || inBoxImpossibleToPlace(randomBox) || directionPossible.length === 0);
     randomDirection = directionPossible[getRandomInt(0, directionPossible.length)];
     placeBox(randomBox, randomDirection);
     addBorderBoxImpossibleToPlace();
@@ -172,6 +172,9 @@ function placeTank(size, grid) {
 }
 
 function GenerateTank() {
+    if (AllTanksEnemy.length > 0 || AllTanksPlayer.length > 0) {
+        return
+    }
     for (const name in NumberAllTanks) {
         for (let i = 0; i < NumberAllTanks[name]["number"]; i++) {
             const tankPlayer = new Tank(name, placeTank(NumberAllTanks[name]["size"], AllTanksPlayer), NumberAllTanks[name]["size"]);
@@ -187,7 +190,4 @@ function GenerateTank() {
     }
 }
 
-function test(){
-}
-
-export { GenerateTank, test };
+export { GenerateTank, AllTanksEnemy, AllTanksPlayer, IsOccupied };
