@@ -1,12 +1,38 @@
-import { AllTanksEnemy, AllTanksPlayer, IsOccupied } from "@/utils/generateTanks"
+import { AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTanks"
+import { IsOccupied } from "@/utils/tools"
+import { motion } from "framer-motion"
 
-export default function Box ({ text, id, x, y, side }) {
+export default function Box ({ id, x, y, side }) {
+    let text = ""
     const debugMode = true
     let color = ""
     let grid = []
     side == "enemy" ? grid = AllTanksEnemy : grid = AllTanksPlayer
     const isOc = IsOccupied({x: x, y: y}, grid)
+    function HandleClick() {
+        console.log(isOc)
+    }
+
+    if (debugMode){
+        if(side == "player") {
+            isOc ? color = "blue" : color = ""
+        } else{
+            isOc ? color = "red" : color = ""
+        }
+    } else {
+        if(side == "player") {
+            isOc ? color = "blue" : color = ""
+        }
+    }
+
     return (
-        <div className="flex h-[5vh] w-[5vh] border" style={{backgroundColor: debugMode ? side == "player" ? isOc ? color = "blue" : color = "" : isOc ? color = "red" : color = "" : side == "player" ? isOc? color = "blue": color = "" : color = ""}} id={id} x={x} y={y} side={side}>{text}</div>
+        <motion.div className="flex h-[5vh] w-[5vh] border" 
+        
+        id={id} 
+        x={x} 
+        y={y} 
+        side={side}
+        onClick={HandleClick}
+        >{text}</motion.div>
     )
 }
