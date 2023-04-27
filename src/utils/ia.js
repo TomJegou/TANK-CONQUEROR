@@ -217,10 +217,10 @@ function ia2(response,caseAlreadyPlay){
             for(let i =0;i<allDiagonalCase.length;i++){
                 if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
                 attackCase = allDiagonalCase[Math.floor(Math.random()*50+1)]//random case in diagonal case
+                }
+            }
         }
     }
-    }
-
     if(response == "toucher"){
         hitCase.push(caseAlreadyPlay[caseAlreadyPlay.length-1])
         if(targeting == true){
@@ -278,7 +278,6 @@ function ia2(response,caseAlreadyPlay){
         diagonalAttack(caseAlreadyPlay,attackCase)
     }
     return (caseAlreadyPlay)
-}
 }
 /** 
 the third ia use the Nick berry algorithm
