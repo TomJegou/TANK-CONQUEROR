@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 
-export default function EndGame({ acclamation, winner, scale, opacity, isGameOver }){
+export default function EndGame({ acclamation, winner, isGameOver }){
     return (
         <motion.div 
         className="flex flew-row flex-wrap justify-center items-center bg-slate-500 w-[70vw] h-[70vh]"
