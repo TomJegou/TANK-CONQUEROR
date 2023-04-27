@@ -1,4 +1,4 @@
-import { IsOccupied } from "./tools"
+import { IsOccupied, getRandomInt } from "./tools"
 
 let NumberAllTanks = {
     "tank convoy": {"number": 1, "size": 5}, //5 cases
@@ -17,12 +17,6 @@ class Tank {
         this.size = size;
         this.listBox = listBox;
     }
-}
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
 function placeTank(size, grid) {
@@ -179,4 +173,4 @@ function GenerateTank() {
     }
 }
 
-export { GenerateTank, AllTanksEnemy, AllTanksPlayer, IsOccupied };
+export { GenerateTank, AllTanksEnemy, AllTanksPlayer };
