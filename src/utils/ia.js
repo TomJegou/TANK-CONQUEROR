@@ -279,13 +279,89 @@ function ia2(response,caseAlreadyPlay){
     }
     return (caseAlreadyPlay)
 }
+
+function huntCase(caseAlreadyPlay){
+    tankCaseProb = [[4,4],[5,5],[6,6],[7,7],[8,8],[8,3],[3,3],[3,8],[5,10],[10,6],[5,1],[1,5],[2,10],[9,10],[9,1],[2,1],[1,2],[1,9],[10,9],[10,2],[7,2],[4,2],[2,4],[2,7],[4,9],[7,9],[9,7],[9,4]]
+    for(let i = 0; i<tankCaseProb.length;i++){
+        if(!checkCaseAlreadyPlay(caseAlreadyPlay,tankCaseProb[i])){
+            return tankCaseProb[i]
+        }
+    }
+}
+/** Attack function is a function to attack whit the use of Nick Berry algorithm inspiration*/
+function attack(caseAlreadyPlay,attackCase){
+    let findCase = false
+    while(!findCase){
+        for(let i = 0)
+    }
+}
 /** 
-the third ia use the Nick berry algorithm
+the third ia was inspired of the Nick berry algorithm
 */
-function ia3(){
+function ia3(response,caseAlreadyPlay){
+    let attackCase = huntCase()
+    if(response == "toucher"){
+        hitCase.push(caseAlreadyPlay[caseAlreadyPlay.length-1])
+        if(targeting == true){
+            if(hitCase>2){
+            for(let k = 0;i<findLineDirection(hitCase).length;k++){
+                    if(!checkCaseAlreadyPlay(caseAlreadyPlay,findLineDirection(hitCase)[k])){
+                        caseAlreadyPlay.push(attackCase)
+                        attackCase = findLineDirection(hitCase)[k]
+                        nb+=1
+                        break
+                    }
+                }
+            }else{
+            for(let j = 0;j<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
+                if(!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
+                    attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
+                    caseAlreadyPlay.push(attackCase)
+                    nb+=1
+                    break
+                }
+            }
+        }
+        }else if(targeting==false){
+        for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
+            if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
+                attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i]
+                caseAlreadyPlay.push(attackCase)
+                targeting = true
+                break
+            }
+        }
+    }
+    else{
+        attack(caseAlreadyPlay,attackCase)
+    }
+    }
+    if(response == "louper"){
+        if(targeting == true){
+            for(let j = 0;j<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
+                if(!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
+                    attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
+                    caseAlreadyPlay.push(attackCase)
+                    break
+                }
+            }
+        }
+        else if (targeting==false){
+            attack(caseAlreadyPlay,attackCase)
+        }
+    }
+    if(response == "detruit"){
+        hitCase=[]
+        nb=1
+        targeting=false
+        attack(caseAlreadyPlay,attackCase)
+    }
+    return (caseAlreadyPlay)
 }
 
 
-let tab = [[1,1]]
-ia2("louper",tab)
-console.log(tab)
+let tab = [[4,4],[5,5],[6,6],[7,7],[8,8]]
+test1 = huntCase(tab)
+console.log(test1)
+
+console.log(attack(tab,test1))
