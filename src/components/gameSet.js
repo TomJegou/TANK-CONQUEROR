@@ -3,7 +3,7 @@ import { GenerateTank } from "@/utils/generateTanks"
 
 export default function GameSet({ sendResponseToSoloGame }) {
     return (
-        <div className="absolute flex flex-row flex-wrap justify-around items-center w-full h-[90vh] bottom-0 bg-black">
+        <div className="fixed flex flex-row flex-wrap justify-around items-center w-full h-[90vh] bottom-0 bg-black overflow-y-scroll">
 
         <div className="flex flex-col justify-around h-[80vh]">
             <h1 className="flex flex-row flex-wrap justify-center items-center text-white text-4xl">You</h1>
