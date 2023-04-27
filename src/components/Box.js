@@ -14,7 +14,7 @@ export default function Box ({ x, y, side, sendResponseToGrid }) {
     const [text, setText] = useState("")
 
     function handleClick(){
-        sendResponseToGrid({x: x, y: y, isOc: isOc})
+        sendResponseToGrid({x: x, y: y})
     }
 
     const otherAttribute = side == "enemy" ? {onClick: handleClick}: {}
