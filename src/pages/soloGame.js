@@ -10,8 +10,9 @@ export default function SoloGame() {
     const [isGameOver, setIsGameOver] = useState(false)
     const [acclamation, setAcclamation] = useState("")
     const [winnerName, setWinnerName] = useState("")
-    let numBoxTobeTouchedByPlayer = getNumBoxToBeTouched(AllTanksEnemy)
-    let numBoxTobeTouchedByEnemy = getNumBoxToBeTouched(AllTanksPlayer)
+    const [numBoxTobeTouchedByPlayer, setNumBoxTobeTouchedByPlayer] = useState(getNumBoxToBeTouched(AllTanksEnemy))
+    const [numBoxTobeTouchedByEnemy, setNumBoxTobeTouchedByEnemy] = useState(getNumBoxToBeTouched(AllTanksPlayer))
+    
     const handleDataFromGameSet = (boxClicked) => {
         let responseEngine = engine(AllTanksEnemy, boxClicked)
         if (responseEngine != "missed") {
@@ -25,8 +26,8 @@ export default function SoloGame() {
     }
 
     return (
-        <Layout className="flex flex-row flex-wrap justify-center">
-            <h1 className="flex flex-row flex-wrap justify-center w-full text-4xl">SOLO GAME</h1>
+        <Layout className="flex flex-row flex-wrap justify-center bg-black">
+            <h1 className="flex flex-row flex-wrap justify-center w-full text-4xl text-white">SOLO GAME</h1>
             <GameSet sendResponseToSoloGame={handleDataFromGameSet} />
             <EndGame acclamation={acclamation} winner={winnerName} isGameOver={isGameOver} />
         </Layout>
