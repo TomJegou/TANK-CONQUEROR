@@ -18,8 +18,7 @@ export default function SoloGame() {
     const [boxPlayedByIA, setBoxPlayedByIA] = useState([])
     const [boxPlayedByPlayer, setBoxPlayedByPlayer] = useState([])
     const [whosTurn, setWhosTurn] = useState(Math.random() > .5 ? "player" : "IA")
-    const [scope, animate] = useAnimate()    
-
+    
     useEffect(() => {
         if (numBoxTobeTouchedByPlayer <= 0) {
             setAcclamation("Congratulation !")
@@ -37,6 +36,7 @@ export default function SoloGame() {
 
     const handleDataFromEnemyGrid = (boxClicked) => {
         let responseEngine = engine(AllTanksEnemy, boxClicked)
+        setBoxPlayedByPlayer(a => [...a, boxClicked])
         if (responseEngine != "missed") {
             setNumBoxTobeTouchedByPlayer(a => a - 1)
         }
