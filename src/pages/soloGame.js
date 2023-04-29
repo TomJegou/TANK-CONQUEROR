@@ -18,7 +18,7 @@ export default function SoloGame() {
     const [boxPlayedByIA, setBoxPlayedByIA] = useState([])
     const [boxPlayedByPlayer, setBoxPlayedByPlayer] = useState([])
     const [whosTurn, setWhosTurn] = useState(Math.random() > .5 ? "player" : "IA")
-    
+
     useEffect(() => {
         if (numBoxTobeTouchedByPlayer <= 0) {
             setAcclamation("Congratulation !")
@@ -44,8 +44,8 @@ export default function SoloGame() {
     }
 
     return (
-        <Layout className="flex flex-row flex-wrap justify-center bg-black">
-            <h1 className="flex flex-row flex-wrap justify-center w-full text-4xl text-white">SOLO GAME</h1>
+        <Layout className="flex justify-center bg-black">
+            <h1 className=" absolute flex flex-row flex-wrap justify-center w-full text-4xl text-white top-11">SOLO GAME</h1>
             <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode}/>
             <EndGame acclamation={acclamation} winner={winnerName} isGameOver={isGameOver}/>
         </Layout>
