@@ -4,7 +4,6 @@ import { GenerateTank, AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTan
 import { engine, getNumBoxToBeTouched } from "@/utils/engine"
 import EndGame from "@/components/endGame"
 import { useState, useEffect } from "react"
-import { getRandomInt } from "@/utils/tools"
 import { motion, useAnimate } from "framer-motion"
 
 export default function SoloGame() {
