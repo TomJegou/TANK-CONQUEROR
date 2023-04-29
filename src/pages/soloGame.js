@@ -27,6 +27,7 @@ export default function SoloGame() {
                 setIsGameOver(true)
             }
         }
+        setWhosTurn("IA")
     }
 
     return (
