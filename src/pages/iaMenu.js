@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout"
 import Menu from "@/components/Menu"
-import Back from "@/components/back"
+import Back from "@/components/Back"
 
 export default function IaMenu(){
     return(

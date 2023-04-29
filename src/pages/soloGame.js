@@ -1,8 +1,8 @@
 import Layout from "@/components/Layout"
-import GameSet from "@/components/gameSet"
+import GameSet from "@/components/GameSet"
 import { GenerateTank, AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTanks"
 import { engine, getNumBoxToBeTouched } from "@/utils/engine"
-import EndGame from "@/components/endGame"
+import EndGame from "@/components/EndGame"
 import { useState, useEffect } from "react"
 import { motion, useAnimate } from "framer-motion"
 
