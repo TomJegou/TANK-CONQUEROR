@@ -4,8 +4,7 @@ import FieldBox from "./FieldBox"
 import TankBox from "./TankBox"
 import { useState } from "react"
 
-export default function Box ({ x, y, side, sendResponseToGrid }) {
-    const debugMode = false
+export default function Box ({ x, y, side, sendResponseToGrid, debugMode }) {
     const grid = side == "enemy" ? AllTanksEnemy : AllTanksPlayer
     const [isOc] = useState(IsOccupied({x: x, y: y}, grid))
     const [color, setColor] = useState(debugMode ? side == "player" ? isOc ? "blue": "" : isOc? "gray" : "" : side == "player" ? isOc ? "blue" : "" :  "")

@@ -7,12 +7,6 @@ let NumberAllTanks = {
     "small tank": {"number": 3, "size": 1}, //1 case
 }
 
-// // debugMode
-
-// NumberAllTanks = {
-//     "small tank": {"number": 1, "size": 1}, //1 case
-// }
-
 let AllTanksEnemy = []
 let AllTanksPlayer = []
 let BoxImpossibleToPlace = []
@@ -160,7 +154,12 @@ function placeTank(size, grid) {
     return result;
 }
 
-function GenerateTank() {
+function GenerateTank(debugMode) {
+    if (debugMode) {
+        NumberAllTanks = {
+            "small tank": {"number": 1, "size": 1}, //1 case
+        }
+    }
     if (AllTanksEnemy.length > 0 || AllTanksPlayer.length > 0) {
         return
     }
