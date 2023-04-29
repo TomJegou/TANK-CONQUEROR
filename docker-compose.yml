@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+    image: tomyj/tank-conqueror
+    ports:
+      - "80:80"
+    volumes:
+      - type: bind
+        source: .
+        target: /app
