@@ -43,10 +43,12 @@ export default function SoloGame() {
     }
 
     return (
-        <Layout className="flex justify-center bg-black">
-            <h1 className=" absolute flex flex-row flex-wrap justify-center w-full text-4xl text-white top-11">SOLO GAME</h1>
-            <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode}/>
-            <EndGame acclamation={acclamation} winner={winnerName} isGameOver={isGameOver}/>
+        <Layout className={"overflow-x-hidden bg-black"}>
+            <div className="flex flex-row flex-wrap w-[100vw] h-[100vh] justify-center">
+                <h1 className="flex flex-row flex-wrap justify-center w-full text-4xl text-white mt-11">SOLO GAME</h1>
+                <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode} />
+                <EndGame acclamation={acclamation} winner={winnerName} isGameOver={isGameOver} />
+            </div>  
         </Layout>
     )
 }

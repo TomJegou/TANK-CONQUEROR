@@ -1,14 +1,18 @@
 import Layout from "@/components/Layout"
 import Menu from "@/components/Menu"
+import Back from "@/components/back"
 
 export default function IaMenu(){
     return(
-        <Layout className="h-[100vh] flex justify-center">
-            <Menu title={"Choose the IA difficulty"} listChoices={[
-                {text: "Easy", href: "/soloGame"},
-                {text: "Medium", href: "/soloGame"},
-                {text: "Hard", href: "/soloGame"},
-            ]} />
+        <Layout>
+            <div className="flex justify-center h-[85vh] w-[100vw]">
+                <Back href={"/mapMenu"}/>
+                <Menu title={"Choose the IA difficulty"} listChoices={[
+                    {text: "Easy", href: "/soloGame"},
+                    {text: "Medium", href: "/soloGame"},
+                    {text: "Hard", href: "/soloGame"},
+                ]} />
+            </div>
         </Layout>
     )
 }
