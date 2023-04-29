@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout"
 import GameSet from "@/components/GameSet"
+import Exit from "@/components/Exit"
 import { GenerateTank, AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTanks"
 import { engine, getNumBoxToBeTouched } from "@/utils/engine"
 import EndGame from "@/components/EndGame"
@@ -44,6 +45,7 @@ export default function SoloGame() {
 
     return (
         <Layout className={"overflow-x-hidden bg-black"}>
+            <Exit />
             <div className="flex flex-row flex-wrap w-[100vw] h-[100vh] justify-center">
                 <h1 className="flex flex-row flex-wrap justify-center w-full text-4xl text-white mt-11">SOLO GAME</h1>
                 <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode} />
