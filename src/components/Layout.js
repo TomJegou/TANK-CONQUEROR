@@ -1,7 +1,7 @@
 import HeadComponent  from "./Head";
 import Footer from "./Footer";
 
-export default function Layout({ children, className }) {
+export default function Layout({ children, className, classNameFooter }) {
     return (
         <div className={className}>
             <HeadComponent 
@@ -10,7 +10,7 @@ export default function Layout({ children, className }) {
                 keywords="Tank, Conqueror, Game, Multiplayer, Online"
             />
             {children}
-            <Footer />
+            <Footer className={classNameFooter}/>
         </div>
     )
 }
