@@ -9,7 +9,7 @@ export default function Home() {
           listChoices={[
             {text: "Solo", href: "/mapMenu"},
             {text: "Multiplayer", href: "/"},
-            {text: "Tutorial", href: "/"},
+            {text: "Tutorial", href: "/tuto"},
           ]} />
       </div>
       </Layout>
