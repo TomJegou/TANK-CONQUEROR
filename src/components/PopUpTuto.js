@@ -1,19 +1,28 @@
 import { useAnimate } from "framer-motion"
 import { useEffect } from "react"
 
-export default function PopUpTuto({ children, numberClick,trigerNumberClick }) {
+export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSendDataToParent }) {
     const [scope, animate] = useAnimate()
+    const duration = .25
 
     useEffect(()=>{
-        if(numberClick == trigerNumberClick) {
-            animate(scope.current, {scale: [0, 1]}, {duration: 0.5})
+        if(nbrClick == trigerNumberClick) {
+            animate(scope.current, {scale: [0, 1]}, {duration: duration})
         } else {
-            animate(scope.current, {scale: 0}, {duration: 0.5})
+            animate(scope.current, {scale: 0}, {duration: duration})
         }
-    },[numberClick])
+    },[nbrClick])
+
+    const clickNext = () => {
+        funcSendDataToParent("next")
+    }
+
+    const clickPrev = () => {
+        funcSendDataToParent("prev")
+    }
 
     return (
-        <div ref={scope} className="h-[80vh] w-[80vw] bg-gray-800">
+        <div ref={scope} className="h-[88vh] w-[88vw] bg-gray-800 flex flex-row flex-wrap justify-center text-white">
             {children}
         </div>
     )
