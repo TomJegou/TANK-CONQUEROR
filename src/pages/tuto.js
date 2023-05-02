@@ -2,10 +2,11 @@ import Layout from "@/components/Layout"
 import PopUpTuto from "@/components/PopUpTuto"
 import { useState } from "react"
 import Exit from "@/components/Exit"
+import Image from "next/image"
 
 export default function Tuto(){
     const [nbrClick, setNbrClick] = useState(0)
-    const nbrTotalPopUp = 3
+    const nbrTotalPopUp = 4
 
     const handleDataFromPopUpTuto = (data) => {
         if(data == "prev") {
@@ -44,11 +45,21 @@ export default function Tuto(){
                     <div className="flex flex-row flex-wrap justify-center items-center h-[70vh] w-[85vw]">
                         <h2 className="flex flex-row flex-wrap text-6xl h-[8vh] w-full justify-center items-center">Team composition: </h2>
                         <p className="relative top-[-10rem] flex flex-row flex-wrap justify-center text-4xl h-[12vh] w-[80vw]">
-                            1 Tank convoy<br/>
-                            2 Big tanks<br/>
-                            3 Medium tanks<br/>
-                            3 Small tanks<br/>
+                            1 Tank convoy (5 squares)<br/>
+                            2 Big tanks (4 squares)<br/>
+                            3 Medium tanks (2 squares)<br/>
+                            3 Small tanks (1 squares)<br/>
                         </p>
+                    </div>
+                </PopUpTuto>
+
+                <PopUpTuto nbrClick={nbrClick} trigerNumberClick={3} funcSendDataToParent={handleDataFromPopUpTuto} nbrTotalPopUp={nbrTotalPopUp}>
+                    <div className="flex flex-row flex-wrap justify-center items-center h-[70vh] w-[85vw]">
+                        <h2 className="flex flex-row flex-wrap text-6xl h-[8vh] w-full justify-center items-center">Gameplay: </h2>
+                        <p className="relative top-[-10rem] flex flex-row flex-wrap justify-center text-4xl h-[12vh] w-[80vw]">
+                            If it's your turn, you must click on one of the squares of the opponent's grid
+                        </p>
+                        <Image src={""}/>
                     </div>
                 </PopUpTuto>
             </div>
