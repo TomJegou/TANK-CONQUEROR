@@ -1,7 +1,7 @@
 import { useAnimate } from "framer-motion"
 import { useEffect } from "react"
 
-export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSendDataToParent }) {
+export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSendDataToParent, nbrTotalPopUp }) {
     const [scope, animate] = useAnimate()
     const duration = .25
 
@@ -9,7 +9,7 @@ export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSe
         if(nbrClick == trigerNumberClick) {
             animate(scope.current, {scale: [0, 1]}, {duration: duration})
         } else {
-            animate(scope.current, {scale: 0}, {duration: duration})
+            animate(scope.current, {scale: 0}, {duration: nbrClick == 0 ? 0 : duration})
         }
     },[nbrClick])
 
@@ -24,15 +24,15 @@ export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSe
     return (
         <div ref={scope} className="absolute top-10 h-[88vh] w-[88vw] bg-gray-800 flex flex-row flex-wrap justify-center items-center rounded-3xl text-white backdrop-blur-md shadow-2xl shadow-white bg-slate-500/30">
             {children}
-            <div className="absolute h-[5vh] w-[5vw] border-2 rounded-3xl bottom-2 right-10  flex flex-row flex-wrap justify-center items-center"
+            <div className="absolute h-[5vh] w-[5vw] border-2 rounded-3xl bottom-4 right-10  flex flex-row flex-wrap justify-center items-center"
             onClick={clickNext}
-            style={{opacity: trigerNumberClick == 3 ? 0 : 1}}>
-                <p>Next</p>
+            style={{opacity: trigerNumberClick == nbrTotalPopUp - 1 ? 0 : 1}}>
+                <p className="flex flex-row flex-wrap justify-center items-center">Next</p>
             </div>
-            <div className="absolute h-[5vh] w-[5vw] border-2 rounded-3xl bottom-2 left-10 flex flex-row flex-wrap justify-center items-center"
+            <div className="absolute h-[5vh] w-[5vw] border-2 rounded-3xl bottom-4 left-10 flex flex-row flex-wrap justify-center items-center"
             onClick={clickPrev}
             style={{opacity: trigerNumberClick == 0 ? 0 : 1}}>
-                <p>Previous</p>
+                <p className="flex flex-row flex-wrap justify-center items-center">Previous</p>
             </div>
         </div>
     )
