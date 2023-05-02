@@ -3,6 +3,8 @@ import PopUpTuto from "@/components/PopUpTuto"
 import { useState } from "react"
 import Exit from "@/components/Exit"
 import Image from "next/image"
+import Capture1 from "../../public/screenshotsTutorial/Capture1.png"
+import Capture2 from "../../public/screenshotsTutorial/Capture2.png"
 
 export default function Tuto(){
     const [nbrClick, setNbrClick] = useState(0)
@@ -44,22 +46,23 @@ export default function Tuto(){
                 <PopUpTuto nbrClick={nbrClick} trigerNumberClick={2} funcSendDataToParent={handleDataFromPopUpTuto} nbrTotalPopUp={nbrTotalPopUp}>
                     <div className="flex flex-row flex-wrap justify-center items-center h-[70vh] w-[85vw]">
                         <h2 className="flex flex-row flex-wrap text-6xl h-[8vh] w-full justify-center items-center">Team composition: </h2>
-                        <p className="relative top-[-10rem] flex flex-row flex-wrap justify-center text-4xl h-[12vh] w-[80vw]">
+                        <p className="flex flex-row flex-wrap text-4xl h-[15vhvh] w-[30vw]">
                             1 Tank convoy (5 squares)<br/>
                             2 Big tanks (4 squares)<br/>
                             3 Medium tanks (2 squares)<br/>
                             3 Small tanks (1 squares)<br/>
                         </p>
+                        <Image src={Capture1} className="flex w-[50vh] h-[50vh] rounded-[12px]" alt="Capture1.png" />
                     </div>
                 </PopUpTuto>
 
                 <PopUpTuto nbrClick={nbrClick} trigerNumberClick={3} funcSendDataToParent={handleDataFromPopUpTuto} nbrTotalPopUp={nbrTotalPopUp}>
                     <div className="flex flex-row flex-wrap justify-center items-center h-[70vh] w-[85vw]">
                         <h2 className="flex flex-row flex-wrap text-6xl h-[8vh] w-full justify-center items-center">Gameplay: </h2>
-                        <p className="relative top-[-10rem] flex flex-row flex-wrap justify-center text-4xl h-[12vh] w-[80vw]">
+                        <p className="top-[-10rem] flex flex-row flex-wrap justify-center items-center text-4xl h-[12vh] w-[80vw]">
                             If it's your turn, you must click on one of the squares of the opponent's grid
                         </p>
-                        <Image src={""}/>
+                        <Image src={Capture2} className="flex w-[50vh] h-[50vh] rounded-[12px]" alt="Capture2.png" />
                     </div>
                 </PopUpTuto>
             </div>
