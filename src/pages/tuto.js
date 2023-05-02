@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout"
 import PopUpTuto from "@/components/PopUpTuto"
 import { useState } from "react"
+import Exit from "@/components/Exit"
 
 export default function Tuto(){
     const [nbrClick, setNbrClick] = useState(0)
@@ -19,6 +20,7 @@ export default function Tuto(){
     return (
         <Layout>
             <div className="bg-black h-[100vh] flex justify-center flex-row flex-wrap">
+                <Exit />
                 <PopUpTuto nbrClick={nbrClick} trigerNumberClick={0} funcSendDataToParent={handleDataFromPopUpTuto} nbrTotalPopUp={nbrTotalPopUp}>
                     <h1 className="absolute top-4 flex flex-row flex-wrap text-7xl h-[7vh] w-full justify-center items-center">Welcome to the tutorial !</h1>
                     <div className="flex flex-row flex-wrap justify-center items-center h-[70vh] w-[85vw]">
