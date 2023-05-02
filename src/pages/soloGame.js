@@ -5,7 +5,7 @@ import { GenerateTank, AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTan
 import { engine, getNumBoxToBeTouched } from "@/utils/engine"
 import EndGame from "@/components/EndGame"
 import { useState, useEffect } from "react"
-import { motion, useAnimate } from "framer-motion"
+import { getRandomInt } from "@/utils/tools"
 
 export default function SoloGame() {
     const debugMode = false
@@ -17,7 +17,7 @@ export default function SoloGame() {
     const [numBoxTobeTouchedByEnemy, setNumBoxTobeTouchedByEnemy] = useState(getNumBoxToBeTouched(AllTanksPlayer))
     const [boxPlayedByIA, setBoxPlayedByIA] = useState([])
     const [boxPlayedByPlayer, setBoxPlayedByPlayer] = useState([])
-    const [whosTurn, setWhosTurn] = useState(Math.random() > .5 ? "player" : "IA")
+    const [whosTurn, setWhosTurn] = useState("player")
 
     useEffect(() => {
         if (numBoxTobeTouchedByPlayer <= 0) {
@@ -48,7 +48,7 @@ export default function SoloGame() {
             <Exit />
             <div className="flex flex-row flex-wrap w-[100vw] bottom-0 justify-center">
                 <h1 className="flex flex-row flex-wrap justify-center w-full text-4xl text-white mt-11">SOLO GAME</h1>
-                <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode} />
+                <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode} whosTurn={whosTurn}/>
                 <EndGame acclamation={acclamation} winner={winnerName} isGameOver={isGameOver} />
             </div>  
         </Layout>
