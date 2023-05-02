@@ -1,4 +1,4 @@
-export class IA {
+class IA {
     iaLevel=""
     constructor(iaLevel) {
         this.iaLevel = iaLevel
@@ -9,9 +9,9 @@ export class IA {
 
 
     /**return a random case*/
-    randomcase =()=>{return [Math.floor(Math.random()*10+1),Math.floor(Math.random()*10+1)]}
+    static randomcase =()=>{return [Math.floor(Math.random()*10+1),Math.floor(Math.random()*10+1)]}
     /**return true if the case is already play (is in the tab)*/
-    checkCaseAlreadyPlay=(tab,caseToCheck)=>{
+    static checkCaseAlreadyPlay=(tab,caseToCheck)=>{
         for (let elemenInTab = 0; elemenInTab < tab.length; elemenInTab++) {
                 if(tab[elemenInTab][0] === caseToCheck[0] && tab[elemenInTab][1] === caseToCheck[1]){
                     return true
@@ -20,7 +20,7 @@ export class IA {
             return false
         }
     /**This Function is use to find the Line direction of a ship */
-    findLineDirection(hitCase){
+    static findLineDirection(hitCase){
         let line = []
 
         let elem1 = hitCase[0]
@@ -38,7 +38,7 @@ export class IA {
         return line
     }
     /**FindCaseAround is a function how check around a case we give to check (caseToCheck) and return all are case around */
-    findCaseAround (caseToCheck){
+    static findCaseAround (caseToCheck){
         let allCaseAround = [];
         let caseAround = [];
         let xnumber = caseToCheck[0];
@@ -69,7 +69,7 @@ export class IA {
         return (allCaseAround)
     }
     /** Random Attack is a function who will find a case to attack,who has not been a player before */
-    randomAttack(caseAlreadyPlay,attackCase){
+    static randomAttack(caseAlreadyPlay,attackCase){
         let findCase = false
         while(!findCase){
             if (this.checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
@@ -89,8 +89,8 @@ export class IA {
 
 
 
-/** This function return a tab whit all the box 1 / 2  */
-    allDiagonalCase(){
+    /** This function return a tab whit all the box 1 / 2  */
+    static allDiagonalCase(){
         const oddeven=(number)=>{if(number % 2==0){return true}else {false}}
         let caseDiagonal = []
         let x = 1;let y = 1;let xNb = 1;let yNb = 1
@@ -104,7 +104,7 @@ export class IA {
     }
 
 
-    diagonalLine() {
+    static diagonalLine() {
         const caseDiagonalLine = [];
         for (let i = 0; i < 10; i++) {
         caseDiagonalLine.push([i + 1, i + 1]);
@@ -113,7 +113,7 @@ export class IA {
     }
 
 
-    diagonalAttack(caseAlreadyPlay,attackCase){
+    static diagonalAttack(caseAlreadyPlay,attackCase){
         let findCase = false    
         while(!findCase){
             for(let i =0;i<diagonalLine.length;i++){
@@ -137,7 +137,7 @@ export class IA {
     }
 
 
-    huntCase(caseAlreadyPlay){
+    static huntCase(caseAlreadyPlay){
         tankCaseProb = [[4,4],[5,5],[6,6],[7,7],[8,8],[8,3],[3,3],[3,8],[5,10],[10,6],[5,1],[1,5],[2,10],[9,10],[9,1],[2,1],[1,2],[1,9],[10,9],[10,2],[7,2],[4,2],[2,4],[2,7],[4,9],[7,9],[9,7],[9,4]]
         for(let i = 0; i<tankCaseProb.length;i++){
             if(!this.checkCaseAlreadyPlay(caseAlreadyPlay,tankCaseProb[i])){
@@ -145,9 +145,9 @@ export class IA {
             }
         }
         return undefined
-    }
-/** Attack function is a function to attack whit the use of Nick Berry algorithm inspiration*/
-    ia3attack(caseAlreadyPlay,attackCase){
+    } 
+    /** Attack function is a function to attack whit the use of Nick Berry algorithm inspiration*/
+    static level3attack(caseAlreadyPlay,attackCase){
         let findCase = false
         while(!findCase){
             if(this.huntCase != undefined){
@@ -172,44 +172,67 @@ export class IA {
         }
         }
     }
-
+    
 
 
     mode= {1:"hunt",2:"targeting"}
     fired(response,caseAlreadyPlay){
         if(response == "touched"){
-            hitCase.push(caseAlreadyPlay[caseAlreadyPlay.length-1])
-            if(mod){
-                if(hitCase>2){
-                for(let k = 0;i<findLineDirection(hitCase).length;k++){
-                        if(!checkCaseAlreadyPlay(caseAlreadyPlay,findLineDirection(hitCase)[k])){
-                            attackCase = findLineDirection(hitCase)[k]
-                            nb+=1
+            this.hitCase.push(caseAlreadyPlay[caseAlreadyPlay.length-1])
+            if(this.mode == "hunt"){
+                if(this.hitCase>2){
+                for(let k = 0;i<this.findLineDirection(this.hitCase).length;k++){
+                        if(!this.checkCaseAlreadyPlay(caseAlreadyPlay,this.findLineDirection(hitCase)[k])){
+                            attackCase = this.findLineDirection(this.hitCase)[k]
+                            this.nb+=1
                             break
                         }
                     }
                 }else{
-                for(let j = 0;j<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
-                    if(!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
-                        attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
-                        nb+=1
+                for(let j = 0;j<this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
+                    if(!this.checkCaseAlreadyPlay(caseAlreadyPlay,this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
+                        attackCase = this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
+                        this.nb+=1
                         break
                     }
                 }
             }
-            }else if(targeting==false){
-            for(let i = 0 ;i<findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
-                if (!checkCaseAlreadyPlay(caseAlreadyPlay,findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
-                    attackCase = findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i]
-                    targeting = true
+            }else if(this.mode == "targeting"){
+            for(let i = 0 ;i<this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1]).length;i++){
+                if (!this.checkCaseAlreadyPlay(caseAlreadyPlay,this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i])) {
+                    attackCase = this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-1])[i]
+                    this.targeting = true
                     break
                 }
             }
         }
         else{
-            attack
+            this.randomAttack(caseAlreadyPlay,attackCase)
         }
+    }
+    }
+    missed(response,caseAlreadyPlay){
+        if(response == "missed"){
+            if(this.mode == "hunt"){
+                for(let j = 0;j<this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
+                    if(!this.checkCaseAlreadyPlay(caseAlreadyPlay,this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
+                        attackCase = this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
+                        break
+                    }
+                }
+            }
+            else if (this.mode == "targeting"){
+                this.randomAttack(caseAlreadyPlay,attackCase)
+            }
+        }
+    }
+    sinked(response){
+    if(response == "sinked"){
+        this.hitCase=[]
+        this.nb=1
+        this.targeting=false
+        this.attack
+    }
     }
 }
 
-}
