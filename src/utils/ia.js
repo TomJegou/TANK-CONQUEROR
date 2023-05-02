@@ -235,4 +235,4 @@ class IA {
     }
     }
 }
-
+const ioa = new IA()
