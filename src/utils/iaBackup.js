@@ -106,9 +106,9 @@ function diagonalLine() {
 function diagonalAttack(caseAlreadyPlay,attackCase){
     let findCase = false    
     while(!findCase){
-        for(let i =0;i<diagonalLine.length;i++){
+        for(let i =0;i<diagonalLine().length;i++){
             if (checkCaseAlreadyPlay(caseAlreadyPlay,diagonalAttack[i])) {
-                attackCase = diagonalAttack[i]
+                attackCase = diagonalLine[i]
                 caseAlreadyPlay.push(attackCase)
                 findCase=true
                 break

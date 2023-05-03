@@ -5,13 +5,46 @@ class IA {
         this.targeting = false;
         this.nb = 1;
         this.hitCase = [];
+        this.caseAlreadyPlay = [];
+        this.attack = attack
+        this.attackCase = null
     }
 
 
+    defineLvl = () => {
+        if(this.iaLevel == 1){
+            let attackCase =randomcase()
+            this.attack=randomAttack(this.caseAlreadyPlay,attackCase)
+        }
+        if(this.iaLevel == 2){
+            for(let i =0;i<diagonalLine.length;i++){
+                if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
+                    attackCase =diagonalLine()[i]
+                }else{
+                    for(let i =0;i<allDiagonalCase.length;i++){
+                        if (checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
+                            this.attackCase = this.allDiagonalCase()[Math.floor(Math.random()*50+1)]//random case in diagonal case
+                        }
+                    }
+                }
+            }
+    
+            this.attack=this.diagonalAttack(this.caseAlreadyPlay,this.attackCase)
+    
+        }
+        if(this.iaLevel == 3){
+            this.attackCase = this.huntCase()
+            if(this.huntCase == undefined){
+                this.attackCase = randomAttack()
+            }
+            this.attack= this.ia3attack(caseAlreadyPlay,attackCase)
+        }
+    }
+
     /**return a random case*/
-    static randomcase =()=>{return [Math.floor(Math.random()*10+1),Math.floor(Math.random()*10+1)]}
+    randomcase =()=>{return [Math.floor(Math.random()*10+1),Math.floor(Math.random()*10+1)]}
     /**return true if the case is already play (is in the tab)*/
-    static checkCaseAlreadyPlay=(tab,caseToCheck)=>{
+    checkCaseAlreadyPlay=(tab,caseToCheck)=>{
         for (let elemenInTab = 0; elemenInTab < tab.length; elemenInTab++) {
                 if(tab[elemenInTab][0] === caseToCheck[0] && tab[elemenInTab][1] === caseToCheck[1]){
                     return true
@@ -20,7 +53,7 @@ class IA {
             return false
         }
     /**This Function is use to find the Line direction of a ship */
-    static findLineDirection(hitCase){
+    findLineDirection(hitCase){
         let line = []
 
         let elem1 = hitCase[0]
@@ -38,7 +71,7 @@ class IA {
         return line
     }
     /**FindCaseAround is a function how check around a case we give to check (caseToCheck) and return all are case around */
-    static findCaseAround (caseToCheck){
+    findCaseAround (caseToCheck){
         let allCaseAround = [];
         let caseAround = [];
         let xnumber = caseToCheck[0];
@@ -69,7 +102,7 @@ class IA {
         return (allCaseAround)
     }
     /** Random Attack is a function who will find a case to attack,who has not been a player before */
-    static randomAttack(caseAlreadyPlay,attackCase){
+    randomAttack(caseAlreadyPlay,attackCase){
         let findCase = false
         while(!findCase){
             if (this.checkCaseAlreadyPlay(caseAlreadyPlay,attackCase)) {
@@ -90,7 +123,7 @@ class IA {
 
 
     /** This function return a tab whit all the box 1 / 2  */
-    static allDiagonalCase(){
+    allDiagonalCase(){
         const oddeven=(number)=>{if(number % 2==0){return true}else {false}}
         let caseDiagonal = []
         let x = 1;let y = 1;let xNb = 1;let yNb = 1
@@ -104,7 +137,7 @@ class IA {
     }
 
 
-    static diagonalLine() {
+    diagonalLine() {
         const caseDiagonalLine = [];
         for (let i = 0; i < 10; i++) {
         caseDiagonalLine.push([i + 1, i + 1]);
@@ -113,12 +146,12 @@ class IA {
     }
 
 
-    static diagonalAttack(caseAlreadyPlay,attackCase){
+    diagonalAttack(caseAlreadyPlay,attackCase){
         let findCase = false    
         while(!findCase){
-            for(let i =0;i<diagonalLine.length;i++){
+            for(let i =0;i<diagonalLine().length;i++){
                 if (this.checkCaseAlreadyPlay(caseAlreadyPlay,diagonalAttack[i])) {
-                    attackCase = diagonalAttack[i]
+                    attackCase = this.diagonalLine()[i]
                     caseAlreadyPlay.push(attackCase)
                     findCase=true
                     break
@@ -137,7 +170,7 @@ class IA {
     }
 
 
-    static huntCase(caseAlreadyPlay){
+    huntCase(caseAlreadyPlay){
         tankCaseProb = [[4,4],[5,5],[6,6],[7,7],[8,8],[8,3],[3,3],[3,8],[5,10],[10,6],[5,1],[1,5],[2,10],[9,10],[9,1],[2,1],[1,2],[1,9],[10,9],[10,2],[7,2],[4,2],[2,4],[2,7],[4,9],[7,9],[9,7],[9,4]]
         for(let i = 0; i<tankCaseProb.length;i++){
             if(!this.checkCaseAlreadyPlay(caseAlreadyPlay,tankCaseProb[i])){
@@ -147,7 +180,7 @@ class IA {
         return undefined
     } 
     /** Attack function is a function to attack whit the use of Nick Berry algorithm inspiration*/
-    static level3attack(caseAlreadyPlay,attackCase){
+    level3attack(caseAlreadyPlay,attackCase){
         let findCase = false
         while(!findCase){
             if(this.huntCase != undefined){
@@ -235,4 +268,4 @@ class IA {
     }
     }
 }
-const ioa = new IA()
+const ioa = new IA(1)
