@@ -34,13 +34,19 @@ export default function SoloGame() {
         }
     }, [numBoxTobeTouchedByPlayer, numBoxTobeTouchedByEnemy])
 
+    useEffect(()=>{
+
+    },[whosTurn])
+
     const handleDataFromEnemyGrid = (boxClicked) => {
-        let responseEngine = engine(AllTanksEnemy, boxClicked)
-        setBoxPlayedByPlayer(a => [...a, boxClicked])
-        if (responseEngine != "missed") {
-            setNumBoxTobeTouchedByPlayer(a => a - 1)
+        if (whosTurn == "player") {
+            let responseEngine = engine(AllTanksEnemy, boxClicked)
+            setBoxPlayedByPlayer(a => [...a, boxClicked])
+            if (responseEngine != "missed") {
+                setNumBoxTobeTouchedByPlayer(a => a - 1)
+            }
+            setWhosTurn("IA")
         }
-        setWhosTurn("IA")
     }
 
     return (
