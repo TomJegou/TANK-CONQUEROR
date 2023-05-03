@@ -10,7 +10,8 @@ export default function Home() {
             {text: "Solo", href: "/mapMenu"},
             {text: "Multiplayer", href: "/"},
             {text: "Tutorial", href: "/tuto"},
-          ]} />
+          ]} 
+          keyWord={"mode"} />
       </div>
       </Layout>
   )

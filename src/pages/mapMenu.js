@@ -12,7 +12,8 @@ export default function MapMenu() {
                     {text: "Mountain", href: "/iaMenu"},
                     {text: "Desert", href: "/iaMenu"},
                     {text: "City", href: "/iaMenu"},
-                    ]} />
+                    ]} 
+                keyWord={"map"} />
             </div>
         </Layout>
     )

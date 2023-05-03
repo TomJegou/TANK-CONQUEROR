@@ -7,7 +7,7 @@ import EndGame from "@/components/EndGame"
 import { useState, useEffect } from "react"
 import { getRandomInt } from "@/utils/tools"
 
-export default function SoloGame() {
+export default function SoloGame({ map, difficulty }) {
     const debugMode = false
     GenerateTank(debugMode)
     const [isGameOver, setIsGameOver] = useState(false)

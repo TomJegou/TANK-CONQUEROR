@@ -11,7 +11,8 @@ export default function IaMenu(){
                     {text: "Easy", href: "/soloGame"},
                     {text: "Medium", href: "/soloGame"},
                     {text: "Hard", href: "/soloGame"},
-                ]} />
+                ]} 
+                keyWord={"iaDifficulty"} />
             </div>
         </Layout>
     )
