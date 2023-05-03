@@ -13,7 +13,7 @@ export default function MapMenu() {
                     {text: "Desert", href: "/iaMenu"},
                     {text: "City", href: "/iaMenu"},
                     ]} 
-                keyWord={"map"} />
+                keyWord={"mapWorld"} />
             </div>
         </Layout>
     )

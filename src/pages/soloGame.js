@@ -5,9 +5,10 @@ import { GenerateTank, AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTan
 import { engine, getNumBoxToBeTouched } from "@/utils/engine"
 import EndGame from "@/components/EndGame"
 import { useState, useEffect } from "react"
-import { getRandomInt } from "@/utils/tools"
+import { IADifficulty, MapWorld, Mode } from "@/utils/gameSetup"
 
-export default function SoloGame({ map, difficulty }) {
+export default function SoloGame() {
+    console.log(Mode, IADifficulty, MapWorld)
     const debugMode = false
     GenerateTank(debugMode)
     const [isGameOver, setIsGameOver] = useState(false)
