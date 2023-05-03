@@ -8,7 +8,6 @@ import { useState, useEffect } from "react"
 import { IADifficulty, MapWorld, Mode } from "@/utils/gameSetup"
 
 export default function SoloGame() {
-    console.log(Mode, IADifficulty, MapWorld)
     const debugMode = false
     GenerateTank(debugMode)
     const [isGameOver, setIsGameOver] = useState(false)

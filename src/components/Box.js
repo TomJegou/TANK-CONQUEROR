@@ -4,7 +4,7 @@ import FieldBox from "./FieldBox"
 import TankBox from "./TankBox"
 import { useState } from "react"
 
-export default function Box ({ x, y, side, sendResponseToGrid, debugMode }) {
+export default function Box ({ x, y, side, sendResponseToGrid, debugMode, WhosTurn }) {
     const grid = side == "enemy" ? AllTanksEnemy : AllTanksPlayer
     const [isOc] = useState(IsOccupied({x: x, y: y}, grid))
     const [color, setColor] = useState(debugMode ? side == "player" ? isOc ? "blue": "" : isOc? "gray" : "" : side == "player" ? isOc ? "blue" : "" :  "")
@@ -13,12 +13,14 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode }) {
     const otherAttribute = side == "enemy" ? {onClick: handleClick} : {}
 
     function handleClick(){
-        sendResponseToGrid({x: x, y: y})
-        if(isOc){
-            setColor("red")
-        } else {
-            setText("X")
+        if (WhosTurn == "player"){
+            if(isOc){
+                setColor("red")
+            } else {
+                setText("X")
+            }
         }
+        sendResponseToGrid({x: x, y: y})
     }
 
     return (
