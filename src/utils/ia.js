@@ -2,7 +2,7 @@ class IA{
     constructor(level){
         this.level = level;
         this.mode = 'Hunt'; 
-        this.target = null;
+        this.target = false;
         this.caseAlreadyPlay = [];
         this.hitCase = [];
         this.response = "missed";
@@ -17,19 +17,31 @@ class IA{
         return this.caseAlreadyPlay;
     }
 
-    switchMode() {
+
+  
+
+
+  
+    attack(response) {
         if (this.mode === 'Hunt') {
-          this.mode = 'Targeting';
-        } else {
-          this.mode = 'Hunt';
-          this.target = null;
-        }
-      }
-    attack() {
-        if (this.mode === 'Hunt') {
-          return this.huntAttack();
-        } else if (this.mode === 'Targeting') {
-          return this.targetingAttack();
+          this.huntAttack();
+        } else if (this.mode === 'Targeting' || this.target===true) {
+            switch (response) {
+                case 'sinked':
+                    this.sinked();
+                    break;
+                case 'touched':
+                    this.touched();
+                    break;
+                case 'missed':
+                    this.missed();
+                    break;
+                case '':
+                    this.huntAttack();
+                    break;
+                default:
+                    break;
+            }
         }
     }
     huntAttack() {
@@ -41,49 +53,54 @@ class IA{
           return this.ia3Attack();
         }
       }
-
-    targetingAttack() {
-        if (this.response === 'missed') {
-            for(let j = 0;j<this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
-                if(!this.checkCaseAlreadyPlay(caseAlreadyPlay,this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
-                    this.attackCase = this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
-                    this.caseAlreadyPlay.push(this.attackCase)
-                    break
-                }
-            }
-        } else if (this.response === 'sinked') {
-            this.nb=1
-            this.hitCase=[]
-            this.switchMode();
-            this.attack();
-        }else if (this.response === 'touched') {
-          if(this.hitCase>2){
-                for(let k = 0;i<this.findLineDirection(this.hitCase).length;k++){
-                        if(!this.checkCaseAlreadyPlay(caseAlreadyPlay,this.findLineDirection(hitCase)[k])){
-                            this.attackCase = this.findLineDirection(this.hitCase)[k]
-                            this.caseAlreadyPlay.push(this.attackCase)
-                            this.nb+=1
-                            break
-                        }
-                    }
-                }else{
-                for(let j = 0;j<this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb]).length;j++){
-                    if(!this.checkCaseAlreadyPlay(caseAlreadyPlay,this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j])) {
-                        this.attackCase = this.findCaseAround(caseAlreadyPlay[caseAlreadyPlay.length-nb])[j]
+    touched() {
+        this.mode = 'Targeting';
+        this.target = true;
+        if(this.hitCase>2){
+            for(let k = 0;i<this.findLineDirection(this.hitCase).length;k++){
+                    if(!this.checkCaseAlreadyPlay(this.caseAlreadyPlay,this.findLineDirection(hitCase)[k])){
+                        this.attackCase = this.findLineDirection(this.hitCase)[k]
                         this.caseAlreadyPlay.push(this.attackCase)
                         this.nb+=1
                         break
                     }
                 }
+            }else{
+            for(let j = 0;j<this.findCaseAround(this.caseAlreadyPlay[this.caseAlreadyPlay.length-nb]).length;j++){
+                if(this.checkCaseAlreadyPlay(this.caseAlreadyPlay,this.findCaseAround(this.caseAlreadyPlay[this.caseAlreadyPlay.length-nb])[j])) {
+                    this.attackCase = this.findCaseAround(this.caseAlreadyPlay[this.caseAlreadyPlay.length-nb])[j]
+                    this.caseAlreadyPlay.push(this.attackCase)
+                    this.nb+=1
+                    break
+                }
             }
+        }
     }
-}
-
+    missed() {
+        for(let j = 0;j<this.findCaseAround(this.caseAlreadyPlay[this.caseAlreadyPlay.length-nb]).length;j++){
+            if(!this.checkCaseAlreadyPlay(caseAlreadyPlay,this.findCaseAround(this.caseAlreadyPlay[this.caseAlreadyPlay.length-nb])[j])) {
+                this.attackCase = this.findCaseAround(this.caseAlreadyPlay[this.caseAlreadyPlay.length-nb])[j]
+                this.caseAlreadyPlay.push(this.attackCase)
+                break
+            }
+        }
+    }
+    sinked() {
+        this.nb=1
+        this.hitCase=[]
+        this.huntAttack()
+        this.mode = 'Hunt';
+    }
     
+
+        
+    randomcase (){
+        return [Math.floor(Math.random()*10+1),Math.floor(Math.random()*10+1)]
+    }
       
       /** Random Attack is a function who will find a case to attack,who has not been a player before */
       
-    randomAttack(caseAlreadyPlay,attackCase){
+    randomAttack(){
         let findCase = false
         while(!findCase){
             if (this.checkCaseAlreadyPlay(this.caseAlreadyPlay,this.attackCase)) {
@@ -91,14 +108,16 @@ class IA{
                 this.caseAlreadyPlay.push(this.attackCase)
                 findCase=true
             }else{
+                this.attackCase = this.randomcase()
                 this.caseAlreadyPlay.push(this.attackCase)
                 findCase=true
             }
             break
         }
+        return this.attackCase
     }
 
-    diagonalAttack(caseAlreadyPlay,attackCase){
+    diagonalAttack(){
         let findCase = false    
         while(!findCase){
             for(let i =0;i<this.diagonalLine().length;i++){
@@ -119,15 +138,16 @@ class IA{
                 }
             }
         }
+        return this.attackCase
     }
     
     /** Attack function is a function to attack whit the use of Nick Berry algorithm inspiration*/
-    ia3Attack(caseAlreadyPlay,attackCase){
+    ia3Attack(){
         let findCase = false
         while(!findCase){
             if(this.huntCase != undefined){
                 if (this.checkCaseAlreadyPlay(this.caseAlreadyPlay,this.attackCase)){
-                    this.attackCase = huntCase()
+                    this.attackCase = this.huntCase()
                     this.caseAlreadyPlay.push(this.attackCase)
                     findCase=true
                 }
@@ -146,6 +166,7 @@ class IA{
             }
         }
     }
+    return this.attackCase
     }
       /** This function return a tab whit all the box 1 / 2  */
     allDiagonalCase(){
@@ -174,7 +195,7 @@ class IA{
   
       
     huntCase(){
-          tankCaseProb = [[4,4],[5,5],[6,6],[7,7],[8,8],[8,3],[3,3],[3,8],[5,10],[10,6],[5,1],[1,5],[2,10],[9,10],[9,1],[2,1],[1,2],[1,9],[10,9],[10,2],[7,2],[4,2],[2,4],[2,7],[4,9],[7,9],[9,7],[9,4]]
+          let tankCaseProb = [[4,4],[5,5],[6,6],[7,7],[8,8],[8,3],[3,3],[3,8],[5,10],[10,6],[5,1],[1,5],[2,10],[9,10],[9,1],[2,1],[1,2],[1,9],[10,9],[10,2],[7,2],[4,2],[2,4],[2,7],[4,9],[7,9],[9,7],[9,4]]
           for(let i = 0; i<tankCaseProb.length;i++){
               if(!this.checkCaseAlreadyPlay(this.caseAlreadyPlay,tankCaseProb[i])){
                   return tankCaseProb[i]
@@ -182,8 +203,7 @@ class IA{
           }
           return undefined
       }
-    
-      randomcase =()=>{return [Math.floor(Math.random()*10+1),Math.floor(Math.random()*10+1)]}
+
 
       /**return true if the case is already play (is in the tab)*/
     checkCaseAlreadyPlay=(tab,caseToCheck)=>{
@@ -201,12 +221,12 @@ class IA{
           let elem1 = hitCase[0]
           let elem2 = hitCase[1]
           if(elem1[0]==elem2[0]){
-              for(let y =1;y<=this.maxTankSize;y++){
+              for(let y =1;y<=10;y++){
                   line.push([elem1[0],y])
               }
           }
           if(elem1[1]==elem2[1]){
-              for(let x =1;x<=this.maxTankSize;x++){
+              for(let x =1;x<=10;x++){
                   line.push([elem1[1],x])
               }
           }
@@ -214,42 +234,58 @@ class IA{
       }
       
       /**FindCaseAround is a function how check around a case we give to check (caseToCheck) and return all are case around */
-    findCaseAround (caseToCheck){
-          let allCaseAround = [];
-          let caseAround = [];
-          let xnumber = caseToCheck[0];
-          let number = caseToCheck[1];
-          let xIndex = xnumber-1;
-          let numberIndex = number-1;
-          let xIndexMin = xIndex-1;let xIndexMax = xIndex+1;let numberIndexMax = numberIndex+1;let numberIndexMin = numberIndex-1;
-          if ( xIndexMax > 9) {
-              xIndexMax = 9
+      findCaseAround(caseToCheck) {
+        let allCaseAround = [];
+        let caseAround = [];
+        let xnumber = caseToCheck[0];
+        let number = caseToCheck[1];
+        let xIndex = xnumber - 1;
+        let numberIndex = number - 1;
+        let xIndexMin = xIndex - 1;
+        let xIndexMax = xIndex + 1;
+        let numberIndexMax = numberIndex + 1;
+        let numberIndexMin = numberIndex - 1;
+      
+        if (xIndexMax > 9) {
+          xIndexMax = 9;
+        }
+        if (xIndexMin < 0) {
+          xIndexMin = 0;
+        }
+        if (numberIndexMax > 9) {
+          numberIndexMax = 9;
+        }
+        if (numberIndexMin < 0) {
+          numberIndexMin = 0;
+        }
+      
+        for (let i = xIndexMin; i <= xIndexMax; i++) {
+          for (let j = numberIndexMin; j <= numberIndexMax; j++) {
+            if (i !== xIndex || j !== numberIndex) {
+              caseAround = [i + 1, j + 1];
+              allCaseAround.push(caseAround);
+            }
           }
-          if (xIndexMin < 0) {
-              xIndexMin = 0
-          }
-          if (numberIndexMax > 9) {
-              numberIndexMax = 9
-          }
-          if (numberIndexMin < 0) {
-              numberIndexMin = 0
-          }
-          for (let i = xIndexMin; i <= xIndexMax; i++) {
-              for (let j = numberIndexMin; j <= numberIndexMax; j++) {
-                  if (i !==  xIndex || j !== numberIndex) {
-                      caseAround = [i+1,j+1]
-                      allCaseAround.push(caseAround)
-                  }
-              }
-          }
-          return (allCaseAround)
+        }
+      
+        return allCaseAround;
       }
       
 }
 
 const ia1 = new IA(1);
-const attackCoords =ia1.attack(); 
 const caseplayed = ia1.getCaseAlreadyPlay();
+const attackCoords =ia1.attack(); 
 console.log(caseplayed);
-console.log(attackCoords);
+const taa = ia1.findCaseAround();
+const A =ia1.attack("touched");
+const b =ia1.attack("touched");
+
+
+
+
+
+
+
+console.log(caseplayed);
 
