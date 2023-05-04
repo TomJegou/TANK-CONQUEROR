@@ -13,7 +13,7 @@ export default function Grid({ side, sendResponseToGameSet, debugMode, whosTurn 
     return (
         <div className={"flex flex-row flex-wrap w-[50vh] h-[50vh]"} side={side}>
             {t.map(box => {
-                return <Box x={box.x} y={box.y} side={side} key={`${side}:${box.x};${box.y}`} sendResponseToGrid={sendResponseToGameSet} debugMode={debugMode} />
+                return <Box x={box.x} y={box.y} side={side} key={`${side}:${box.x};${box.y}`} sendResponseToGrid={sendResponseToGameSet} debugMode={debugMode} whosTurn={whosTurn} />
             })}
         </div>
     )
