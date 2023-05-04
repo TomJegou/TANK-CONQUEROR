@@ -1,6 +1,6 @@
 import Box from "./Box"
 
-export default function Grid({ side, sendResponseToGameSet, debugMode }) {
+export default function Grid({ side, sendResponseToGameSet, debugMode, whosTurn }) {
     const t = [] 
     function generateGrid() {
         for (let y = 1; y <= 10; y++) {
