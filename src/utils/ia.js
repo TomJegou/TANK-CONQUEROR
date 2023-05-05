@@ -1,18 +1,18 @@
-export class IA{
+class IA{
     constructor(level){
         this.level = level;
         this.mode = 'Hunt'; 
         this.target = false;
         this.caseAlreadyPlay = [];
         this.hitCase = [];
-        this.response = "missed";
         this.targeting = false;
         this.nb = 1;
 
         this.maxTankSize = 5;
         this.numberTank = 9;
-        this.attackCase = []
+        this.attackCase = [1,1];
     }
+
     getCaseAlreadyPlay(){
         return this.caseAlreadyPlay;
     }
@@ -64,6 +64,7 @@ export class IA{
                         this.nb+=1
                         break
                     }
+                    return this.attackCase
                 }
             }else{
             for(let j = 0;j<this.findCaseAround(this.caseAlreadyPlay[this.caseAlreadyPlay.length-nb]).length;j++){
@@ -73,6 +74,7 @@ export class IA{
                     this.nb+=1
                     break
                 }
+                return this.attackCase
             }
         }
     }
@@ -83,6 +85,7 @@ export class IA{
                 this.caseAlreadyPlay.push(this.attackCase)
                 break
             }
+            return this.attackCase
         }
     }
     sinked() {
@@ -272,3 +275,6 @@ export class IA{
       }
       
 }
+
+
+
