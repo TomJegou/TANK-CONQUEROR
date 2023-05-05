@@ -1,4 +1,4 @@
-class IA{
+export class IA{
     constructor(level){
         this.level = level;
         this.mode = 'Hunt'; 
@@ -17,15 +17,9 @@ class IA{
         return this.caseAlreadyPlay;
     }
 
-
-
-
-  
     attack(response) {
         if (this.mode === 'Hunt') {
             return this.huntAttack();
-
-
         } else if (this.target===true) {
             switch (response) {
                 case 'sinked':
@@ -39,6 +33,7 @@ class IA{
             }
         }
     }
+
     huntAttack() {
         if (this.level === "Easy") {
           return this.randomAttack();
@@ -48,6 +43,7 @@ class IA{
           return this.ia3Attack();
         }
       }
+
     touched() {
         this.target = true;
         if(this.hitCase>2){
@@ -72,6 +68,7 @@ class IA{
             }
         }
     }
+
     missed() {
         for(let j = 0;j<this.findCaseAround(this.caseAlreadyPlay[this.caseAlreadyPlay.length-nb]).length;j++){
             if(!this.checkCaseAlreadyPlay(caseAlreadyPlay,this.findCaseAround(this.caseAlreadyPlay[this.caseAlreadyPlay.length-nb])[j])) {
