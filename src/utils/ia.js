@@ -1,4 +1,4 @@
-class IA{
+export class IA{
     constructor(level){
         this.level = level;
         this.mode = 'Hunt'; 
@@ -272,4 +272,5 @@ class IA{
       }
       
 }
+
 
