@@ -2,15 +2,15 @@ import { AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTanks"
 import { IsOccupied } from "@/utils/tools"
 import FieldBox from "./FieldBox"
 import TankBox from "./TankBox"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTurn }) {
+export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTurn, boxPlayedByEnemy }) {
     const grid = side == "enemy" ? AllTanksEnemy : AllTanksPlayer
     const [isOc] = useState(IsOccupied({x: x, y: y}, grid))
     const [color, setColor] = useState(debugMode ? side == "player" ? isOc ? "blue": "" : isOc? "gray" : "" : side == "player" ? isOc ? "blue" : "" :  "")
     const ContentBox = isOc ? TankBox : FieldBox
     const [text, setText] = useState("")
-    const otherAttribute = side == "enemy" ? {onClick: handleClick} : {}
+    const [otherAttribute, setOtherAttribute] = useState({})
 
     function handleClick(){
         if (whosTurn == "player"){
@@ -22,6 +22,28 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
         }
         sendResponseToGrid({x: x, y: y})
     }
+
+    useEffect(()=>{
+        if (boxPlayedByEnemy != null && side === "player") {
+            if (boxPlayedByEnemy.x == x && boxPlayedByEnemy.y == y) {
+                if (isOc) {
+                    setColor("red")
+                } else {
+                    setText("X")
+                }
+            }
+        }
+    }, [boxPlayedByEnemy, side])
+
+    useEffect(()=>{
+        if (side == "enemy") {
+            if (color == "red" || text == "X") {
+                setOtherAttribute({})
+            }else {
+                setOtherAttribute({onClick: handleClick})
+            }
+        }
+    }, [side, color, text])
 
     return (
         <div className="flex h-[5vh] w-[5vh] border"
