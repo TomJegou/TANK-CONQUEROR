@@ -45,11 +45,11 @@ export class IA{
         }
     }
     huntAttack() {
-        if (this.level === 1) {
+        if (this.level === "Easy") {
           return this.randomAttack();
-        } else if (this.level === 2) {
+        } else if (this.level === "Medium") {
           return this.diagonalAttack();
-        } else if (this.level === 3) {
+        } else if (this.level === "Hard") {
           return this.ia3Attack();
         }
       }
@@ -272,5 +272,3 @@ export class IA{
       }
       
 }
-
-
