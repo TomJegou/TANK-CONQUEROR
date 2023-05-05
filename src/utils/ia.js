@@ -36,8 +36,6 @@ export class IA{
                     return this.missed();
                 case '':
                     return this.huntAttack();
-                default:
-                    break;
             }
         }
     }
