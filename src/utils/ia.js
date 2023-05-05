@@ -48,7 +48,7 @@ export class IA{
         this.target = true;
         if(this.hitCase>2){
             for(let k = 0;i<this.findLineDirection(this.hitCase).length;k++){
-                    if(!this.checkCaseAlreadyPlay(this.caseAlreadyPlay,this.findLineDirection(hitCase)[k])){
+                    if(this.checkCaseAlreadyPlay(this.caseAlreadyPlay,this.findLineDirection(hitCase)[k])){
                         this.attackCase = this.findLineDirection(this.hitCase)[k]
                         this.caseAlreadyPlay.push(this.attackCase)
                         this.nb+=1
