@@ -13,7 +13,6 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
     const otherAttribute = side == "enemy" ? {onClick: handleClick} : {}
 
     function handleClick(){
-        console.log(whosTurn)
         if (whosTurn == "player"){
             if(isOc){
                 setColor("red")

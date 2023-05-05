@@ -6,17 +6,18 @@ import { engine, getNumBoxToBeTouched } from "@/utils/engine"
 import EndGame from "@/components/EndGame"
 import { useState, useEffect } from "react"
 import { IADifficulty, MapWorld } from "@/utils/gameSetup"
+import { IA } from "@/utils/ia"
 
 export default function SoloGame() {
-    const debugMode = true
+    const ia = new IA(IADifficulty)
+    const debugMode = false
     GenerateTank(debugMode)
     const [isGameOver, setIsGameOver] = useState(false)
     const [acclamation, setAcclamation] = useState("")
     const [winnerName, setWinnerName] = useState("")
     const [numBoxTobeTouchedByPlayer, setNumBoxTobeTouchedByPlayer] = useState(getNumBoxToBeTouched(AllTanksEnemy))
     const [numBoxTobeTouchedByEnemy, setNumBoxTobeTouchedByEnemy] = useState(getNumBoxToBeTouched(AllTanksPlayer))
-    const [boxPlayedByIA, setBoxPlayedByIA] = useState([])
-    const [boxPlayedByPlayer, setBoxPlayedByPlayer] = useState([])
+    const [respFromEngineForIA, setRespFromEngineForIA] = useState("")
     const [whosTurn, setWhosTurn] = useState("player")
 
     useEffect(() => {
@@ -35,13 +36,20 @@ export default function SoloGame() {
     }, [numBoxTobeTouchedByPlayer, numBoxTobeTouchedByEnemy])
 
     useEffect(()=>{
-
+        if (whosTurn == "IA") {
+            let tmp = ia.attack(respFromEngineForIA)
+            console.log(tmp)
+            let boxPlayed = {x: tmp[0], y: tmp[1]}
+            let responseEngine = engine(AllTanksPlayer, boxPlayed)
+            setRespFromEngineForIA(responseEngine)
+            setWhosTurn("player")
+            setNumBoxTobeTouchedByEnemy(getNumBoxToBeTouched(AllTanksPlayer))
+        }
     },[whosTurn])
 
     const handleDataFromEnemyGrid = (boxClicked) => {
         if (whosTurn == "player") {
             let responseEngine = engine(AllTanksEnemy, boxClicked)
-            setBoxPlayedByPlayer(a => [...a, boxClicked])
             if (responseEngine != "missed") {
                 setNumBoxTobeTouchedByPlayer(a => a - 1)
             }
