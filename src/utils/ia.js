@@ -273,19 +273,3 @@ class IA{
       
 }
 
-const ia1 = new IA(1);
-const caseplayed = ia1.getCaseAlreadyPlay();
-const attackCoords =ia1.attack(); 
-console.log(caseplayed);
-const taa = ia1.findCaseAround();
-const A =ia1.attack("touched");
-const b =ia1.attack("touched");
-
-
-
-
-
-
-
-console.log(caseplayed);
-
