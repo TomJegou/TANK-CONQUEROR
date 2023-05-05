@@ -18,7 +18,6 @@ export class IA{
     }
 
 
-  
 
 
   
@@ -26,20 +25,17 @@ export class IA{
         if (this.mode === 'Hunt') {
             this.huntAttack();
             return this.attackCase;
+
         } else if (this.mode === 'Targeting' || this.target===true) {
             switch (response) {
                 case 'sinked':
-                    this.sinked();
-                    break;
+                    return this.sinked();
                 case 'touched':
-                    this.touched();
-                    break;
+                    return this.touched();
                 case 'missed':
-                    this.missed();
-                    break;
+                    return this.missed();
                 case '':
-                    this.huntAttack();
-                    break;
+                    return this.huntAttack();
                 default:
                     break;
             }
@@ -277,3 +273,22 @@ export class IA{
       
 }
 
+
+// const ia1 = new IA("Easy");
+// const caseplayed = ia1.getCaseAlreadyPlay();
+// console.log(caseplayed);
+// const A =ia1.attack();
+// const b =ia1.attack("touched");
+// const c =ia1.attack("touched");
+// const a =ia1.attack("touched");
+// const B =ia1.attack("touched");
+// const C =ia1.attack("touched");
+
+
+
+
+
+// console.log(A)
+// console.log(C)
+
+// console.log(caseplayed);
