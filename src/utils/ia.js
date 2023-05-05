@@ -1,4 +1,4 @@
-export class IA{
+class IA{
     constructor(level){
         this.level = level;
         this.mode = 'Hunt'; 
@@ -23,10 +23,10 @@ export class IA{
   
     attack(response) {
         if (this.mode === 'Hunt') {
-            this.huntAttack();
-            return this.attackCase;
+            return this.huntAttack();
 
-        } else if (this.mode === 'Targeting' || this.target===true) {
+
+        } else if (this.target===true) {
             switch (response) {
                 case 'sinked':
                     return this.sinked();
@@ -49,7 +49,6 @@ export class IA{
         }
       }
     touched() {
-        this.mode = 'Targeting';
         this.target = true;
         if(this.hitCase>2){
             for(let k = 0;i<this.findLineDirection(this.hitCase).length;k++){
@@ -87,7 +86,7 @@ export class IA{
         this.nb=1
         this.hitCase=[]
         this.huntAttack()
-        this.mode = 'Hunt';
+        this.target = false;
     }
     
 
