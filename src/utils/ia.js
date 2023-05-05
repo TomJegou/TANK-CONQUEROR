@@ -10,7 +10,7 @@ export class IA{
 
         this.maxTankSize = 5;
         this.numberTank = 9;
-        this.attackCase = [1,1];
+        this.attackCase = [];
     }
 
     getCaseAlreadyPlay(){
@@ -24,7 +24,8 @@ export class IA{
   
     attack(response) {
         if (this.mode === 'Hunt') {
-          this.huntAttack();
+            this.huntAttack();
+            return this.attackCase;
         } else if (this.mode === 'Targeting' || this.target===true) {
             switch (response) {
                 case 'sinked':
@@ -275,3 +276,4 @@ export class IA{
       }
       
 }
+
