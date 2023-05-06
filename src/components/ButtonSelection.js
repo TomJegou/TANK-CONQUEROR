@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { setMapWorld, setIADifficulty, setMode } from "@/utils/gameSetup";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimate } from "framer-motion";
+import { useState } from "react";
 
 export default function ButtonSelection({ href, text, keyWord }) {
-    const [isHoover, setIsHoover] = useState(false)
+    const [scope, animate] = useAnimate()
+    const [isLoad, setIsLoad] = useState(false)
 
     const handleClick = () => {
         switch (keyWord){
@@ -21,15 +22,21 @@ export default function ButtonSelection({ href, text, keyWord }) {
     }
 
     const handleHoover = () => {
-        setIsHoover(true)
+        setIsLoad(true)
+    }
+
+    const handleHooverStart = () => {
+        animate(scope.current, {scale: 1.5})
+    }
+
+    const handleHooverEnd = () => {
+        animate(scope.current, {scale: 0})
     }
 
     return (
-        <motion.div onClick={handleClick} className="flex flex-col flex-wrap" whileHover={handleHoover}>
+        <motion.div onClick={handleClick} className="flex flex-col flex-wrap" whileHover={handleHoover} onHoverStart={handleHooverStart} onHoverEnd={handleHooverEnd}>
             <Link className="flex flex-row flex-wrap justify-center items-center h-11" href={href}>{text}</Link>
-            <motion.div 
-            className="bg-black h-1 rounded-sm"
-            animate={{scaleX: isHoover ? [2, 1] : null}}/>
+            <div ref={scope} className="bg-black h-[0.1vh] rounded-sm" style={{opacity: isLoad ? 1 : 0}} />
         </motion.div>
     )
 }
