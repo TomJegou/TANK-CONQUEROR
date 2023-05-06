@@ -10,7 +10,7 @@ import Capture4 from "../../public/screenshotsTutorial/Capture4.PNG"
 
 export default function Tuto(){
     const [nbrClick, setNbrClick] = useState(0)
-    const nbrTotalPopUp = 4
+    const nbrTotalPopUp = 5
 
     const handleDataFromPopUpTuto = (data) => {
         if(data == "prev") {
@@ -67,6 +67,21 @@ export default function Tuto(){
                             If it's your turn, you must click on one of the squares of the opponent's grid
                         </p>
                         <Image src={Capture2} className="flex w-[50vh] h-[50vh] rounded-[12px]" alt="Capture2.png" />
+                    </div>
+                </PopUpTuto>
+
+                <PopUpTuto nbrClick={nbrClick} trigerNumberClick={4} funcSendDataToParent={handleDataFromPopUpTuto} nbrTotalPopUp={nbrTotalPopUp}>
+                    <div className="flex flex-row flex-wrap justify-center items-center h-[70vh] w-[85vw]">
+                        <h2 className="flex flex-row flex-wrap text-6xl h-[8vh] w-full justify-center items-center">Gameplay: </h2>
+                        <p className="top-[-10rem] flex flex-row flex-wrap justify-start items-center text-4xl h-[12vh] w-[50vw]">
+                            If you miss your shot the box a hit marker will appears :
+                        </p>
+                        <Image src={Capture3} className="flex w-[10vh] h-[10vh] rounded-[12px]" alt="Capture3.png" />
+
+                        <p className="top-[-10rem] flex flex-row flex-wrap justify-start items-center text-4xl h-[12vh] w-[50vw]">
+                            If you hit a tank the box will become red :
+                        </p>
+                        <Image src={Capture4} className="flex w-[10vh] h-[10vh] rounded-[12px]" alt="Capture4.png" />
                     </div>
                 </PopUpTuto>
             </div>
