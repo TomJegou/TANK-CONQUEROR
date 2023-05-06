@@ -26,11 +26,11 @@ export default function ButtonSelection({ href, text, keyWord }) {
     }
 
     const handleHooverStart = () => {
-        animate(scope.current, {scale: 1.5})
+        animate(scope.current, {scale: 1}, {type: "spring", damping: 10})
     }
 
     const handleHooverEnd = () => {
-        animate(scope.current, {scale: 0})
+        animate(scope.current, {scale: 0}, {type: "spring", damping: 10})
     }
 
     return (
