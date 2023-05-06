@@ -1,8 +1,10 @@
 import { useAnimate } from "framer-motion"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSendDataToParent, nbrTotalPopUp }) {
     const [scope, animate] = useAnimate()
+    const [attrtibuteNext, setAttributeNext] = useState({})
+    const [attrtibutePrev, setAttributePrev] = useState({})
     const duration = .25
 
     useEffect(()=>{
@@ -12,6 +14,19 @@ export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSe
             animate(scope.current, {scale: 0}, {duration: nbrClick == 0 ? 0 : duration})
         }
     },[nbrClick])
+
+    useEffect(()=>{
+        if (trigerNumberClick == nbrTotalPopUp - 1) {
+            setAttributeNext({})
+        } else {
+            setAttributeNext({onClick: clickNext})
+        }
+        if (trigerNumberClick == 0) {
+            setAttributePrev({})
+        } else {
+            setAttributePrev({onClick: clickPrev})
+        }
+    },[trigerNumberClick])
 
     const clickNext = () => {
         funcSendDataToParent("next")
@@ -25,12 +40,12 @@ export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSe
         <div ref={scope} className="absolute top-10 h-[88vh] w-[88vw] bg-gray-800 flex flex-row flex-wrap justify-center items-center rounded-3xl text-white backdrop-blur-md shadow-2xl shadow-white bg-slate-500/30">
             {children}
             <div className="absolute h-[5vh] w-[5vw] border-2 rounded-3xl bottom-4 right-10  flex flex-row flex-wrap justify-center items-center"
-            onClick={clickNext}
+            {...attrtibuteNext}
             style={{opacity: trigerNumberClick == nbrTotalPopUp - 1 ? 0 : 1}}>
                 <p className="flex flex-row flex-wrap justify-center items-center">Next</p>
             </div>
             <div className="absolute h-[5vh] w-[5vw] border-2 rounded-3xl bottom-4 left-10 flex flex-row flex-wrap justify-center items-center"
-            onClick={clickPrev}
+            {...attrtibutePrev}
             style={{opacity: trigerNumberClick == 0 ? 0 : 1}}>
                 <p className="flex flex-row flex-wrap justify-center items-center">Previous</p>
             </div>
