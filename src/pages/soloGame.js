@@ -36,7 +36,7 @@ export default function SoloGame() {
         }
     }, [numBoxTobeTouchedByPlayer, numBoxTobeTouchedByEnemy])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (whosTurn == "IA") {
             let tmp = ia.attack(respFromEngineForIA)
             let boxPlayed = {x: tmp[0], y: tmp[1]}
