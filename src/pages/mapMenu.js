@@ -28,7 +28,8 @@ export default function MapMenu() {
                     {text: "City", href: "/iaMenu"},
                     ]} 
                 keyWord={"mapWorld"}
-                sendDataToPage={handleDataFromButton} />
+                sendDataToPage={handleDataFromButton}
+                textColor={"white"} />
             </div>
         </Layout>
     )

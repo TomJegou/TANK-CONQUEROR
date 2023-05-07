@@ -18,7 +18,8 @@ export default function Home() {
             {text: "Tutorial", href: "/tuto"},
           ]} 
           keyWord={"mode"}
-          sendDataToPage={handleDataFromButton} />
+          sendDataToPage={handleDataFromButton}
+          textColor={"white"} />
       </div>
       </Layout>
   )

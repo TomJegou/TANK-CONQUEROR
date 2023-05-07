@@ -16,7 +16,8 @@ export default function IaMenu(){
                     {text: "Hard", href: "/soloGame"},
                 ]} 
                 keyWord={"iaDifficulty"}
-                sendDataToPage={handleDataFromButton} />
+                sendDataToPage={handleDataFromButton}
+                textColor={"black"} />
             </div>
         </Layout>
     )
