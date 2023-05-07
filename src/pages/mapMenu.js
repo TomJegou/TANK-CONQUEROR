@@ -4,32 +4,22 @@ import Back from "@/components/Back"
 import BackgroundMapCity from "../../public/BackgroundMapCity.JPG"
 import BackgroundMapDesert from "../../public/BackgroundMapDesert.JPG"
 import BackgroundMapMountain from "../../public/BackgroundMapMountain.JPG"
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import { useAnimate } from "framer-motion"
+import { useState } from "react"
+import BgMenuMap from "@/components/BgMenuMap"
 
 export default function MapMenu() {
-    const mappingButtonBg = {
-        "Mountain": BackgroundMapMountain,
-        "Desert": BackgroundMapDesert,
-        "City": BackgroundMapCity,
-    }
-
-    const [scope, animate] = useAnimate()
-
-    const [bg, setBg] = useState(BackgroundMapMountain)
+    const [buttonOnHoover, setbuttonOnHoover] = useState("Desert")
 
     const handleDataFromButton = (data) => {
-        setBg(mappingButtonBg[data])
+        setbuttonOnHoover(data)
     }
-
-    useEffect(()=>{
-        animate(scope.current, {opacity: [0, 1]}, {duration: 3})
-    }, [bg])
 
     return (
         <Layout>
             <div className="flex justify-center h-[85vh] w-[100vw]">
+                <BgMenuMap bg={BackgroundMapMountain} trigger={"Mountain"} currentButtonOnHoover={buttonOnHoover} />
+                <BgMenuMap bg={BackgroundMapDesert} trigger={"Desert"} currentButtonOnHoover={buttonOnHoover} />
+                <BgMenuMap bg={BackgroundMapCity} trigger={"City"} currentButtonOnHoover={buttonOnHoover} />
                 <Back href={"/"}/>
                 <Menu title={"Choose your environnement"} 
                 listChoices={[
