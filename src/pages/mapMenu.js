@@ -1,9 +1,9 @@
 import Layout from "@/components/Layout"
 import Menu from "@/components/Menu"
 import Back from "@/components/Back"
-import BackgroundMapCity from "../../public/BackgroundMapCity.JPG"
-import BackgroundMapDesert from "../../public/BackgroundMapDesert.JPG"
-import BackgroundMapMountain from "../../public/BackgroundMapMountain.JPG"
+import BackgroundMapCity from "../../public/BackgroundMapCity.jpg"
+import BackgroundMapDesert from "../../public/BackgroundMapDesert.jpg"
+import BackgroundMapMountain from "../../public/BackgroundMapMountain.jpg"
 import { useState } from "react"
 import BgMenuMap from "@/components/BgMenuMap"
 

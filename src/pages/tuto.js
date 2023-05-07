@@ -3,10 +3,10 @@ import PopUpTuto from "@/components/PopUpTuto"
 import { useState } from "react"
 import Exit from "@/components/Exit"
 import Image from "next/image"
-import Capture1 from "../../public/screenshotsTutorial/Capture1.PNG"
-import Capture2 from "../../public/screenshotsTutorial/Capture2.PNG"
-import Capture3 from "../../public/screenshotsTutorial/Capture3.PNG"
-import Capture4 from "../../public/screenshotsTutorial/Capture4.PNG"
+import Capture1 from "../../public/screenshotsTutorial/Capture1.png"
+import Capture2 from "../../public/screenshotsTutorial/Capture2.png"
+import Capture3 from "../../public/screenshotsTutorial/Capture3.png"
+import Capture4 from "../../public/screenshotsTutorial/Capture4.png"
 
 export default function Tuto(){
     const [nbrClick, setNbrClick] = useState(0)

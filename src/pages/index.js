@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout"
 import Menu from "@/components/Menu"
 import Image from "next/image"
-import Background from "../../public/background.JPG"
+import Background from "../../public/background.jpg"
 
 export default function Home() {
   const handleDataFromButton = (data) => {
