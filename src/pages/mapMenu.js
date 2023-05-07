@@ -30,9 +30,6 @@ export default function MapMenu() {
     return (
         <Layout>
             <div className="flex justify-center h-[85vh] w-[100vw]">
-                <div ref={scope} className="w-full h-full">
-                    <Image src={bg} alt="bg" className="w-full h-full z-[-1]" />
-                </div>
                 <Back href={"/"}/>
                 <Menu title={"Choose your environnement"} 
                 listChoices={[
