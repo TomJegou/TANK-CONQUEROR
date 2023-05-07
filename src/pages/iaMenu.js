@@ -3,6 +3,9 @@ import Menu from "@/components/Menu"
 import Back from "@/components/Back"
 
 export default function IaMenu(){
+    const handleDataFromButton = (data) => {
+    }
+
     return(
         <Layout>
             <div className="flex justify-center h-[85vh] w-[100vw]">
@@ -12,7 +15,8 @@ export default function IaMenu(){
                     {text: "Medium", href: "/soloGame"},
                     {text: "Hard", href: "/soloGame"},
                 ]} 
-                keyWord={"iaDifficulty"} />
+                keyWord={"iaDifficulty"}
+                sendDataToPage={handleDataFromButton} />
             </div>
         </Layout>
     )

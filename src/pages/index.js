@@ -4,6 +4,9 @@ import Image from "next/image"
 import Background from "../../public/background.JPG"
 
 export default function Home() {
+  const handleDataFromButton = (data) => {
+  }
+
   return (
     <Layout>
       <div className="flex justify-center h-[85vh] w-[100vw]">
@@ -14,7 +17,8 @@ export default function Home() {
             {text: "Multiplayer", href: "/"},
             {text: "Tutorial", href: "/tuto"},
           ]} 
-          keyWord={"mode"} />
+          keyWord={"mode"}
+          sendDataToPage={handleDataFromButton} />
       </div>
       </Layout>
   )
