@@ -36,7 +36,7 @@ export default function ButtonSelection({ href, text, keyWord, sendDataToMenu })
 
     return (
         <motion.div onClick={handleClick} className="flex flex-col flex-wrap" whileHover={handleHoover} onHoverStart={handleHooverStart} onHoverEnd={handleHooverEnd}>
-            <Link className="flex flex-row flex-wrap justify-center items-center h-11" href={href}>{text}</Link>
+            <Link className="flex flex-row flex-wrap justify-center items-center h-11 text-4xl" href={href}>{text}</Link>
             <motion.div ref={scope} className="bg-black h-[0.2vh] rounded-sm" animate={{scale: isLoad ? 1 : 0}} transition={{duration: .5, type: "spring", damping: 10}} />
         </motion.div>
     )
