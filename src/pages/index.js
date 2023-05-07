@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <Layout>
       <div className="flex justify-center h-[85vh] w-[100vw]">
-          <Image src={Background} alt="background" className="w-full h-full z-[-1]"/>
+          <Image src={Background} alt="background" className="w-full h-full z-[-1]" />
           <Menu title={"Welcome to Tank Conqueror"} 
           listChoices={[
             {text: "Solo", href: "/mapMenu"},
