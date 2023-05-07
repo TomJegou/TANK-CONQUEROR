@@ -10,6 +10,9 @@ module.exports = {
       fontFamily: {
         'sans': ['Roboto', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        'green-military': '#596643',
+      },
     },
   },
   plugins: [],
