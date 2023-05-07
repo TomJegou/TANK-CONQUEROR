@@ -3,7 +3,7 @@ import { setMapWorld, setIADifficulty, setMode } from "@/utils/gameSetup";
 import { motion, useAnimate } from "framer-motion";
 import { useState } from "react";
 
-export default function ButtonSelection({ href, text, keyWord }) {
+export default function ButtonSelection({ href, text, keyWord, sendDataToMenu }) {
     const [scope, animate] = useAnimate()
     const [isLoad, setIsLoad] = useState(false)
 
@@ -23,6 +23,7 @@ export default function ButtonSelection({ href, text, keyWord }) {
 
     const handleHoover = () => {
         setIsLoad(true)
+        sendDataToMenu(text)
     }
 
     const handleHooverStart = () => {
