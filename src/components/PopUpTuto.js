@@ -37,7 +37,7 @@ export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSe
     }
 
     return (
-        <div ref={scope} className="absolute top-10 h-[88vh] w-[88vw] flex flex-row flex-wrap justify-center items-center rounded-3xl text-white backdrop-blur-md shadow-2xl shadow-white bg-slate-500/30">
+        <div ref={scope} className="absolute top-10 h-[88vh] w-[88vw] flex flex-row flex-wrap justify-center items-center rounded-3xl text-white backdrop-blur-xl shadow-2xl shadow-black bg-green-military/50">
             {children}
             <div className="absolute h-[5vh] w-[5vw] border-2 rounded-3xl bottom-4 right-10  flex flex-row flex-wrap justify-center items-center"
             {...attrtibuteNext}

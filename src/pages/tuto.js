@@ -3,6 +3,7 @@ import PopUpTuto from "@/components/PopUpTuto"
 import { useState } from "react"
 import Exit from "@/components/Exit"
 import Image from "next/image"
+import bgTuto from "../../public/bgTuto.jpg"
 import Capture1 from "../../public/screenshotsTutorial/Capture1.png"
 import Capture2 from "../../public/screenshotsTutorial/Capture2.png"
 import Capture3 from "../../public/screenshotsTutorial/Capture3.png"
@@ -27,6 +28,7 @@ export default function Tuto(){
     return (
         <Layout>
             <div className="bg-black h-[100vh] flex justify-center flex-row flex-wrap">
+                <Image src={bgTuto} alt="bg" className="w-full h-full" />
                 <Exit />
                 <PopUpTuto nbrClick={nbrClick} trigerNumberClick={0} funcSendDataToParent={handleDataFromPopUpTuto} nbrTotalPopUp={nbrTotalPopUp}>
                     <h1 className="absolute top-4 flex flex-row flex-wrap text-7xl h-[7vh] w-full justify-center items-center">Welcome to the tutorial !</h1>
@@ -77,11 +79,13 @@ export default function Tuto(){
                             If you miss your shot the box a hit marker will appears :
                         </p>
                         <Image src={Capture3} className="flex w-[10vh] h-[10vh] rounded-[12px]" alt="Capture3.png" />
-
                         <p className="top-[-10rem] flex flex-row flex-wrap justify-start items-center text-4xl h-[12vh] w-[50vw]">
                             If you hit a tank the box will become red :
                         </p>
                         <Image src={Capture4} className="flex w-[10vh] h-[10vh] rounded-[12px]" alt="Capture4.png" />
+                        <p className="top-[-10rem] flex flex-row flex-wrap justify-start items-center text-4xl h-[12vh] w-[50vw]">
+                            If you hit or sink a tank you can play again
+                        </p>
                     </div>
                 </PopUpTuto>
             </div>
