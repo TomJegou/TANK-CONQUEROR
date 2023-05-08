@@ -46,7 +46,7 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
     }, [side, color, text])
 
     return (
-        <div className="flex h-[5vh] w-[5vh] border"
+        <div className="flex h-[5vh] w-[5vh] border border-black"
         x={x}
         y={y}
         side={side} 
