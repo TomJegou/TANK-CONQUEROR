@@ -27,7 +27,7 @@ export default function MapMenu() {
                     {text: "Desert", href: "/iaMenu"},
                     {text: "City", href: "/iaMenu"},
                     ]} 
-                keyWord={"mapWorld"}
+                keyWord={"Bg"}
                 sendDataToPage={handleDataFromButton}
                 textColor={"white"} />
             </div>

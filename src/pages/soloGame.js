@@ -10,11 +10,13 @@ import { IA } from "@/utils/ia"
 export default function SoloGame() {
     const debugMode = false
     GenerateTank(debugMode)
-    const ia = new IA("Easy")
+    let ia
     if (typeof document != "undefined") {
-        console.log(document.cookie)
+        const a = document.cookie.split(";")
+        const b = a[a.length - 1]
+        const c = b.split("=")
+        ia = new IA(c[c.length - 1])
     }
-    console.log(ia)
     const [isGameOver, setIsGameOver] = useState(false)
     const [acclamation, setAcclamation] = useState("")
     const [winnerName, setWinnerName] = useState("")
@@ -42,7 +44,6 @@ export default function SoloGame() {
     useEffect(() => {
         if (whosTurn == "IA" || whosTurn == "IA2") {
             let tmp = ia.attack(respFromEngineForIA)
-            console.log({tmp})
             let boxPlayed = {x: tmp[0], y: tmp[1]}
             setBoxPlayedByIA(boxPlayed)
             let responseEngine = engine(AllTanksPlayer, boxPlayed)
