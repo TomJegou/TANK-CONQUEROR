@@ -57,7 +57,8 @@ export default function SoloGame() {
         if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
             if (whosTurn == "IA") {
                 setWhosTurn("IA2")
-            } else {
+            } 
+            if (whosTurn == "IA2") {
                 setWhosTurn("IA")
             }
         }
