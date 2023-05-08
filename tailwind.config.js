@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': ['Roboto', ...defaultTheme.fontFamily.sans],
+        'title': 'Ubuntu',
       },
       colors: {
         'green-military': '#596643',
