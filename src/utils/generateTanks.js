@@ -19,16 +19,16 @@ class Tank {
     }
 }
 
-function placeTank(size, grid) {
+function placeTank (size, grid) {
     let result = [];
     const directionPossible = [];
     let randomBox;
     let randomDirection;
 
-    function inResult(thisBox) {
+    function inResult (thisBox) {
         let r = false;
         result.map((currentBox) => {
-            if(currentBox.x === thisBox.x && currentBox.y === thisBox.y) {
+            if (currentBox.x === thisBox.x && currentBox.y === thisBox.y) {
                 r = true;
                 return;
             }
@@ -36,10 +36,10 @@ function placeTank(size, grid) {
         return r;
     }
 
-    function inBoxImpossibleToPlace(thisBox) {
+    function inBoxImpossibleToPlace (thisBox) {
         let result = false;
         BoxImpossibleToPlace.map((currentBox) => {
-            if(currentBox.x === thisBox.x && currentBox.y === thisBox.y) {
+            if (currentBox.x === thisBox.x && currentBox.y === thisBox.y) {
                 result = true;
                 return;
             }
@@ -47,7 +47,7 @@ function placeTank(size, grid) {
         return result;
     }
     
-    function addBorderBoxImpossibleToPlace() {
+    function addBorderBoxImpossibleToPlace () {
         function addBorderBox(currentBox, x, y) {
             if (x < 1 || x > 10 || y < 1 || y > 10 || inBoxImpossibleToPlace({x: x, y: y}) || inResult({x: x, y: y})) {
                 return;
@@ -70,7 +70,7 @@ function placeTank(size, grid) {
         })
     }
 
-    function getSens(box) {
+    function getSens (box) {
         if (box.x - size >= 1) {
             let isOk = true;
             for (let i = box.x; i >= box.x - size; i--) {
@@ -121,7 +121,7 @@ function placeTank(size, grid) {
         }
     }
 
-    function placeBox(box, direction) {
+    function placeBox (box, direction) {
         if (direction === "left") {
             for (let i = box.x; i > box.x - size; i--) {
                 result.push({x: i, y: box.y});
@@ -154,7 +154,7 @@ function placeTank(size, grid) {
     return result;
 }
 
-function GenerateTank(debugMode) {
+function GenerateTank (debugMode) {
     if (debugMode) {
         NumberAllTanks = {
             "small tank": {"number": 1, "size": 1}, //1 case
