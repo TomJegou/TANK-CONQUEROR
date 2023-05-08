@@ -41,12 +41,12 @@ export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSe
             {children}
             <div className="absolute h-[5vh] w-[5vw] border-2 rounded-3xl bottom-4 right-10  flex flex-row flex-wrap justify-center items-center"
             {...attrtibuteNext}
-            style={{opacity: trigerNumberClick == nbrTotalPopUp - 1 ? 0 : 1}}>
+            style={{opacity: trigerNumberClick == nbrTotalPopUp - 1 ? 0 : 1, cursor: "pointer"}}>
                 <p className="flex flex-row flex-wrap justify-center items-center">Next</p>
             </div>
             <div className="absolute h-[5vh] w-[5vw] border-2 rounded-3xl bottom-4 left-10 flex flex-row flex-wrap justify-center items-center"
             {...attrtibutePrev}
-            style={{opacity: trigerNumberClick == 0 ? 0 : 1}}>
+            style={{opacity: trigerNumberClick == 0 ? 0 : 1, cursor: "pointer"}}>
                 <p className="flex flex-row flex-wrap justify-center items-center">Previous</p>
             </div>
         </div>
