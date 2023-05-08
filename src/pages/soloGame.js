@@ -10,7 +10,7 @@ import { IA } from "@/utils/ia"
 export default function SoloGame() {
     const debugMode = false
     GenerateTank(debugMode)
-    const ia = new IA("easy")
+    const ia = new IA("Easy")
     if (typeof document != "undefined") {
         console.log(document.cookie)
     }
@@ -40,8 +40,9 @@ export default function SoloGame() {
     }, [numBoxTobeTouchedByPlayer, numBoxTobeTouchedByEnemy])
 
     useEffect(() => {
-        if (whosTurn == "IA") {
+        if (whosTurn == "IA" || whosTurn == "IA2") {
             let tmp = ia.attack(respFromEngineForIA)
+            console.log({tmp})
             let boxPlayed = {x: tmp[0], y: tmp[1]}
             setBoxPlayedByIA(boxPlayed)
             let responseEngine = engine(AllTanksPlayer, boxPlayed)
@@ -55,7 +56,11 @@ export default function SoloGame() {
 
     useEffect(()=> {
         if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
-            setWhosTurn("IA")
+            if (whosTurn == "IA") {
+                setWhosTurn("IA2")
+            } else {
+                setWhosTurn("IA")
+            }
         }
     }, [respFromEngineForIA])
 
