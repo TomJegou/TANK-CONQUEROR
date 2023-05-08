@@ -7,14 +7,16 @@ import EndGame from "@/components/EndGame"
 import { useState, useEffect } from "react"
 import { IA } from "@/utils/ia"
 import { getCookie } from "@/utils/tools"
+import bgCity from "@/../public/maps/City.png"
+import bgMountain from "@/../public/maps/Mountain.png"
+import bgDesert from "@/../public/maps/Desert.png"
+import BgGame from "@/components/BgGame"
 
 export default function SoloGame () {
     const debugMode = false
     GenerateTank(debugMode)
-    let ia
-    if (typeof document != "undefined") {
-        ia = new IA(getCookie("iaDifficulty"))
-    }
+    const [ia, setIA] = useState()
+    const [srcBg, setSrcBg] = useState()
     const [isGameOver, setIsGameOver] = useState(false)
     const [acclamation, setAcclamation] = useState("")
     const [winnerName, setWinnerName] = useState("")
@@ -67,10 +69,28 @@ export default function SoloGame () {
         }
     }
 
+    useEffect(() => {
+        if (typeof document != "undefined") {
+            setIA(new IA(getCookie("iaDifficulty")))
+            switch (getCookie("Bg")) {
+                case "Mountain":
+                    setSrcBg(bgMountain)
+                    break
+                case "City" :
+                    setSrcBg(bgCity)
+                    break
+                case "Desert" :
+                    setSrcBg(bgDesert)
+                    break
+            }
+        }
+    }, [typeof document])
+
     return (
-        <Layout className={"overflow-x-hidden bg-black h-[115vh] flex flex-row flex-wrap justify-center items-end"}>
-            <Exit />
+        <Layout className={"overflow-x-hidden h-[115vh] flex flex-row flex-wrap justify-center items-end"}>
             <div className="flex flex-row flex-wrap w-[100vw] bottom-0 justify-center">
+                <BgGame src={srcBg} alt="Bg" />
+                <Exit />
                 <h1 className="flex flex-row flex-wrap justify-center w-full text-4xl text-white mt-11">SOLO GAME</h1>
                 <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode} whosTurn={whosTurn} boxPlayedByEnemy={boxPlayedByIA}/>
                 <EndGame acclamation={acclamation} winner={winnerName} isGameOver={isGameOver} />
