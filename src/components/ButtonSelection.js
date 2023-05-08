@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { setMapWorld, setIADifficulty, setMode } from "@/utils/gameSetup";
 import { motion, useAnimate } from "framer-motion";
 import { useState } from "react";
 
@@ -8,17 +7,7 @@ export default function ButtonSelection({ href, text, keyWord, sendDataToMenu, t
     const [isLoad, setIsLoad] = useState(false)
 
     const handleClick = () => {
-        switch (keyWord){
-            case "mapWorld":
-                setMapWorld(text)
-                break
-            case "mode":
-                setMode(text)
-                break
-            case "iaDifficulty":
-                setIADifficulty(text)
-                break
-        }
+        document.cookie = `${keyWord}=${text}`
     }
 
     const handleHoover = () => {

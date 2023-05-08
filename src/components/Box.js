@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTurn, boxPlayedByEnemy }) {
     const grid = side == "enemy" ? AllTanksEnemy : AllTanksPlayer
     const [isOc] = useState(IsOccupied({x: x, y: y}, grid))
-    const [color, setColor] = useState(debugMode ? side == "player" ? isOc ? "blue": "" : isOc? "gray" : "" : side == "player" ? isOc ? "blue" : "" :  "")
+    const [color, setColor] = useState(debugMode ? side == "player" ? isOc ? "#000CFF": "" : isOc ? "#555655" : "#FFFFFF00" : side == "player" ? isOc ? "#000CFF" : "#FFFFFF00" :  "#FFFFFF00")
     const ContentBox = isOc ? TankBox : FieldBox
     const [text, setText] = useState("")
     const [otherAttribute, setOtherAttribute] = useState({})
@@ -15,7 +15,7 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
     function handleClick(){
         if (whosTurn == "player"){
             if(isOc){
-                setColor("red")
+                setColor("#FF0000")
             } else {
                 setText("X")
             }
@@ -27,7 +27,7 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
         if (boxPlayedByEnemy != null && side === "player") {
             if (boxPlayedByEnemy.x == x && boxPlayedByEnemy.y == y) {
                 if (isOc) {
-                    setColor("red")
+                    setColor("#FF0000")
                 } else {
                     setText("X")
                 }
@@ -37,7 +37,7 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
 
     useEffect(()=>{
         if (side == "enemy") {
-            if (color == "red" || text == "X") {
+            if (color == "#FF0000" || text == "X") {
                 setOtherAttribute({})
             }else {
                 setOtherAttribute({onClick: handleClick})
