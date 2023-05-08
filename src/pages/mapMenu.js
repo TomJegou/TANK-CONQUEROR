@@ -5,21 +5,21 @@ import BackgroundMapCity from "../../public/bgMapMenu/BackgroundMapCity.jpg"
 import BackgroundMapDesert from "../../public/bgMapMenu/BackgroundMapDesert.jpg"
 import BackgroundMapMountain from "../../public/bgMapMenu/BackgroundMapMountain.jpg"
 import { useState } from "react"
-import BgMenuMap from "@/components/BgMenuMap"
+import DynamicBgMenuOnHover from "@/components/BgMenuMap"
 
 export default function MapMenu () {
-    const [buttonOnHoover, setbuttonOnHoover] = useState("Desert")
+    const [buttonOnHover, setbuttonOnHover] = useState("Desert")
 
     const handleDataFromButton = (data) => {
-        setbuttonOnHoover(data)
+        setbuttonOnHover(data)
     }
 
     return (
         <Layout>
             <div className="flex justify-center h-[85vh] w-[100vw]">
-                <BgMenuMap bg={BackgroundMapMountain} trigger={"Mountain"} currentButtonOnHoover={buttonOnHoover} />
-                <BgMenuMap bg={BackgroundMapDesert} trigger={"Desert"} currentButtonOnHoover={buttonOnHoover} />
-                <BgMenuMap bg={BackgroundMapCity} trigger={"City"} currentButtonOnHoover={buttonOnHoover} />
+                <DynamicBgMenuOnHover bg={BackgroundMapMountain} trigger={"Mountain"} currentButtonOnHover={buttonOnHover} />
+                <DynamicBgMenuOnHover bg={BackgroundMapDesert} trigger={"Desert"} currentButtonOnHover={buttonOnHover} />
+                <DynamicBgMenuOnHover bg={BackgroundMapCity} trigger={"City"} currentButtonOnHover={buttonOnHover} />
                 <Back href={"/"}/>
                 <Menu 
                     title={"Choose your environnement"} 
@@ -31,7 +31,7 @@ export default function MapMenu () {
                     keyWord={"Bg"}
                     sendDataToPage={handleDataFromButton}
                     textColor={"white"} />
-            </div>/bgMapMenu
+            </div>
         </Layout>
     )
 }

@@ -10,21 +10,21 @@ export default function ButtonSelection ({ href, text, keyWord, sendDataToMenu, 
         document.cookie = `${keyWord}=${text}`
     }
 
-    const handleHoover = () => {
+    const handleHover = () => {
         setIsLoad(true)
         sendDataToMenu(text)
     }
 
-    const handleHooverStart = () => {
+    const handleHoverStart = () => {
         animate(scope.current, {scale: 1}, {type: "spring", damping: 10})
     }
 
-    const handleHooverEnd = () => {
+    const handleHoverEnd = () => {
         animate(scope.current, {scale: 0}, {type: "spring", damping: 10})
     }
 
     return (
-        <motion.div onClick={handleClick} className="flex flex-col flex-wrap bg-green-military -skew-x-12 rounded-xl shadow-[12px_12px_2px_1px] shadow-black p-4" whileHover={handleHoover} onHoverStart={handleHooverStart} onHoverEnd={handleHooverEnd}>
+        <motion.div onClick={handleClick} className="flex flex-col flex-wrap bg-green-military -skew-x-12 rounded-xl shadow-[12px_12px_2px_1px] shadow-black p-4" whileHover={handleHover} onHoverStart={handleHoverStart} onHoverEnd={handleHoverEnd}>
             <Link 
                 className="flex flex-row flex-wrap justify-center items-center h-11 text-4xl"
                 href={href}
