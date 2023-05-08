@@ -9,9 +9,9 @@ export default function GameSet ({ sendResponseToSoloGame, debugMode, whosTurn, 
                 <Grid side="player" sendResponseToGameSet={sendResponseToSoloGame} debugMode={debugMode} whosTurn={whosTurn} boxPlayedByEnely={boxPlayedByEnemy} />
             </div>
 
-            <div className="flex flex-row flex-wrap items-center gap-3 h-[5vh] w-[8vw]">
-                <p className="text-white text-2xl flex flex-row flex-wrap">turn: </p>
-                <p className="text-white text-2xl flex flex-row flex-wrap">{whosTurn}</p>
+            <div className="flex flex-row bg-green-military flex-wrap justify-center rounded-xl items-center gap-3 h-[5vh] w-[8vw]">
+                <p className="text-white font-bold text-2xl flex flex-row flex-wrap">turn: </p>
+                <p className="text-white font-bold text-2xl flex flex-row flex-wrap">{whosTurn}</p>
             </div>
 
             <div className="flex flex-col justify-around h-[80vh]">
