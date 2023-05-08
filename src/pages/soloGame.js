@@ -6,16 +6,14 @@ import { engine, getNumBoxToBeTouched } from "@/utils/engine"
 import EndGame from "@/components/EndGame"
 import { useState, useEffect } from "react"
 import { IA } from "@/utils/ia"
+import { getCookie } from "@/utils/tools"
 
 export default function SoloGame() {
     const debugMode = false
     GenerateTank(debugMode)
     let ia
     if (typeof document != "undefined") {
-        const a = document.cookie.split(";")
-        const b = a[a.length - 1]
-        const c = b.split("=")
-        ia = new IA(c[c.length - 1])
+        ia = new IA(getCookie("iaDifficulty"))
     }
     const [isGameOver, setIsGameOver] = useState(false)
     const [acclamation, setAcclamation] = useState("")
