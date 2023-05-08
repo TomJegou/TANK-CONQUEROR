@@ -5,11 +5,11 @@ export default function PopUpTuto({ children, nbrClick,trigerNumberClick, funcSe
     const [scope, animate] = useAnimate()
     const [attrtibuteNext, setAttributeNext] = useState({})
     const [attrtibutePrev, setAttributePrev] = useState({})
-    const duration = .25
+    const duration = .5
 
     useEffect(()=>{
         if(nbrClick == trigerNumberClick) {
-            animate(scope.current, {scale: [0, 1]}, {duration: duration})
+            animate(scope.current, {scale: [0, 1]}, {duration: duration, delay: .5})
         } else {
             animate(scope.current, {scale: 0}, {duration: nbrClick == 0 ? 0 : duration})
         }
