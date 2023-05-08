@@ -9,12 +9,12 @@ import Capture2 from "../../public/screenshotsTutorial/Capture2.png"
 import Capture3 from "../../public/screenshotsTutorial/Capture3.png"
 import Capture4 from "../../public/screenshotsTutorial/Capture4.png"
 
-export default function Tuto(){
+export default function Tuto () {
     const [nbrClick, setNbrClick] = useState(0)
     const nbrTotalPopUp = 5
 
     const handleDataFromPopUpTuto = (data) => {
-        if(data == "prev") {
+        if (data == "prev") {
             setNbrClick(a => a - 1)
         } else if (data == "next") {
             setNbrClick(a => a + 1)
@@ -88,6 +88,7 @@ export default function Tuto(){
                         </p>
                     </div>
                 </PopUpTuto>
+                
             </div>
         </Layout>
     )

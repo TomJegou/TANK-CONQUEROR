@@ -7,7 +7,7 @@ import BackgroundMapMountain from "../../public/BackgroundMapMountain.jpg"
 import { useState } from "react"
 import BgMenuMap from "@/components/BgMenuMap"
 
-export default function MapMenu() {
+export default function MapMenu () {
     const [buttonOnHoover, setbuttonOnHoover] = useState("Desert")
 
     const handleDataFromButton = (data) => {
@@ -21,15 +21,16 @@ export default function MapMenu() {
                 <BgMenuMap bg={BackgroundMapDesert} trigger={"Desert"} currentButtonOnHoover={buttonOnHoover} />
                 <BgMenuMap bg={BackgroundMapCity} trigger={"City"} currentButtonOnHoover={buttonOnHoover} />
                 <Back href={"/"}/>
-                <Menu title={"Choose your environnement"} 
-                listChoices={[
-                    {text: "Mountain", href: "/iaMenu"},
-                    {text: "Desert", href: "/iaMenu"},
-                    {text: "City", href: "/iaMenu"},
-                    ]} 
-                keyWord={"Bg"}
-                sendDataToPage={handleDataFromButton}
-                textColor={"white"} />
+                <Menu 
+                    title={"Choose your environnement"} 
+                    listChoices={[
+                            {text: "Mountain", href: "/iaMenu"},
+                            {text: "Desert", href: "/iaMenu"},
+                            {text: "City", href: "/iaMenu"},
+                        ]} 
+                    keyWord={"Bg"}
+                    sendDataToPage={handleDataFromButton}
+                    textColor={"white"} />
             </div>
         </Layout>
     )

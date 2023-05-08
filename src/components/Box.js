@@ -12,9 +12,9 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
     const [text, setText] = useState("")
     const [otherAttribute, setOtherAttribute] = useState({})
 
-    function handleClick(){
-        if (whosTurn == "player"){
-            if(isOc){
+    function handleClick () {
+        if (whosTurn == "player") {
+            if (isOc) {
                 setColor("#FF0000")
             } else {
                 setText("X")
@@ -23,7 +23,7 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
         sendResponseToGrid({x: x, y: y})
     }
 
-    useEffect(()=>{
+    useEffect (()=>{
         if (boxPlayedByEnemy != null && side === "player") {
             if (boxPlayedByEnemy.x == x && boxPlayedByEnemy.y == y) {
                 if (isOc) {
@@ -35,11 +35,11 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
         }
     }, [boxPlayedByEnemy, side])
 
-    useEffect(()=>{
+    useEffect (()=>{
         if (side == "enemy") {
             if (color == "#FF0000" || text == "X") {
                 setOtherAttribute({})
-            }else {
+            } else {
                 setOtherAttribute({onClick: handleClick})
             }
         }
@@ -49,7 +49,8 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
         <div className="flex h-[5vh] w-[5vh] border"
         x={x}
         y={y}
-        side={side} {...otherAttribute}>
+        side={side} 
+        {...otherAttribute}>
             <ContentBox color={color} text={text} />
         </div>
     )

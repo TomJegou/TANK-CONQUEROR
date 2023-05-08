@@ -1,7 +1,7 @@
-import HeadComponent  from "./Head";
-import Footer from "./Footer";
+import HeadComponent  from "./Head"
+import Footer from "./Footer"
 
-export default function Layout({ children, className, classNameFooter }) {
+export default function Layout ({ children, className, classNameFooter }) {
     return (
         <div className={className}>
             <HeadComponent 

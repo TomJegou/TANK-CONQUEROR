@@ -2,7 +2,7 @@ import Link from "next/link";
 import { motion, useAnimate } from "framer-motion";
 import { useState } from "react";
 
-export default function ButtonSelection({ href, text, keyWord, sendDataToMenu, textColor }) {
+export default function ButtonSelection ({ href, text, keyWord, sendDataToMenu, textColor }) {
     const [scope, animate] = useAnimate()
     const [isLoad, setIsLoad] = useState(false)
 

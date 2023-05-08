@@ -1,7 +1,7 @@
 import ButtonSelection from "./ButtonSelection"
 import { motion } from "framer-motion"
 
-export default function Menu({ title, listChoices, keyWord, sendDataToPage, textColor }) {
+export default function Menu ({ title, listChoices, keyWord, sendDataToPage, textColor }) {
     return (
         <>
             <motion.h1

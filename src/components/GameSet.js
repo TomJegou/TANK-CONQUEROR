@@ -1,6 +1,6 @@
-import Grid from "@/components/Grid"
+import Grid from "./Grid"
 
-export default function GameSet({ sendResponseToSoloGame, debugMode, whosTurn, boxPlayedByEnemy }) {
+export default function GameSet ({ sendResponseToSoloGame, debugMode, whosTurn, boxPlayedByEnemy }) {
     return (
         <div className="flex flex-row flex-wrap justify-around items-center w-[100vw] bottom-0">
 

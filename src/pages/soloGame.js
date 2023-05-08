@@ -8,7 +8,7 @@ import { useState, useEffect } from "react"
 import { IA } from "@/utils/ia"
 import { getCookie } from "@/utils/tools"
 
-export default function SoloGame() {
+export default function SoloGame () {
     const debugMode = false
     GenerateTank(debugMode)
     let ia
@@ -24,7 +24,7 @@ export default function SoloGame() {
     const [respFromEngineForIA, setRespFromEngineForIA] = useState("")
     const [whosTurn, setWhosTurn] = useState("player")
 
-    useEffect(() => {
+    useEffect (() => {
         if (numBoxTobeTouchedByPlayer <= 0) {
             setAcclamation("Congratulation !")
             setWinnerName("player")
@@ -39,7 +39,7 @@ export default function SoloGame() {
         }
     }, [numBoxTobeTouchedByPlayer, numBoxTobeTouchedByEnemy])
 
-    useEffect(() => {
+    useEffect (() => {
         if (whosTurn == "IA") {
             let tmp = ia.attack(respFromEngineForIA)
             let boxPlayed = {x: tmp[0], y: tmp[1]}
@@ -49,7 +49,7 @@ export default function SoloGame() {
         }
     }, [whosTurn])
 
-    useEffect(() => {
+    useEffect (() => {
         if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
             setNumBoxTobeTouchedByEnemy(a => a -1)
             setWhosTurn("IA")

@@ -2,10 +2,10 @@ import Image from "next/image"
 import { useAnimate } from "framer-motion"
 import { useEffect } from "react"
 
-export default function BgMenuMap({ bg, currentButtonOnHoover, trigger }) {
+export default function BgMenuMap ({ bg, currentButtonOnHoover, trigger }) {
     const [scope, animate] = useAnimate()
 
-    useEffect(()=>{
+    useEffect (()=>{
         if (currentButtonOnHoover == trigger) {
             animate(scope.current, {opacity: [0, 1]}, {duration: 2})
         } else {
