@@ -1,9 +1,9 @@
 import Layout from "@/components/Layout"
 import Menu from "@/components/Menu"
 import Back from "@/components/Back"
-import BackgroundMapCity from "../../public/BackgroundMapCity.jpg"
-import BackgroundMapDesert from "../../public/BackgroundMapDesert.jpg"
-import BackgroundMapMountain from "../../public/BackgroundMapMountain.jpg"
+import BackgroundMapCity from "../../public/bgMapMenu/BackgroundMapCity.jpg"
+import BackgroundMapDesert from "../../public/bgMapMenu/BackgroundMapDesert.jpg"
+import BackgroundMapMountain from "../../public/bgMapMenu/BackgroundMapMountain.jpg"
 import { useState } from "react"
 import BgMenuMap from "@/components/BgMenuMap"
 
@@ -31,7 +31,7 @@ export default function MapMenu () {
                     keyWord={"Bg"}
                     sendDataToPage={handleDataFromButton}
                     textColor={"white"} />
-            </div>
+            </div>/bgMapMenu
         </Layout>
     )
 }

@@ -3,7 +3,7 @@ import PopUpTuto from "@/components/PopUpTuto"
 import { useState } from "react"
 import Exit from "@/components/Exit"
 import Image from "next/image"
-import bgTuto from "../../public/bgTuto.jpg"
+import bgTuto from "../../public/bgTuto/bgTuto.jpg"
 import Capture1 from "../../public/screenshotsTutorial/Capture1.png"
 import Capture2 from "../../public/screenshotsTutorial/Capture2.png"
 import Capture3 from "../../public/screenshotsTutorial/Capture3.png"
@@ -88,7 +88,7 @@ export default function Tuto () {
                         </p>
                     </div>
                 </PopUpTuto>
-                
+
             </div>
         </Layout>
     )
