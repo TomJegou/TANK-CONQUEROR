@@ -40,29 +40,19 @@ export default function SoloGame() {
     }, [numBoxTobeTouchedByPlayer, numBoxTobeTouchedByEnemy])
 
     useEffect(() => {
-        if (whosTurn == "IA" || whosTurn == "IA2") {
-            let tmp = ia.attack(respFromEngineForIA)
-            let boxPlayed = {x: tmp[0], y: tmp[1]}
-            setBoxPlayedByIA(boxPlayed)
-            let responseEngine = engine(AllTanksPlayer, boxPlayed)
-            setRespFromEngineForIA(responseEngine)
-            setNumBoxTobeTouchedByEnemy(getNumBoxToBeTouched(AllTanksPlayer))
-            if (responseEngine == "missed") {
-                setWhosTurn("player")
-            }
+        if (whosTurn == "IA") {
+            let responseEngine
+            do {
+                let tmp = ia.attack(respFromEngineForIA)
+                let boxPlayed = {x: tmp[0], y: tmp[1]}
+                setBoxPlayedByIA(boxPlayed)
+                responseEngine = engine(AllTanksPlayer, boxPlayed)
+                setRespFromEngineForIA(responseEngine)
+                setNumBoxTobeTouchedByEnemy(getNumBoxToBeTouched(AllTanksPlayer))
+            } while (responseEngine != "missed")
+            setWhosTurn("player")
         }
     }, [whosTurn])
-
-    useEffect(()=> {
-        if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
-            if (whosTurn == "IA") {
-                setWhosTurn("IA2")
-            } 
-            if (whosTurn == "IA2") {
-                setWhosTurn("IA")
-            }
-        }
-    }, [respFromEngineForIA])
 
     const handleDataFromEnemyGrid = (boxClicked) => {
         if (whosTurn == "player") {
