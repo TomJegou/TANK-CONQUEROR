@@ -3,7 +3,7 @@ import Footer from "./Footer"
 
 export default function Layout ({ children, className, classNameFooter }) {
     return (
-        <div className={className}>
+        <div className={"overflow-x-hidden "+className}>
             <HeadComponent 
                 title="Tank Conqueror"
                 description="Tank Conqueror is a game where you can play with your friends and conquer the world"
