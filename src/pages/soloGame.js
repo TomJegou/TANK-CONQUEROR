@@ -45,9 +45,8 @@ export default function SoloGame () {
 
     useEffect (() => {
         if (whosTurn == "IA") {
-            let tmp = ia.attack(respFromEngineForIA)
-            console.log(tmp)
-            let boxPlayed = {x: tmp.x, y: tmp.y}
+            let boxPlayed = ia.attack(respFromEngineForIA)
+            console.log(boxPlayed)
             setBoxPlayedByIA(boxPlayed)
             setRespFromEngineForIA(engine(AllTanksPlayer, boxPlayed))
             setWhosTurn("player")
