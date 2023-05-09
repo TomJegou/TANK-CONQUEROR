@@ -15,7 +15,7 @@ export default class IASimple extends IA {
             } else if (respFromEngine == "missed") {
                 return this.search()
             } else if (respFromEngine == "sinked") {
-                this.sensFoundedTank == "unknow" ? "" : this.sensFoundedTank == "unknow"
+                this.sensFoundedTank == "unknown" ? "" : this.sensFoundedTank == "unknown"
                 return this.search()
             } else {
                 return this.search()
@@ -30,7 +30,7 @@ export default class IASimple extends IA {
         this.listBoxToPlayForSearch.map(box => {
             if (!this.isAlreadyPlayed(box)) {
                 result = box
-                return
+                return result
             }
         })
         this.listBoxAlreadyPlayed.push(result)
@@ -38,14 +38,31 @@ export default class IASimple extends IA {
     }
 
     finish (respFromEngine) {
-        return this.search()
-        if (this.sensFoundedTank == "unknow") {
-            const boxAround = [
-                {x: this.firstBoxTouchedWhenFound.x + 1 <= 10 ? this.firstBoxTouchedWhenFound.x + 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
-                {x: this.firstBoxTouchedWhenFound.x - 1 >= 1 ? this.firstBoxTouchedWhenFound.x - 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
-                {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y + 1 <= 10 ? this.firstBoxTouchedWhenFound.y + 1: this.firstBoxTouchedWhenFound.y},
-                {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y - 1 >= 1 ? this.firstBoxTouchedWhenFound.y - 1: this.firstBoxTouchedWhenFound.y},
-            ]
+        let result = {x: 1, y: 1}
+        const boxAround = [
+            {x: this.firstBoxTouchedWhenFound.x + 1 <= 10 ? this.firstBoxTouchedWhenFound.x + 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
+            {x: this.firstBoxTouchedWhenFound.x - 1 >= 1 ? this.firstBoxTouchedWhenFound.x - 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
+            {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y + 1 <= 10 ? this.firstBoxTouchedWhenFound.y + 1: this.firstBoxTouchedWhenFound.y},
+            {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y - 1 >= 1 ? this.firstBoxTouchedWhenFound.y - 1: this.firstBoxTouchedWhenFound.y},
+        ]
+        if (this.sensFoundedTank == "unknown") {
+            this.boxAround.map(box => {
+                if (!this.isAlreadyPlayed(box)) {
+                    result = box
+                    return result
+                }
+            })
+            this.listBoxAlreadyPlayed.push(result)
+            this.sensFoundedTank = "searching"
+            return result
+        } else if (this.sensFoundedTank == "searching") {
+            if (respFromEngine == "touched") {
+
+            } else if (respFromEngine == "sinked") {
+
+            } else {
+                
+            }
         }
     }
 
