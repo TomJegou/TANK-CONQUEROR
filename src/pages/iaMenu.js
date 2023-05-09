@@ -23,9 +23,9 @@ export default function IaMenu (){
                 <Menu 
                     title={"Choose the IA difficulty"} 
                     listChoices={[
-                        {text: "Easy", href: "/soloGame"},
-                        {text: "Medium", href: "/soloGame"},
-                        {text: "Hard", href: "/soloGame"},
+                        {text: "Easy", href: "/skinTankMenu"},
+                        {text: "Medium", href: "/skinTankMenu"},
+                        {text: "Hard", href: "/skinTankMenu"},
                     ]} 
                     keyWord={"iaDifficulty"}
                     sendDataToPage={handleDataFromButton}

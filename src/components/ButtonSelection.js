@@ -28,7 +28,9 @@ export default function ButtonSelection ({ href, text, keyWord, sendDataToMenu, 
             <Link 
                 className="flex flex-row flex-wrap justify-center items-center h-11 text-4xl"
                 href={href}
-                style={{color: textColor}}>{text}</Link>
+                style={{color: textColor}}>
+                    {text}
+            </Link>
             <motion.div 
                 ref={scope}
                 className="h-[0.2vh] rounded-sm"
