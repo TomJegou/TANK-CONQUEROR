@@ -15,6 +15,7 @@ import BgGame from "@/components/BgGame"
 export default function SoloGame () {
     const debugMode = false
     GenerateTank(debugMode)
+    const [tankColor, setTankColor] = useState()
     const [ia, setIA] = useState()
     const [srcBg, setSrcBg] = useState()
     const [isGameOver, setIsGameOver] = useState(false)
@@ -71,6 +72,7 @@ export default function SoloGame () {
 
     useEffect(() => {
         if (typeof document != "undefined") {
+            setTankColor(getCookie("tankColor"))
             setIA(new IA(getCookie("iaDifficulty")))
             switch (getCookie("Bg")) {
                 case "Mountain":
