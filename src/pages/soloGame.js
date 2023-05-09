@@ -15,7 +15,6 @@ import BgGame from "@/components/BgGame"
 export default function SoloGame () {
     const debugMode = false
     GenerateTank(debugMode)
-    const [tankColor, setTankColor] = useState()
     const [ia, setIA] = useState()
     const [srcBg, setSrcBg] = useState()
     const [isGameOver, setIsGameOver] = useState(false)
@@ -72,7 +71,6 @@ export default function SoloGame () {
 
     useEffect(() => {
         if (typeof document != "undefined") {
-            setTankColor(getCookie("tankColor"))
             setIA(new IA(getCookie("iaDifficulty")))
             switch (getCookie("Bg")) {
                 case "Mountain":
@@ -91,7 +89,7 @@ export default function SoloGame () {
     return (
         <Layout className={"overflow-x-hidden h-[115vh] flex flex-row flex-wrap justify-center items-end"}>
             <div className="flex flex-row flex-wrap w-[100vw] bottom-0 justify-center">
-                <BgGame src={srcBg} alt="Bg" />
+                <BgGame src={srcBg} />
                 <Exit />
                 <h1 className="font-title flex flex-row flex-wrap justify-center w-[20vw] rounded-xl text-4xl text-white mt-11 bg-green-military">SOLO GAME</h1>
                 <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode} whosTurn={whosTurn} boxPlayedByEnemy={boxPlayedByIA}/>
