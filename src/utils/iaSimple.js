@@ -15,7 +15,7 @@ export default class IASimple extends IA {
             } else if (respFromEngine == "missed") {
                 return this.search()
             } else if (respFromEngine == "sinked") {
-                this.sensFoundedTank == "unknown" ? "" : this.sensFoundedTank == "unknown"
+                this.StateSensFoundedTank == "unknown" ? "" : this.StateSensFoundedTank == "unknown"
                 return this.search()
             } else {
                 return this.search()
@@ -44,17 +44,37 @@ export default class IASimple extends IA {
             {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y + 1 <= 10 ? this.firstBoxTouchedWhenFound.y + 1: this.firstBoxTouchedWhenFound.y},
             {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y - 1 >= 1 ? this.firstBoxTouchedWhenFound.y - 1: this.firstBoxTouchedWhenFound.y},
         ]
-        if (this.sensFoundedTank == "unknown") {
+        if (this.StateSensFoundedTank == "unknown") {
             return this.fireAround(boxAround)
-        } else if (this.sensFoundedTank == "searching") {
+        } else if (this.StateSensFoundedTank == "searching") {
             if (respFromEngine == "touched") {
-
+                this.StateSensFoundedTank = "founded"
+                this.getDirection()
             } else if (respFromEngine == "sinked") {
-                this.sensFoundedTank = "unknown"
+                this.StateSensFoundedTank = "unknown"
                 this.currentMode = "search"
                 return this.search()
             } else {
                 return this.fireAround(boxAround)
+            }
+        }
+    }
+
+    getDirection () {
+        const lastBoxPlayed = this.getLastShot()
+        if (this.firstBoxTouchedWhenFound.x + 1 == lastBoxPlayed.x || this.firstBoxTouchedWhenFound.x -1 == lastBoxPlayed.x) {
+            this.sensFoundedTank == "horizontale"
+            if (this.firstBoxTouchedWhenFound.x + 1 == lastBoxPlayed.x) {
+                this.direction = "right"
+            } else {
+                this.direction = "left"
+            }
+        } else {
+            this.sensFoundedTank == "verticale"
+            if (this.firstBoxTouchedWhenFound.y + 1 == lastBoxPlayed.y) {
+                this.direction = "down"
+            } else {
+                this.direction = "up"
             }
         }
     }

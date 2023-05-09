@@ -3,7 +3,9 @@ export default class IA {
     listBoxAlreadyPlayed = []
     listBoxToPlayForSearch = []
     firstBoxTouchedWhenFound = {}
-    sensFoundedTank = "unknow"
+    StateSensFoundedTank = "unknow"
+    sensFoundedTank = ""
+    direction = ""
     getLastShot () {
         return this.listBoxAlreadyPlayed[this.listBoxAlreadyPlayed.length - 1]
     }
@@ -19,7 +21,7 @@ export default class IA {
             }
         })
         this.listBoxAlreadyPlayed.push(result)
-        this.sensFoundedTank = "searching"
+        this.StateSensFoundedTank = "searching"
         return result
     }
 }
