@@ -38,7 +38,6 @@ export default class IASimple extends IA {
     }
 
     finish (respFromEngine) {
-        let result = {x: 1, y: 1}
         const boxAround = [
             {x: this.firstBoxTouchedWhenFound.x + 1 <= 10 ? this.firstBoxTouchedWhenFound.x + 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
             {x: this.firstBoxTouchedWhenFound.x - 1 >= 1 ? this.firstBoxTouchedWhenFound.x - 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
@@ -46,22 +45,16 @@ export default class IASimple extends IA {
             {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y - 1 >= 1 ? this.firstBoxTouchedWhenFound.y - 1: this.firstBoxTouchedWhenFound.y},
         ]
         if (this.sensFoundedTank == "unknown") {
-            this.boxAround.map(box => {
-                if (!this.isAlreadyPlayed(box)) {
-                    result = box
-                    return result
-                }
-            })
-            this.listBoxAlreadyPlayed.push(result)
-            this.sensFoundedTank = "searching"
-            return result
+            return this.fireAround(boxAround)
         } else if (this.sensFoundedTank == "searching") {
             if (respFromEngine == "touched") {
 
             } else if (respFromEngine == "sinked") {
-
+                this.sensFoundedTank = "unknown"
+                this.currentMode = "search"
+                return this.search()
             } else {
-                
+                return this.fireAround(boxAround)
             }
         }
     }

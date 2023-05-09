@@ -10,4 +10,16 @@ export default class IA {
     isAlreadyPlayed (box) {
         return this.listBoxAlreadyPlayed.includes(box)
     }
+    fireAround (boxAround) {
+        let result = {x: 1, y: 1}
+        boxAround.map(box => {
+            if (!this.isAlreadyPlayed(box)) {
+                result = box
+                return result
+            }
+        })
+        this.listBoxAlreadyPlayed.push(result)
+        this.sensFoundedTank = "searching"
+        return result
+    }
 }
