@@ -114,15 +114,19 @@ export default class IA {
     }
 
     fireKnowingDir() {
-        const lasBox = this.getLastShot()
+        const lastBox = this.getLastShot()
         if (this.direction == "right") {
-            return {x: lasBox.x + 1, y: lasBox.y}
+            this.listBoxAlreadyPlayed.push({x: lastBox.x, y: lastBox.y})
+            return {x: lastBox.x + 1, y: lastBox.y}
         } else if (this.direction == "left") {
-            return {x: lasBox.x - 1, y: lasBox.y}
+            this.listBoxAlreadyPlayed.push({x: lastBox.x, y: lastBox.y})
+            return {x: lastBox.x - 1, y: lastBox.y}
         } else if (this.direction == "up") {
-            return {x: lasBox.x, y: lasBox.y - 1}
+            this.listBoxAlreadyPlayed.push({x: lastBox.x, y: lastBox.y})
+            return {x: lastBox.x, y: lastBox.y - 1}
         } else {
-            return {x: lasBox.x, y: lasBox.y + 1}
+            this.listBoxAlreadyPlayed.push({x: lastBox.x, y: lastBox.y})
+            return {x: lastBox.x, y: lastBox.y + 1}
         }
     }
 }
