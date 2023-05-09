@@ -24,7 +24,7 @@ export default function ButtonSelection ({ href, text, keyWord, sendDataToMenu, 
     }
 
     return (
-        <motion.div onClick={handleClick} className="flex flex-col flex-wrap bg-green-military -skew-x-12 rounded-xl shadow-[12px_12px_2px_1px] shadow-black p-4" whileHover={handleHover} onHoverStart={handleHoverStart} onHoverEnd={handleHoverEnd}>
+        <motion.div onClick={handleClick} className="flex flex-col flex-wrap bg-green-military -skew-x-12 rounded-xl shadow-[12px_12px_2px_1px] shadow-black p-4 cursor-pointer" whileHover={handleHover} onHoverStart={handleHoverStart} onHoverEnd={handleHoverEnd}>
             <Link 
                 className="flex flex-row flex-wrap justify-center items-center h-11 text-4xl"
                 href={href}
