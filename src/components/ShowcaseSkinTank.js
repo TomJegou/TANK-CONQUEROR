@@ -7,9 +7,9 @@ export default function ShowcaseSkinTank ({ srcTank, href, tankColor }) {
     }
 
     return (
-        <div className="flex flex-col flex-wrap justify-around items-center border" onClick={handleClick}>
-            <Image src={srcTank} />
-            <Link href={href} className="">Select</Link>
+        <div className="flex flex-col flex-wrap justify-around items-center border border-black rounded-2xl h-[50vh] w-[25vw]" onClick={handleClick}>
+            <Image src={srcTank} className="flex w-[20vw] h-[30vh]" />
+            <Link href={href} className="flex flex-row flex-wrap justify-center items-center w-[8vw] h-[4vh] bg-green-military rounded-xl border-[2px] border-black">Select</Link>
         </div>
     )
 }
