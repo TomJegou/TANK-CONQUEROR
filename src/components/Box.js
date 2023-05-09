@@ -11,13 +11,11 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
     const ContentBox = isOc ? TankBox : FieldBox
     const [text, setText] = useState("")
     const [otherAttribute, setOtherAttribute] = useState({})
-    const [isBoxTouchedAndOc, setIsBoxTouchedAndOc] = useState(false)
 
     function handleClick () {
         if (whosTurn == "player") {
             if (isOc) {
                 setColor("#FF0000")
-                setIsBoxTouchedAndOc(true)
             } else {
                 setText("X")
             }
@@ -53,7 +51,7 @@ export default function Box ({ x, y, side, sendResponseToGrid, debugMode, whosTu
         y={y}
         side={side} 
         {...otherAttribute}>
-            <ContentBox color={color} text={text} side={side} touched={isBoxTouchedAndOc} />
+            <ContentBox color={color} text={text} />
         </div>
     )
 }

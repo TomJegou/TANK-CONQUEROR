@@ -92,7 +92,7 @@ export default function SoloGame () {
                 <BgGame src={srcBg} />
                 <Exit />
                 <h1 className="font-title flex flex-row flex-wrap justify-center w-[20vw] rounded-xl text-4xl text-white mt-11 bg-green-military">SOLO GAME</h1>
-                <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode} whosTurn={whosTurn} boxPlayedByEnemy={boxPlayedByIA}/>
+                <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={!debugMode} whosTurn={whosTurn} boxPlayedByEnemy={boxPlayedByIA}/>
                 <EndGame acclamation={acclamation} winner={winnerName} isGameOver={isGameOver} />
             </div>  
         </Layout>
