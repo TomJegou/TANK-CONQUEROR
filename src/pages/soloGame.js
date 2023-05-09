@@ -5,7 +5,7 @@ import { GenerateTank, AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTan
 import { engine, getNumBoxToBeTouched } from "@/utils/engine"
 import EndGame from "@/components/EndGame"
 import { useState, useEffect } from "react"
-import { IA } from "@/utils/ia"
+import IA from "@/utils/ia"
 import { getCookie } from "@/utils/tools"
 import bgCity from "@/../public/maps/City.png"
 import bgMountain from "@/../public/maps/Mountain.png"
