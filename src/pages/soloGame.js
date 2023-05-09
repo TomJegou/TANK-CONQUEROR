@@ -5,7 +5,9 @@ import { GenerateTank, AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTan
 import { engine, getNumBoxToBeTouched } from "@/utils/engine"
 import EndGame from "@/components/EndGame"
 import { useState, useEffect } from "react"
-import IA from "@/utils/ia"
+import IASimple from "@/utils/iaSimple"
+import IAHard from "@/utils/iaHard"
+import IAMedium from "@/utils/iaMedium"
 import { getCookie } from "@/utils/tools"
 import bgCity from "@/../public/maps/City.png"
 import bgMountain from "@/../public/maps/Mountain.png"
@@ -44,7 +46,8 @@ export default function SoloGame () {
     useEffect (() => {
         if (whosTurn == "IA") {
             let tmp = ia.attack(respFromEngineForIA)
-            let boxPlayed = {x: tmp[0], y: tmp[1]}
+            console.log(tmp)
+            let boxPlayed = {x: tmp.x, y: tmp.y}
             setBoxPlayedByIA(boxPlayed)
             setRespFromEngineForIA(engine(AllTanksPlayer, boxPlayed))
             setWhosTurn("player")
@@ -71,7 +74,13 @@ export default function SoloGame () {
 
     useEffect(() => {
         if (typeof document != "undefined") {
-            setIA(new IA(getCookie("iaDifficulty")))
+            if (getCookie("iaDifficulty") == "Easy") {
+                setIA(new IASimple())
+            } else if (getCookie("iaDifficulty") == "Medium") {
+                setIA(new IAMedium())
+            } else {
+                setIA(new IAHard())
+            }
             switch (getCookie("Bg")) {
                 case "Mountain":
                     setSrcBg(bgMountain)
@@ -85,14 +94,14 @@ export default function SoloGame () {
             }
         }
     }, [typeof document])
-
+    
     return (
         <Layout className={"overflow-x-hidden h-[115vh] flex flex-row flex-wrap justify-center items-end"}>
             <div className="flex flex-row flex-wrap w-[100vw] bottom-0 justify-center">
                 <BgGame src={srcBg} />
                 <Exit />
                 <h1 className="font-title flex flex-row flex-wrap justify-center w-[20vw] rounded-xl text-4xl text-white mt-11 bg-green-military">SOLO GAME</h1>
-                <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode} whosTurn={whosTurn} boxPlayedByEnemy={boxPlayedByIA}/>
+                <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={!debugMode} whosTurn={whosTurn} boxPlayedByEnemy={boxPlayedByIA}/>
                 <EndGame acclamation={acclamation} winner={winnerName} isGameOver={isGameOver} />
             </div>  
         </Layout>

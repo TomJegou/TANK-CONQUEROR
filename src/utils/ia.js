@@ -1,6 +1,13 @@
 export default class IA {
-    level = ""
-    constructor(level) {
-        this.level = level
+    currentMode = "search"
+    listBoxAlreadyPlayed = []
+    listBoxToPlayForSearch = []
+    firstBoxTouchedWhenFound = {}
+    sensFoundedTank = "unknow"
+    getLastShot () {
+        return this.boxAlreadyPlayed[this.boxAlreadyPlayed.length - 1]
+    }
+    isAlreadyPlayed (box) {
+        return this.listBoxAlreadyPlayed.includes(box)
     }
 }
