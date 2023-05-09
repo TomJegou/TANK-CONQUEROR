@@ -295,7 +295,6 @@ export class IA{
 // const ia1 = new IA("Easy");
 // const caseplayed = ia1.getCaseAlreadyPlay();
 
-// const b =ia1.attack("");
 // const c =ia1.attack("touched");
 // console.log(caseplayed);
 
