@@ -47,6 +47,7 @@ export default function SoloGame () {
         if (whosTurn == "IA") {
             let boxPlayed = ia.attack(respFromEngineForIA)
             console.log(boxPlayed)
+            console.log(ia)
             setBoxPlayedByIA(boxPlayed)
             setRespFromEngineForIA(engine(AllTanksPlayer, boxPlayed))
             setWhosTurn("player")
