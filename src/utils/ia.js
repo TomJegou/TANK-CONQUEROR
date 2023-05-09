@@ -5,7 +5,7 @@ export default class IA {
     firstBoxTouchedWhenFound = {}
     sensFoundedTank = "unknow"
     getLastShot () {
-        return this.boxAlreadyPlayed[this.boxAlreadyPlayed.length - 1]
+        return this.listBoxAlreadyPlayed[this.listBoxAlreadyPlayed.length - 1]
     }
     isAlreadyPlayed (box) {
         return this.listBoxAlreadyPlayed.includes(box)

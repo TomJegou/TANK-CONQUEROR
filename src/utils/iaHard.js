@@ -17,6 +17,8 @@ export default class IAHard extends IA {
             } else if (respFromEngine == "sinked") {
                 this.sensFoundedTank == "unknow" ? "" : this.sensFoundedTank == "unknow"
                 return this.search()
+            } else {
+                return this.search()
             }
         } else if (this.currentMode == "finish") {
             return this.finish(respFromEngine)
@@ -24,6 +26,7 @@ export default class IAHard extends IA {
     }
 
     search () {
+        console.log("Searching !")
         let result = {x: 1, y: 1}
         this.listBoxToPlayForSearch.map(box => {
             if (!this.isAlreadyPlayed(box)) {

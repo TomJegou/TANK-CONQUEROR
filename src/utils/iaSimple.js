@@ -17,6 +17,8 @@ export default class IASimple extends IA {
             } else if (respFromEngine == "sinked") {
                 this.sensFoundedTank == "unknow" ? "" : this.sensFoundedTank == "unknow"
                 return this.search()
+            } else {
+                return this.search()
             }
         } else if (this.currentMode == "finish") {
             return this.finish(respFromEngine)
@@ -31,6 +33,7 @@ export default class IASimple extends IA {
                 return
             }
         })
+        this.listBoxAlreadyPlayed.push(result)
         return result
     }
 
@@ -49,7 +52,7 @@ export default class IASimple extends IA {
     generateCheckerboard () {
         for (let y = 1; y <= 10; y++) {
             for (let x = 1; x <= 10; x++) {
-                if (x + y % 2 == 0) {
+                if ((x + y)% 2 == 0) {
                     this.listBoxToPlayForSearch.push({x: x, y: y})
                 }
             }

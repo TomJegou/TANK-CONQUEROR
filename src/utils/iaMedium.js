@@ -17,6 +17,8 @@ export default class IAMedium extends IA {
             } else if (respFromEngine == "sinked") {
                 this.sensFoundedTank == "unknow" ? "" : this.sensFoundedTank == "unknow"
                 return this.search()
+            } else {
+                return this.search()
             }
         } else if (this.currentMode == "finish") {
             return this.finish(respFromEngine)
