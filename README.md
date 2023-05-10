@@ -47,22 +47,36 @@ Le gagnant est celui qui parvient à détruire tous les véhicules de l'adversai
 ## Installation et lancement: 
 
 - ### Depuis le code source:
-    - ```git pull https://github.com/TomJegou/TANK-CONQUEROR.git```
 
-    - ```cd TANK-CONQUEROR```
+    ```
+    git pull https://github.com/TomJegou/TANK-CONQUEROR.git
+    ```
+    ```
+    cd TANK-CONQUEROR
+    ```
     - ### Avec node:
-        - ```npm run build```
-
-        - ```npm run start```
+        ```
+        npm run build
+        ```
+        ```
+        npm run start
+        ```
     - ### Avec Docker Compose:
-        - Pour build l'image:
-            - ```docker compose build```
-        - ```docker compose up -d```
+        - Pour build l'image: 
+            ``` 
+            docker compose build 
+            ```
+            
+        ```
+        docker compose up -d
+        ```
 - ### Depuis Docker
-
-    - ```docker pull tomyj/tank-conqueror```
-
-    - ```docker run -p 80:80 tomyj/tank-conqueror```
+    ```
+    docker pull tomyj/tank-conqueror
+    ```
+    ```
+    docker run -p 80:80 tomyj/tank-conqueror
+    ```
 ## Utilisation:
 
 - Ouvrez votre navigateur favori et rendez-vous à l'adresse suivante: ```http://localhost```
