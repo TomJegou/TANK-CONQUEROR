@@ -12,7 +12,14 @@ export default class IA {
     }
     
     isAlreadyPlayed (box) {
-        return this.listBoxAlreadyPlayed.includes(box)
+        let result = false
+        this.listBoxAlreadyPlayed.map(b => {
+            if (b.x == box.x && b.y == box.y) {
+                result = true
+                return
+            }
+        })
+        return result
     }
 
     attack (respFromEngine) {
@@ -113,19 +120,16 @@ export default class IA {
 
     fireKnowingDir() {
         const lastBox = this.getLastShot()
-        if (this.direction == "right") {
-            this.listBoxAlreadyPlayed.push({x: lastBox.x, y: lastBox.y})
-            return {x: lastBox.x + 1, y: lastBox.y}
-        } else if (this.direction == "left") {
-            this.listBoxAlreadyPlayed.push({x: lastBox.x, y: lastBox.y})
-            return {x: lastBox.x - 1, y: lastBox.y}
+        let b = {x: lastBox.x + 1, y: lastBox.y}
+        if (this.direction == "left") {
+            b = {x: lastBox.x - 1, y: lastBox.y}
         } else if (this.direction == "up") {
-            this.listBoxAlreadyPlayed.push({x: lastBox.x, y: lastBox.y})
-            return {x: lastBox.x, y: lastBox.y - 1}
-        } else {
-            this.listBoxAlreadyPlayed.push({x: lastBox.x, y: lastBox.y})
-            return {x: lastBox.x, y: lastBox.y + 1}
+            b = {x: lastBox.x, y: lastBox.y - 1}
+        } else if (this.direction == "down") {
+            b = {x: lastBox.x, y: lastBox.y + 1}
         }
+        this.listBoxAlreadyPlayed.push(b)
+        return b
     }
 
     generateBoxAroundFirstTouchedWhenSearched() {
