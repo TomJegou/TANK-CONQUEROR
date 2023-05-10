@@ -25,7 +25,7 @@ Le gagnant est celui qui parvient à détruire tous les véhicules de l'adversai
     * Un niveau de difficulté difficile
 
 
-## Téchnologies utilisés : 
+## Technologies utilisés : 
     
 * Github
 * Docker
@@ -44,30 +44,26 @@ Le gagnant est celui qui parvient à détruire tous les véhicules de l'adversai
 * Langage côté front : Html, Css
 
 ---
+## Installation et lancement: 
 
-## Utilistion :
+- ### Depuis le code source:
+    - ```git pull https://github.com/TomJegou/TANK-CONQUEROR.git```
 
+    - ```cd TANK-CONQUEROR```
+    - ### Avec node:
+        - ```npm run build```
 
+        - ```npm run start```
+    - ### Avec Docker Compose:
+        - Pour build l'image:
+            - ```docker compose build```
+        - ```docker compose up -d```
+- ### Depuis Docker
 
+    - ```docker pull tomyj/tank-conqueror```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    - ```docker run -p 80:80 tomyj/tank-conqueror```
+## Utilisation:
 
  ![](https://brand.ynov.com/img/logos/ynov_campus/logo_ynov_campus.svg)
 [Tom Jegou](https://github.com/TomJegou) & [Louis Rouxelin](https://github.com/L0uxe)
