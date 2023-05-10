@@ -16,9 +16,18 @@ Le gagnant est celui qui parvient à détruire tous les véhicules de l'adversai
 
 ### Fonctionnalités :
 
-* Menu interactif avec choix de mode (solo/multijoueurs)
-* Choix de différentes cartes sur lesquelles jouer
-* Différents skins/apparences pour les chars
+* Menu interactif avec choix de mode:
+    * Solo
+    * Multijoueurs
+    * Tutoriel
+* Choix de différentes cartes sur lesquelles jouer:
+    * Montagne
+    * Desert
+    * Ville
+* Différents skins/apparences pour les chars:
+    * Bleu
+    * Vert
+    * Marron
 * Pour l’IA :
     * Un niveau de difficulté simple
     * Un niveau de difficulté moyen
@@ -82,7 +91,7 @@ Le gagnant est celui qui parvient à détruire tous les véhicules de l'adversai
     ```
 ## Utilisation:
 
-- Ouvrez votre navigateur favori et rendez-vous à l'adresse suivante: ```http://localhost```
+- Une fois lancé, ouvrez votre navigateur favori et rendez-vous à l'adresse suivante: ```http://localhost```
 
  ![](https://brand.ynov.com/img/logos/ynov_campus/logo_ynov_campus.svg)
 [Tom Jegou](https://github.com/TomJegou) & [Louis Rouxelin](https://github.com/L0uxe)
