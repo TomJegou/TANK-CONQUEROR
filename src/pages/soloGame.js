@@ -5,7 +5,9 @@ import { GenerateTank, AllTanksEnemy, AllTanksPlayer } from "@/utils/generateTan
 import { engine, getNumBoxToBeTouched } from "@/utils/engine"
 import EndGame from "@/components/EndGame"
 import { useState, useEffect } from "react"
-import { IA } from "@/utils/ia"
+import IASimple from "@/utils/IA/iaSimple"
+import IAHard from "@/utils/IA/iaHard"
+import IAMedium from "@/utils/IA/iaMedium"
 import { getCookie } from "@/utils/tools"
 import bgCity from "@/../public/maps/City.png"
 import bgMountain from "@/../public/maps/Mountain.png"
@@ -43,8 +45,7 @@ export default function SoloGame () {
 
     useEffect (() => {
         if (whosTurn == "IA") {
-            let tmp = ia.attack(respFromEngineForIA)
-            let boxPlayed = {x: tmp[0], y: tmp[1]}
+            let boxPlayed = ia.attack(respFromEngineForIA)
             setBoxPlayedByIA(boxPlayed)
             setRespFromEngineForIA(engine(AllTanksPlayer, boxPlayed))
             setWhosTurn("player")
@@ -53,8 +54,7 @@ export default function SoloGame () {
 
     useEffect (() => {
         if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
-            setNumBoxTobeTouchedByEnemy(a => a -1)
-            setWhosTurn("IA")
+            setNumBoxTobeTouchedByEnemy(getNumBoxToBeTouched(AllTanksPlayer))
         }
     }, [respFromEngineForIA])
 
@@ -63,15 +63,20 @@ export default function SoloGame () {
             let responseEngine = engine(AllTanksEnemy, boxClicked)
             if (responseEngine != "missed") {
                 setNumBoxTobeTouchedByPlayer(a => a - 1)
-            } else {
-                setWhosTurn("IA")
-            }
+            } 
+            setWhosTurn("IA")
         }
     }
 
     useEffect(() => {
         if (typeof document != "undefined") {
-            setIA(new IA(getCookie("iaDifficulty")))
+            if (getCookie("iaDifficulty") == "Easy") {
+                setIA(new IASimple())
+            } else if (getCookie("iaDifficulty") == "Medium") {
+                setIA(new IAMedium())
+            } else {
+                setIA(new IAHard())
+            }
             switch (getCookie("Bg")) {
                 case "Mountain":
                     setSrcBg(bgMountain)
@@ -85,7 +90,7 @@ export default function SoloGame () {
             }
         }
     }, [typeof document])
-
+    
     return (
         <Layout className={"overflow-x-hidden h-[115vh] flex flex-row flex-wrap justify-center items-end"}>
             <div className="flex flex-row flex-wrap w-[100vw] bottom-0 justify-center">
