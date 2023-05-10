@@ -85,12 +85,11 @@ export default class IA {
 
     fireAround () {
         let result = {x: 1, y: 1}
-        this.boxAround.map(box => {
-            if (!this.isAlreadyPlayed(box)) {
-                result = box
-                return result
-            }
-        })
+        let b
+        do {
+            b = this.boxAround.pop()
+        } while (this.isAlreadyPlayed(b))
+        result = b
         this.listBoxAlreadyPlayed.push(result)
         this.StateSensFoundedTank = "searching"
         return result
