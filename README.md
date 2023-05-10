@@ -32,7 +32,7 @@ Le gagnant est celui qui parvient à détruire tous les véhicules de l'adversai
 * JavaScript
 * React
 * Tailwind
-* next.js
+* Next.js
 
 
 ## Delais:
