@@ -3,7 +3,7 @@ export default class IA {
     listBoxAlreadyPlayed = []
     listBoxToPlayForSearch = []
     firstBoxTouchedWhenFound = {}
-    StateSensFoundedTank = "unknow"
+    StateSensFoundedTank = "unknown"
     sensFoundedTank = ""
     direction = ""
     getLastShot () {
