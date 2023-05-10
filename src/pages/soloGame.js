@@ -54,21 +54,23 @@ export default function SoloGame () {
         }
     }, [whosTurn])
 
-    useEffect (() => {
-        if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
-            setNumBoxTobeTouchedByEnemy(a => a -1)
-            setWhosTurn("IA")
-        }
-    }, [respFromEngineForIA])
+    // useEffect (() => {
+    //     if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
+    //         setNumBoxTobeTouchedByEnemy(a => a -1)
+    //         setWhosTurn("IA")
+    //     }
+    // }, [respFromEngineForIA])
 
     const handleDataFromEnemyGrid = (boxClicked) => {
         if (whosTurn == "player") {
             let responseEngine = engine(AllTanksEnemy, boxClicked)
             if (responseEngine != "missed") {
                 setNumBoxTobeTouchedByPlayer(a => a - 1)
-            } else {
-                setWhosTurn("IA")
-            }
+            } 
+            // else {
+            //     setWhosTurn("IA")
+            // }
+            setWhosTurn("IA")
         }
     }
 

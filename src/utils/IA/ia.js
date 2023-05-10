@@ -18,19 +18,16 @@ export default class IA {
     attack (respFromEngine) {
         if (this.currentMode == "search") {
             if (respFromEngine == "touched") {
-                this.firstBoxTouchedWhenFound = this.getLastShot()
                 this.currentMode = "finish"
-                this.boxAround = [
-                    {x: this.firstBoxTouchedWhenFound.x + 1 <= 10 ? this.firstBoxTouchedWhenFound.x + 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
-                    {x: this.firstBoxTouchedWhenFound.x - 1 >= 1 ? this.firstBoxTouchedWhenFound.x - 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
-                    {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y + 1 <= 10 ? this.firstBoxTouchedWhenFound.y + 1: this.firstBoxTouchedWhenFound.y},
-                    {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y - 1 >= 1 ? this.firstBoxTouchedWhenFound.y - 1: this.firstBoxTouchedWhenFound.y},
-                ]
-                return this.finish (respFromEngine)
+                this.firstBoxTouchedWhenFound = this.getLastShot()
+                this.boxAroundFirstShot = generateBoxAroundFirstTouchedWhenSearched ()
+                return this.finish(respFromEngine)
             } else if (respFromEngine == "missed") {
                 return this.search()
             } else if (respFromEngine == "sinked") {
-                this.StateSensFoundedTank == "unknown" ? "" : this.StateSensFoundedTank == "unknown"
+                this.StateSensFoundedTank = "unknown"
+                this.direction = ""
+                this.sensFoundedTank = ""
                 return this.search()
             } else {
                 return this.search()
@@ -87,7 +84,7 @@ export default class IA {
         let result = {x: 1, y: 1}
         let b
         do {
-            b = this.boxAround.pop()
+            b = this.boxAroundFirstShot.pop()
         } while (this.isAlreadyPlayed(b))
         result = b
         this.listBoxAlreadyPlayed.push(result)
@@ -129,5 +126,36 @@ export default class IA {
             this.listBoxAlreadyPlayed.push({x: lastBox.x, y: lastBox.y})
             return {x: lastBox.x, y: lastBox.y + 1}
         }
+    }
+
+    generateBoxAroundFirstTouchedWhenSearched() {
+        const result = []
+        let b = {x: this.firstBoxTouchedWhenFound.x + 1, y: this.firstBoxTouchedWhenFound.y}
+        if (this.isBoxValid(b)){
+            result.push(b)
+        }
+        b = {x: this.firstBoxTouchedWhenFound.x - 1, y: this.firstBoxTouchedWhenFound.y}
+        if (this.isBoxValid(b)){
+            result.push(b)
+        }
+        b = {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y + 1}
+        if (this.isBoxValid(b)){
+            result.push(b)
+        }
+        b = {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y - 1}
+        if (this.isBoxValid(b)){
+            result.push(b)
+        }
+        return result
+    }
+
+    isBoxValid(b) {
+        if (b.x < 1 || b.x > 10) {
+            return false
+        }
+        if (b.y < 1 || b.y > 10) {
+            return false
+        }
+        return true
     }
 }
