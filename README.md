@@ -54,6 +54,9 @@ Le gagnant est celui qui parvient à détruire tous les véhicules de l'adversai
     ```
     cd TANK-CONQUEROR
     ```
+    ```
+    npm ci
+    ```
     - ### Avec node:
         ```
         npm run build
