@@ -20,14 +20,14 @@ export default class IA {
             if (respFromEngine == "touched") {
                 this.currentMode = "finish"
                 this.firstBoxTouchedWhenFound = this.getLastShot()
-                this.boxAroundFirstShot = generateBoxAroundFirstTouchedWhenSearched ()
+                this.boxAroundFirstShot = this.generateBoxAroundFirstTouchedWhenSearched ()
                 return this.finish(respFromEngine)
-            } else if (respFromEngine == "missed") {
-                return this.search()
             } else if (respFromEngine == "sinked") {
                 this.StateSensFoundedTank = "unknown"
                 this.direction = ""
                 this.sensFoundedTank = ""
+                this.boxAroundFirstShot = []
+                this.firstBoxTouchedWhenFound = {}
                 return this.search()
             } else {
                 return this.search()
