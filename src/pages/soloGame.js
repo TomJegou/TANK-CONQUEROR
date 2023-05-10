@@ -46,8 +46,6 @@ export default function SoloGame () {
     useEffect (() => {
         if (whosTurn == "IA") {
             let boxPlayed = ia.attack(respFromEngineForIA)
-            console.log(boxPlayed) //Debug
-            console.log(ia) //Debug
             setBoxPlayedByIA(boxPlayed)
             setRespFromEngineForIA(engine(AllTanksPlayer, boxPlayed))
             setWhosTurn("player")
@@ -57,7 +55,6 @@ export default function SoloGame () {
     useEffect (() => {
         if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
             setNumBoxTobeTouchedByEnemy(getNumBoxToBeTouched(AllTanksPlayer))
-            // setWhosTurn("IA")
         }
     }, [respFromEngineForIA])
 
@@ -67,9 +64,6 @@ export default function SoloGame () {
             if (responseEngine != "missed") {
                 setNumBoxTobeTouchedByPlayer(a => a - 1)
             } 
-            // else {
-            //     setWhosTurn("IA")
-            // }
             setWhosTurn("IA")
         }
     }
@@ -103,7 +97,7 @@ export default function SoloGame () {
                 <BgGame src={srcBg} />
                 <Exit />
                 <h1 className="font-title flex flex-row flex-wrap justify-center w-[20vw] rounded-xl text-4xl text-white mt-11 bg-green-military">SOLO GAME</h1>
-                <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={!debugMode} whosTurn={whosTurn} boxPlayedByEnemy={boxPlayedByIA}/>
+                <GameSet sendResponseToSoloGame={handleDataFromEnemyGrid} debugMode={debugMode} whosTurn={whosTurn} boxPlayedByEnemy={boxPlayedByIA}/>
                 <EndGame acclamation={acclamation} winner={winnerName} isGameOver={isGameOver} />
             </div>  
         </Layout>

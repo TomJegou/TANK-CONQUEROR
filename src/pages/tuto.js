@@ -83,9 +83,6 @@ export default function Tuto () {
                             If you hit a tank the box will become red :
                         </p>
                         <Image src={Capture4} className="flex w-[10vh] h-[10vh] rounded-[12px]" alt="Capture4.png" />
-                        <p className="top-[-10rem] flex flex-row flex-wrap justify-start items-center text-4xl h-[12vh] w-[50vw]">
-                            If you hit or sink a tank you can play again
-                        </p>
                     </div>
                 </PopUpTuto>
 
