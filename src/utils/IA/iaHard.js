@@ -16,7 +16,8 @@ import IA from "./ia";
             for (let y = 1; y <= 10; y++) {
                 for (let x = 1; x <= 10; x++) {
                     if ((x + y)% 2 == 0) {
-                        rest.push({x: x, y: y})
+                        this.listBoxToPlayForSearch.push({x: x, y: y})
+                        
                     } else {
                         rest.push({x: x, y: y})
                     }
@@ -35,7 +36,6 @@ import IA from "./ia";
         } while (this.isAlreadyPlayed(b))
         result = b
         this.listBoxAlreadyPlayed.push(result)
-        console.log(result)
         return result
     }
 }
