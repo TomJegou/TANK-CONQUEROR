@@ -6,6 +6,7 @@ export default class IA {
     StateSensFoundedTank = "unknown"
     sensFoundedTank = ""
     direction = ""
+    boxAroundFirstShot = []
     getLastShot () {
         return this.listBoxAlreadyPlayed[this.listBoxAlreadyPlayed.length - 1]
     }
@@ -19,6 +20,12 @@ export default class IA {
             if (respFromEngine == "touched") {
                 this.firstBoxTouchedWhenFound = this.getLastShot()
                 this.currentMode = "finish"
+                this.boxAround = [
+                    {x: this.firstBoxTouchedWhenFound.x + 1 <= 10 ? this.firstBoxTouchedWhenFound.x + 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
+                    {x: this.firstBoxTouchedWhenFound.x - 1 >= 1 ? this.firstBoxTouchedWhenFound.x - 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
+                    {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y + 1 <= 10 ? this.firstBoxTouchedWhenFound.y + 1: this.firstBoxTouchedWhenFound.y},
+                    {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y - 1 >= 1 ? this.firstBoxTouchedWhenFound.y - 1: this.firstBoxTouchedWhenFound.y},
+                ]
                 return this.finish (respFromEngine)
             } else if (respFromEngine == "missed") {
                 return this.search()
@@ -34,14 +41,8 @@ export default class IA {
     }
 
     finish (respFromEngine) {
-        const boxAround = [
-            {x: this.firstBoxTouchedWhenFound.x + 1 <= 10 ? this.firstBoxTouchedWhenFound.x + 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
-            {x: this.firstBoxTouchedWhenFound.x - 1 >= 1 ? this.firstBoxTouchedWhenFound.x - 1 : this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y},
-            {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y + 1 <= 10 ? this.firstBoxTouchedWhenFound.y + 1: this.firstBoxTouchedWhenFound.y},
-            {x: this.firstBoxTouchedWhenFound.x, y: this.firstBoxTouchedWhenFound.y - 1 >= 1 ? this.firstBoxTouchedWhenFound.y - 1: this.firstBoxTouchedWhenFound.y},
-        ]
         if (this.StateSensFoundedTank == "unknown") {
-            return this.fireAround(boxAround)
+            return this.fireAround()
         } else if (this.StateSensFoundedTank == "searching") {
             if (respFromEngine == "touched") {
                 this.StateSensFoundedTank = "founded"
@@ -52,7 +53,7 @@ export default class IA {
                 this.currentMode = "search"
                 return this.search()
             } else {
-                return this.fireAround(boxAround)
+                return this.fireAround()
             }
         } else {
             if (respFromEngine == "sinked") {
@@ -74,6 +75,7 @@ export default class IA {
                         this.direction = "up"
                     }
                 }
+                this.listBoxAlreadyPlayed.push(this.firstBoxTouchedWhenFound)
                 return this.fireKnowingDir()
             } else {
                 return this.fireKnowingDir()
@@ -81,9 +83,9 @@ export default class IA {
         }
     }
 
-    fireAround (boxAround) {
+    fireAround () {
         let result = {x: 1, y: 1}
-        boxAround.map(box => {
+        this.boxAround.map(box => {
             if (!this.isAlreadyPlayed(box)) {
                 result = box
                 return result

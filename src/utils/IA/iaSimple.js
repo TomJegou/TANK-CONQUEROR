@@ -8,12 +8,11 @@ export default class IASimple extends IA {
 
     search () {
         let result = {x: 1, y: 1}
-        this.listBoxToPlayForSearch.map(box => {
-            if (!this.isAlreadyPlayed(box)) {
-                result = box
-                return result
-            }
-        })
+        let b
+        do {
+           b = this.listBoxToPlayForSearch.pop() 
+        } while (this.isAlreadyPlayed(b))
+        result = b
         this.listBoxAlreadyPlayed.push(result)
         return result
     }
