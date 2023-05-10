@@ -65,5 +65,7 @@ Le gagnant est celui qui parvient à détruire tous les véhicules de l'adversai
     - ```docker run -p 80:80 tomyj/tank-conqueror```
 ## Utilisation:
 
+- Ouvrez votre navigateur favori et rendez-vous à l'adresse suivante: ```http://localhost```
+
  ![](https://brand.ynov.com/img/logos/ynov_campus/logo_ynov_campus.svg)
 [Tom Jegou](https://github.com/TomJegou) & [Louis Rouxelin](https://github.com/L0uxe)
