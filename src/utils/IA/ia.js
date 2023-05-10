@@ -30,11 +30,7 @@ export default class IA {
                 this.boxAroundFirstShot = this.generateBoxAroundFirstTouchedWhenSearched ()
                 return this.finish(respFromEngine)
             } else if (respFromEngine == "sinked") {
-                this.StateSensFoundedTank = "unknown"
-                this.direction = ""
-                this.sensFoundedTank = ""
-                this.boxAroundFirstShot = []
-                this.firstBoxTouchedWhenFound = {}
+                this.resetMode()
                 return this.search()
             } else {
                 return this.search()
@@ -53,17 +49,14 @@ export default class IA {
                 this.getDirection()
                 return this.fireKnowingDir()
             } else if (respFromEngine == "sinked") {
-                this.StateSensFoundedTank = "unknown"
-                this.currentMode = "search"
+                this.resetMode()
                 return this.search()
             } else {
                 return this.fireAround()
             }
         } else {
             if (respFromEngine == "sinked") {
-                this.StateSensFoundedTank = "unknown"
-                this.direction = ""
-                this.currentMode = "search"
+                this.resetMode()
                 return this.search()
             } else if (respFromEngine == "missed") {
                 if (this.sensFoundedTank == "horizontale") {
@@ -80,10 +73,8 @@ export default class IA {
                     }
                 }
                 this.listBoxAlreadyPlayed.push(this.firstBoxTouchedWhenFound)
-                return this.fireKnowingDir()
-            } else {
-                return this.fireKnowingDir()
             }
+            return this.fireKnowingDir()
         }
     }
 
@@ -161,5 +152,14 @@ export default class IA {
             return false
         }
         return true
+    }
+
+    resetMode () {
+        this.StateSensFoundedTank = "unknown"
+        this.direction = ""
+        this.sensFoundedTank = ""
+        this.boxAroundFirstShot = []
+        this.firstBoxTouchedWhenFound = {}
+        this.currentMode = "search"
     }
 }
