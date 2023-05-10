@@ -93,14 +93,14 @@ export default class IA {
     getDirection () {
         const lastBoxPlayed = this.getLastShot()
         if (this.firstBoxTouchedWhenFound.x + 1 == lastBoxPlayed.x || this.firstBoxTouchedWhenFound.x -1 == lastBoxPlayed.x) {
-            this.sensFoundedTank == "horizontale"
+            this.sensFoundedTank = "horizontale"
             if (this.firstBoxTouchedWhenFound.x + 1 == lastBoxPlayed.x) {
                 this.direction = "right"
             } else {
                 this.direction = "left"
             }
         } else {
-            this.sensFoundedTank == "verticale"
+            this.sensFoundedTank = "verticale"
             if (this.firstBoxTouchedWhenFound.y + 1 == lastBoxPlayed.y) {
                 this.direction = "down"
             } else {
@@ -111,8 +111,10 @@ export default class IA {
 
     fireKnowingDir() {
         const lastBox = this.getLastShot()
-        let b = {x: lastBox.x + 1, y: lastBox.y}
-        if (this.direction == "left") {
+        let b
+        if (this.direction == "right") {
+            b = {x: lastBox.x + 1, y: lastBox.y}
+        } else if (this.direction == "left") {
             b = {x: lastBox.x - 1, y: lastBox.y}
         } else if (this.direction == "up") {
             b = {x: lastBox.x, y: lastBox.y - 1}

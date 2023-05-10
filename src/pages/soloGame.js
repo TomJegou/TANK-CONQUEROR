@@ -56,7 +56,7 @@ export default function SoloGame () {
 
     useEffect (() => {
         if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
-            setNumBoxTobeTouchedByEnemy(a => a -1)
+            setNumBoxTobeTouchedByEnemy(getNumBoxToBeTouched(AllTanksPlayer))
             // setWhosTurn("IA")
         }
     }, [respFromEngineForIA])
