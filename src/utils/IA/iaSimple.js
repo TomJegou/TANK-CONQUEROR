@@ -18,12 +18,16 @@ export default class IASimple extends IA {
     }
 
     generateCheckerboard () {
+        const rest = []
         for (let y = 1; y <= 10; y++) {
             for (let x = 1; x <= 10; x++) {
                 if ((x + y)% 2 == 0) {
                     this.listBoxToPlayForSearch.push({x: x, y: y})
+                } else {
+                    rest.push({x: x, y: y})
                 }
             }
         }
+        this.listBoxToPlayForSearch = [...rest, ...this.listBoxToPlayForSearch]
     }
 }
