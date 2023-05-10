@@ -54,12 +54,12 @@ export default function SoloGame () {
         }
     }, [whosTurn])
 
-    // useEffect (() => {
-    //     if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
-    //         setNumBoxTobeTouchedByEnemy(a => a -1)
-    //         setWhosTurn("IA")
-    //     }
-    // }, [respFromEngineForIA])
+    useEffect (() => {
+        if (respFromEngineForIA == "touched" || respFromEngineForIA == "sinked") {
+            setNumBoxTobeTouchedByEnemy(a => a -1)
+            // setWhosTurn("IA")
+        }
+    }, [respFromEngineForIA])
 
     const handleDataFromEnemyGrid = (boxClicked) => {
         if (whosTurn == "player") {
