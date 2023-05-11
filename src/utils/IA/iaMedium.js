@@ -15,7 +15,7 @@ export default class IAMedium extends IA {
             i = getRandomInt(0,this.listBoxToPlayForSearch.length)
             b = this.listBoxToPlayForSearch[i]
         } while (this.isAlreadyPlayed(b))
-        delete this.listBoxToPlayForSearch[i]
+        this.listBoxToPlayForSearch[i]
         result = b
         console.log(result)
         this.listBoxAlreadyPlayed.push(result)
