@@ -47,6 +47,7 @@ function placeTank (size, grid) {
         return result;
     }
     
+    /* Add boxes where the tanks can't be placed */
     function addBorderBoxImpossibleToPlace () {
         function addBorderBox(currentBox, x, y) {
             if (x < 1 || x > 10 || y < 1 || y > 10 || inBoxImpossibleToPlace({x: x, y: y}) || inResult({x: x, y: y})) {
@@ -121,6 +122,7 @@ function placeTank (size, grid) {
         }
     }
 
+    /* Place the tanks */
     function placeBox (box, direction) {
         if (direction === "left") {
             for (let i = box.x; i > box.x - size; i--) {

@@ -11,7 +11,10 @@ export function isTankDistroyed (tank) {
     return tank.size == 0
 }
 
-/* Return missed, touched, destroyed */
+/*
+Return missed, touched, destroyed
+Calculated with the list of tanks and the box played
+*/
 export function engine (listTanks, boxPlayed) {
     let result = "missed"
     let indexTankToDelete = null
