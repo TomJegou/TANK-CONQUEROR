@@ -1,5 +1,5 @@
 import IA from "./ia";
-
+/** Ia Simple do a grid */
 export default class IASimple extends IA {
     constructor() {
         super()

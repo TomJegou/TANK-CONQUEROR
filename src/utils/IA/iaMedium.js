@@ -1,6 +1,6 @@
 import IA from "./ia";
 import { getRandomInt } from "../tools";
-
+/** Ia Medium do a random grid */
 export default class IAMedium extends IA {
     constructor() {
         super()
