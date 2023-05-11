@@ -29,7 +29,7 @@ export default class IA {
                 this.firstBoxTouchedWhenFound = this.getLastShot()
                 this.boxAroundFirstShot = this.generateBoxAroundFirstTouchedWhenSearched ()
                 return this.finish(respFromEngine)
-            } else if (respFromEngine == "sinked") {
+            } else if (respFromEngine == "destroyed") {
                 this.resetMode()
                 return this.search()
             } else {
@@ -48,14 +48,14 @@ export default class IA {
                 this.StateSensFoundedTank = "founded"
                 this.getDirection()
                 return this.fireKnowingDir()
-            } else if (respFromEngine == "sinked") {
+            } else if (respFromEngine == "destroyed") {
                 this.resetMode()
                 return this.search()
             } else {
                 return this.fireAround()
             }
         } else {
-            if (respFromEngine == "sinked") {
+            if (respFromEngine == "destroyed") {
                 this.resetMode()
                 return this.search()
             } else if (respFromEngine == "missed") {

@@ -6,10 +6,12 @@ export function getNumBoxToBeTouched (listTanks) {
     return result
 }
 
+// Return a boolean if a Tank is destroyed or not
 export function isTankDistroyed (tank) {
     return tank.size == 0
 }
 
+/* Return missed, touched, destroyed */
 export function engine (listTanks, boxPlayed) {
     let result = "missed"
     let indexTankToDelete = null
@@ -33,7 +35,7 @@ export function engine (listTanks, boxPlayed) {
     })
     if (indexTankToDelete != null) {
         delete listTanks[indexTankToDelete]
-        result = "sinked"
+        result = "destroyed"
     }
     return result
 }
